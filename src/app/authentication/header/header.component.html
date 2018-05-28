@@ -1,0 +1,9 @@
+<div id="header">
+  <h1>My app is the best</h1>
+  <div id ="links">
+    <h4>{{greetingMessage}}</h4>
+    <a *ngIf="!logout" routerLink="/logout">Logout</a><br>
+    <a *ngIf="logout" routerLink="/login">Login</a>
+  </div>
+
+</div>
