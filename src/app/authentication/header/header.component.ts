@@ -17,9 +17,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user.getAllStates().subscribe( state => {
-      console.log(state);
-    })
+    //this.user.getAllStates().select.subscribe( state => {
+      //console.log(state);
+    //})
   }
 
 }

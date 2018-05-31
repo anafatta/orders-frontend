@@ -1,10 +1,10 @@
 import { reducer , appReducerState } from './appReducers'
-import { ActionReducerMap } from '@ngrx/store'
+//import { ActionReducerMap } from '@ngrx/store'
 
-interface AppStore {
+export interface AppState {
     appReducer : appReducerState
 }
 
-export const reducers : ActionReducerMap<AppStore> = {
-    appReducer : reducer
-}
+//export const reducers : ActionReducerMap<AppState> = {
+//  appReducer : reducer
+//}
