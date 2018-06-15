@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-seller',
@@ -6,17 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./seller.component.css']
 })
 export class SellerComponent implements OnInit {
-  clients : string[];
+  sellers : string[];
+  isAdmin: boolean;
+  selectedSeller: string;
 
   constructor() { }
 
   ngOnInit() {
     // call service to retrieve client by seller
-    this.clients = ['Ana Fatta', 'Juan Perez' , 'Maria Lopez' ];
+    this.isAdmin = true;
+    this.sellers = ['Ana Fatta', 'Juan Perez' , 'Maria Lopez' ];
 
   }
-  onClick(){
-    console.log("click works");
+  onClick(seller:string){
+    console.log("click works ... " + seller);
   }
 
 }

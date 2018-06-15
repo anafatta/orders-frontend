@@ -1,18 +1,12 @@
-<h1> Clientes</h1>
-<div class="table-responsive table-striped"> 
-  <p>Dashboard vendedor - comunicaciones - metricas - Si es admin ver lista de vendedores</p>         
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Numero de Cliente</th>
-        <th>Nombre</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr  (onClickRow)="onClick()" *ngFor="let client of clients; let i = index" >
-        <td>{{i}}</td>
-        <td>{{client}}</td>
-      </tr>
-    </tbody>
-  </table>
+<h3>Bienvenido</h3>
+<div class="table-responsive table-striped">
+  <p>Dashboard vendedor - comunicaciones - metricas - Si es admin ver lista de vendedores</p>
+  <div ng-if=isAdmin>
+    <label  for="inputGroupSelect01">Vendedores</label>
   </div>
+  <select #seller class="custom-select" id="inputGroupSelect01" data-live-search="true">
+    <option selected>Choose...</option>
+    <option *ngFor="let seller of sellers" data-tokens=seller>{{seller}}</option>
+  </select>
+  <button (click)="onClick(seller.value)">submit</button>
+</div>
