@@ -1,0 +1,12 @@
+<h3>Bienvenido</h3>
+<div class="table-responsive table-striped">
+  <p>Dashboard vendedor - comunicaciones - metricas - Si es admin ver lista de vendedores</p>
+  <div ng-if=isAdmin>
+    <label  for="inputGroupSelect01">Vendedores</label>
+  </div>
+  <select #seller class="custom-select" id="inputGroupSelect01" data-live-search="true">
+    <option selected>Choose...</option>
+    <option *ngFor="let seller of sellers" data-tokens=seller>{{seller}}</option>
+  </select>
+  <button (click)="onClick(seller.value)">submit</button>
+</div>
