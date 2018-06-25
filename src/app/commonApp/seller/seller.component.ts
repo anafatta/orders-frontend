@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-seller',
@@ -7,20 +8,31 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./seller.component.css']
 })
 export class SellerComponent implements OnInit {
-  sellers : string[];
+  sellers : Seller[];
   isAdmin: boolean;
   selectedSeller: string;
 
-  constructor() { }
+  constructor(private userService : UserService) { }
 
   ngOnInit() {
     // call service to retrieve client by seller
+    console.log('INIT!!! ... ');
     this.isAdmin = true;
-    this.sellers = ['Ana Fatta', 'Juan Perez' , 'Maria Lopez' ];
+    this.userService.getSellers().subscribe(( data: Seller[] ) => {
+      this.sellers = data;
+      console.log('sellers+ .. ' +this.sellers);
+    });
+
+    //this.sellers = ['Ana Fatta', 'Juan Perez' , 'Maria Lopez' ];
 
   }
   onClick(seller:string){
     console.log("click works ... " + seller);
   }
 
+}
+
+export interface Seller {
+  id:number;
+  nom:String;
 }

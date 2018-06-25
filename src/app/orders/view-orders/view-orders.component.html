@@ -8,13 +8,13 @@
         <th scope="col">Total Estimado</th>
       </tr>
     </thead>
-    <tbody>
+    <!--tbody>
         <tr *ngFor="let order of orders" >
         <th scope="row">{{order.id}}</th>
         <td>{{order.clientName}}</td>
-        <td>{{order.date}}</td>
+        <td>{{order.date| date:'dd-MM-yyyy'}}</td>
         <td>{{order.estimateAmount}}</td>
-        <button routerLink="/orders/detail">Ver Detalle</button> 
+        <button [routerLink]="['/orders/detail', order.id]">Ver Detalle</button> 
       </tr>
-     </tbody>
+     </tbody-->
   </table>

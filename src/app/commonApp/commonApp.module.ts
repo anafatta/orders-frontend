@@ -15,7 +15,7 @@ const commonAppRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(commonAppRoutes)
+    RouterModule.forChild(commonAppRoutes),
   ],
   declarations: [
     NavbarComponent,

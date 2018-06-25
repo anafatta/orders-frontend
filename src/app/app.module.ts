@@ -13,7 +13,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { OrdersModule } from './orders/orders.module';
 import { CommonAppModule } from './commonApp/commonApp.module';
 import { PagenotfoundComponent } from './commonApp/pagenotfound/pagenotfound.component';
-
+import { OrdersService } from './services/orders.service';
+import {HttpClientModule} from '@angular/common/http'
 
 const appRoutes: Routes = [ 
   { path: '**', component: PagenotfoundComponent }
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     // StoreModule.forRoot(reducers,{}),
     RouterModule.forRoot(appRoutes),
     CommonAppModule ,
@@ -33,7 +35,9 @@ const appRoutes: Routes = [
     OrdersModule
     
   ],
-  providers: [],
+  providers: [
+    OrdersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

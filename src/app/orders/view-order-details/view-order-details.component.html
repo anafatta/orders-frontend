@@ -1,1 +1,40 @@
-<h3>proximamente... Detalle de Pedido</h3>
+<h3>Orden de Pedido</h3>
+<div class="container-fluid">
+<div class="container-fluid">
+<div class="row ">
+  <div class="col-4 col-md-2 orderFields">Numero de Pedido</div>
+  <div class="col-4 col-md-2 orderFields">{{orderDetail.id}}</div>
+  <div class="col-4 col-md-2 orderFields">Fecha de Pedido</div>
+  <div class="col-4 col-md-2 orderFields">{{orderDetail.date}}</div>
+</div>
+
+<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+<div class="row">
+  <div class="col-4 col-md-2 orderFields">Cliente</div>
+  <div class="col-6 col-md-6 orderFields">{{client.clientName}}</div>
+</div>
+
+<!-- Columns are always 50% wide, on mobile and desktop -->
+<div class="row">
+  <div class="col-4 col-md-2  orderFields">Direccion</div>
+  <div class="col-6 col-md-6 orderFields">{{client.address}}</div>
+</div>
+<div class="row">
+  <div class="col-4 col-md-2  orderFields">Flete</div>
+  <div class="col-4 col-md-2 orderFields">{{orderDetail.freight}}</div>
+  <div class="col-4 col-md-2  orderFields">Condicion de Pago</div>
+  <div class="col-4 col-md-2 orderFields">{{orderDetail.paymentType}}</div>
+</div>
+<div class="row">
+  <div class="col-4 col-md-2 orderFields">Observaciones</div>
+  <div class="col-6 col-md-6 orderFields">{{orderDetail.notes}}</div>
+</div>
+</div>
+
+
+
+<div class="container-fluid">
+    <h3>Detalle del Pedido</h3>
+  
+</div>
+
