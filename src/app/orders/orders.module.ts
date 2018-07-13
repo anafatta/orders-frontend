@@ -10,7 +10,7 @@ import { ViewOrderDetailsComponent } from './view-order-details/view-order-detai
 const ordersRoutes: Routes = [
   { path: 'orders/create', component: CreateOrderComponent },
   { path: 'orders/view', component: ViewOrdersComponent },
-  { path: 'orders/detail', component: ViewOrderDetailsComponent }
+  { path: 'orders/detail/:id', component: ViewOrderDetailsComponent }
 
 ];
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdersService } from '../../services/orders.service';
+import { SellerComponent, Seller } from '../../commonApp/seller/seller.component';
 
 @Component({
   selector: 'app-view-orders',
@@ -8,10 +10,15 @@ import { Component, OnInit } from '@angular/core';
 export class ViewOrdersComponent implements OnInit {
   orders: Order[];
 
-  constructor() { }
+  constructor(private ordersService: OrdersService) { }
 
   ngOnInit() {
     // call service to retrieve orders by seller
+    this.ordersService.getOrders().subscribe(data => {
+      console.log();
+    });
+    
+    
    this.orders = [
      {
       id:9873,
@@ -42,10 +49,34 @@ export class ViewOrdersComponent implements OnInit {
 
 }
 
-export interface Order {
+/* export interface Order {
   id: number;
+  nro:number;
+  fem:Date;
+  cliente: Cliente;
+  vend: Seller;
+  address: Address;
   clientId: number;
   clientName: string;
   date: Date;
   estimateAmount: number;  
+}
+export interface Cliente {
+  id:number;
+  nombre:string;
+}
+export interface Address {
+  id:number;
+  dir:string;
+  localidad:string;
+  codpos:string;
+  prov:string;
+} */
+
+export interface Order {
+id: number;
+clientId: number;
+clientName: string;
+date: Date;
+estimateAmount: number;  
 }
