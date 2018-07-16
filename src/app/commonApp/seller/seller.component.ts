@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { DataService } from '../../services/data.service';
+import { Seller } from '../../models/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seller',
@@ -12,27 +15,26 @@ export class SellerComponent implements OnInit {
   isAdmin: boolean;
   selectedSeller: string;
 
-  constructor(private userService : UserService) { }
+  constructor(private router : Router, private userService : UserService, private dataService : DataService ) { }
 
   ngOnInit() {
     // call service to retrieve client by seller
-    console.log('INIT!!! ... ');
+
     this.isAdmin = true;
     this.userService.getSellers().subscribe(( data: Seller[] ) => {
+      
       this.sellers = data;
-      console.log('sellers+ .. ' +this.sellers);
+      console.log("call sellers works... "+ this.sellers)
     });
 
-    //this.sellers = ['Ana Fatta', 'Juan Perez' , 'Maria Lopez' ];
 
   }
-  onClick(seller:string){
-    console.log("click works ... " + seller);
+  onClick(){
+    console.log("click works ... ");
+    this.dataService.setSellerId(this.selectedSeller);
+    var root = "orders/view/" + this.selectedSeller;
+    this.router.navigate([root]);
   }
 
 }
 
-export interface Seller {
-  id:number;
-  nom:String;
-}

@@ -5,36 +5,60 @@
   <div class="col-4 col-md-2 orderFields">Numero de Pedido</div>
   <div class="col-4 col-md-2 orderFields">{{orderDetail.id}}</div>
   <div class="col-4 col-md-2 orderFields">Fecha de Pedido</div>
-  <div class="col-4 col-md-2 orderFields">{{orderDetail.date}}</div>
+  <div class="col-4 col-md-2 orderFields">{{orderDetail.fem| date:'dd-MM-yyyy'}}</div>
 </div>
 
 <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
 <div class="row">
   <div class="col-4 col-md-2 orderFields">Cliente</div>
-  <div class="col-6 col-md-6 orderFields">{{client.clientName}}</div>
+  <div class="col-6 col-md-6 orderFields">{{orderDetail.cliente.nom}}</div>
 </div>
 
 <!-- Columns are always 50% wide, on mobile and desktop -->
 <div class="row">
   <div class="col-4 col-md-2  orderFields">Direccion</div>
-  <div class="col-6 col-md-6 orderFields">{{client.address}}</div>
+  <div class="col-6 col-md-6 orderFields">{{orderDetail.address.dir}} - {{orderDetail.address.localidad}}</div>
 </div>
 <div class="row">
   <div class="col-4 col-md-2  orderFields">Flete</div>
-  <div class="col-4 col-md-2 orderFields">{{orderDetail.freight}}</div>
+  <div class="col-4 col-md-2 orderFields"></div>
   <div class="col-4 col-md-2  orderFields">Condicion de Pago</div>
-  <div class="col-4 col-md-2 orderFields">{{orderDetail.paymentType}}</div>
+  <div class="col-4 col-md-2 orderFields"></div>
 </div>
 <div class="row">
   <div class="col-4 col-md-2 orderFields">Observaciones</div>
-  <div class="col-6 col-md-6 orderFields">{{orderDetail.notes}}</div>
+  <div class="col-6 col-md-6 orderFields"></div>
 </div>
 </div>
-
 
 
 <div class="container-fluid">
     <h3>Detalle del Pedido</h3>
   
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nro Art</th>
+          <th scope="col">Descrpcion</th>
+          <th scope="col">Variante</th>
+          <th scope="col">Cantidad Pedida</th>
+          <th scope="col">Cantidad Autorizada</th>
+          <th scope="col">Precio Pedido</th>
+          <th scope="col">Precio Autorizado</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of orderDetail.peditms" >
+          <td>{{ (item && item.itemdatum && item.itemdatum.art) ? item.itemdatum.art.codfac : ''}}</td>
+          <td>{{ (item && item.itemdatum && item.itemdatum.art) ? item.itemdatum.art.nom : ''}}</td>
+          <td>{{ (item && item.itemdatum && item.itemdatum.variante) ? item.itemdatum.variante.nom: '' }}</td>
+          <td>{{ (item)? item.can_ped: ''}}</td>
+          <td>{{ (item)? item.can_aut: ''}}</td>
+          <td>{{ (item)? item.pre_ped: ''}}</td>
+          <td>{{ (item)? item.pre_aut: '' }}</td>
+        </tr>
+       </tbody>
+    </table>
 </div>
+
 

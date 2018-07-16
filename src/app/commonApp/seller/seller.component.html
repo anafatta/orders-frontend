@@ -2,11 +2,12 @@
 <div class="table-responsive table-striped">
   <p>Dashboard vendedor - comunicaciones - metricas - Si es admin ver lista de vendedores</p>
   <div ng-if=isAdmin>
-    <label  for="inputGroupSelect01">Vendedores</label>
+    <label  for="selectedSeller">Vendedores</label>
   </div>
-  <select #seller class="custom-select" id="inputGroupSelect01" data-live-search="true">
-    <option selected>Choose...</option>
-    <option *ngFor="let seller of sellers" data-tokens=seller>{{seller}}</option>
+  <select #seller class="custom-select" [(ngModel)]="selectedSeller" data-live-search="true" id= "selectedSeller">
+    <option *ngFor="let seller of sellers" [ngValue]=seller.id> {{seller.nom}}   
+  </option>
   </select>
-  <button (click)="onClick(seller.value)">submit</button>
+  <button id="button" (click)="onClick()">Ver Detalle</button> 
+ 
 </div>

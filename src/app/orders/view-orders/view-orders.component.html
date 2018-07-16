@@ -2,19 +2,19 @@
 <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">Nro</th>
         <th scope="col">Cliente</th>
         <th scope="col">Fecha</th>
-        <th scope="col">Total Estimado</th>
+        <th scope="col">Direccion</th>
       </tr>
     </thead>
-    <!--tbody>
+    <tbody>
         <tr *ngFor="let order of orders" >
-        <th scope="row">{{order.id}}</th>
-        <td>{{order.clientName}}</td>
-        <td>{{order.date| date:'dd-MM-yyyy'}}</td>
-        <td>{{order.estimateAmount}}</td>
+        <td>{{order.nro}}</td>
+        <td>{{order.cliente.nom}}</td>
+        <td>{{order.fem| date:'dd-MM-yyyy'}}</td>
+        <td>{{ (order.address && order.address.dir) ?order.address.dir : ""}}</td>
         <button [routerLink]="['/orders/detail', order.id]">Ver Detalle</button> 
       </tr>
-     </tbody-->
+     </tbody>
   </table>
