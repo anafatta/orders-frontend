@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { OrdersService } from '../../services/orders.service';
+import { Seller , OrderDetail , ItemDatum, Art, Variante, Peditem } from '../../models/models';
+
+
 
 
 @Component({
@@ -20,16 +23,18 @@ export class ViewOrderDetailsComponent implements OnInit {
   ngOnInit() {
     console.log("on init");
     let id = this.route.snapshot.paramMap.get('id');
-    console.log ("snapshotId: " + id )
-  }
+    this.orderService.getOrder(id).subscribe((data : OrderDetail) => {
+      this.orderDetail=data;
+      console.log("Order Detail DATA: .." + data);
+    });
+    //this.getDataFake();
+
+    console.log("Order Detail ORDER_DETAIL: .." + this.orderDetail);
+ 
+}
 
 }
 
-export interface OrderDetail {
-  id: number;
-  clientId: number;
-  clientName: string;
-  address: string,
-  date: Date;
-  estimateAmount: number;  
-}
+
+
+

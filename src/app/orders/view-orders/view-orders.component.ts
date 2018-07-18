@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { OrdersService } from '../../services/orders.service';
-import { SellerComponent, Seller } from '../../commonApp/seller/seller.component';
+import { Seller, Order } from '../../models/models';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 
 @Component({
   selector: 'app-view-orders',
@@ -10,73 +13,25 @@ import { SellerComponent, Seller } from '../../commonApp/seller/seller.component
 export class ViewOrdersComponent implements OnInit {
   orders: Order[];
 
-  constructor(private ordersService: OrdersService) { }
+  constructor(private router : Router, private route : ActivatedRoute ,private ordersService: OrdersService) { }
 
   ngOnInit() {
     // call service to retrieve orders by seller
-    this.ordersService.getOrders().subscribe(data => {
-      console.log();
-    });
-    
-    
-   this.orders = [
-     {
-      id:9873,
-      clientId:1,
-      clientName: 'Robert De Niro',
-      date: new Date('01/12/2018'),
-      estimateAmount: 12399
-    },
-    {
-      id:10990,
-      clientId:2,
-      clientName: 'Julia Robert',
-      date: new Date('11/11/2018'),
-      estimateAmount: 45900
-    },
-    {
-      id:11789,
-      clientId:3,
-      clientName: 'Brad Pitt',
-      date: new Date('10/10/2018'),
-      estimateAmount: 75300
-    },
+    let sellerId = this.route.snapshot.paramMap.get('sellerId');
+    console.log('view orders...'+ sellerId);
+   
 
-  ]
-
+    this.ordersService.getOrders(sellerId).subscribe((data:Order[]) => { 
+      console.log('ViewOrdersComponent orders...' + data);
+      this.orders = data;
+      for (let order of this.orders)
+      console.log("address " + order.address + "fem" +order.fem  )
+      })
+    ;
     
   }
 
 }
 
-/* export interface Order {
-  id: number;
-  nro:number;
-  fem:Date;
-  cliente: Cliente;
-  vend: Seller;
-  address: Address;
-  clientId: number;
-  clientName: string;
-  date: Date;
-  estimateAmount: number;  
-}
-export interface Cliente {
-  id:number;
-  nombre:string;
-}
-export interface Address {
-  id:number;
-  dir:string;
-  localidad:string;
-  codpos:string;
-  prov:string;
-} */
 
-export interface Order {
-id: number;
-clientId: number;
-clientName: string;
-date: Date;
-estimateAmount: number;  
-}
+
