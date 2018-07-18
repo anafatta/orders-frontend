@@ -29,7 +29,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   onClientSelected(){
-    this.userService.getClient(this.selectedClient).subscribe((data :Cliente) => {
+   this.userService.getClient(this.selectedClient).subscribe((data :Cliente) => {
    this.client = data;
    console.log("call client works... "+ this.selectedClient)
     });

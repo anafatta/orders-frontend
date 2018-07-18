@@ -10,14 +10,10 @@ export interface Seller {
     fem: Date;
     ven: number;
     cli:number;
-    //  "precio": "0.000",
-  //  "articulo": 0,
     cliente: Cliente;
     vend: Seller;
     address : Address; 
-    peditms: Peditem[];
-  
-  
+    peditms: Peditem[];  
   }
 
  export interface Order {
