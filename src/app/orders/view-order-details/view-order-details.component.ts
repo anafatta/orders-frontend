@@ -15,6 +15,7 @@ import { Seller , OrderDetail , ItemDatum, Art, Variante, Peditem } from '../../
 export class ViewOrderDetailsComponent implements OnInit {
   orderDetail:OrderDetail;
   orderId: string;
+  articulos : Art[];
 
   constructor(  private route: ActivatedRoute,
     private router: Router,

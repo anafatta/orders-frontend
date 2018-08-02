@@ -14,6 +14,7 @@ export interface Seller {
     vend: Seller;
     address : Address; 
     peditms: Peditem[];  
+
   }
 
  export interface Order {
@@ -28,7 +29,14 @@ export interface Seller {
   
   export interface Cliente {
     id:number;
-    nombre:string;
+    //nombre:string;
+    nom:string;
+    cuit:string;
+    codfac:number;
+    razonsoc:string;
+    address : Address[];
+
+
   }
   
   export interface Address {
@@ -37,9 +45,11 @@ export interface Seller {
     localidad:string;
     codpos:string;
     prov:string;
+    flete: Flete;
   } 
   
   export interface Variante {
+    itemdata_id:number
     codigo: string;
     nom: string;
   }
@@ -60,7 +70,21 @@ export interface Seller {
   }  
   
   export interface Art {
+    id : number;
     codfac: string;
     nom: string;
   }
+
+
+  export interface DetalleArticulo {
+    art_id: number;
+    nom:string;
+    variantes: Variante[];
+    }  
+
   
+
+  export interface Flete {
+    id: number;
+    nom: string;
+  }

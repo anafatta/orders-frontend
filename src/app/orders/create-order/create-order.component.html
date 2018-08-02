@@ -1,11 +1,131 @@
-<div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01">Clientes</label>
+<h4>Orden de Pedido</h4>
+<div class="container-fluid">
+
+  <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#datosPedido" aria-expanded="true" aria-controls="collapseOne">
+            Datos del pedido
+          </button>
+        </h5>
+      </div>
     </div>
 
-    <select #client class="custom-select" [(ngModel)]="selectedClient" data-live-search="true" id= "selectedClient">
-      <option *ngFor="let client of clients" [ngValue]=client.id> {{client.nom}}   
-    </option>
-    </select>
-    <button id="button" (click)="onClientSelected()">Submit</button> 
+    <div id="datosPedido">
+      <div class="row">
+        <div class="col-4 col-md-2 orderFields">Cliente</div>
+        <div class="col-6 col-md-6 orderFields">
+          <select class="custom-select" (ngModelChange)="onClientSelected($event)" [(ngModel)]="clientId" data-live-search="true">
+            <option [value]="selectedAddress" selected="selected">selectione un cliente
+            </option>
+            <option *ngFor="let client of clients" [ngValue]=client.id> {{client.nom}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Columns are always 50% wide, on mobile and desktop -->
+
+      <div class="row">
+        <div class="col-4 col-md-2  orderFields">Direccion</div>
+        <div class="col-6 col-md-6 orderFields">
+          <div *ngIf="selectedClient">
+            <select class="custom-select" (ngModelChange)="onAdressSelected($event)" [(ngModel)]="selectedAddress" data-live-search="true"
+              id="selectedAddress">
+              <option [value]="selectedAddress" selected="selected">{{selectedAddress.dir}} - {{selectedAddress.localidad}}
+              </option>
+              <option *ngFor="let addr of selectedClient.address.slice(1)" [ngValue]=addr.id> {{addr.dir}} - {{addr.localidad}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 col-md-2  orderFields">Flete</div>
+        <div class="col-4 col-md-2 orderFields"> {{ (selectedClient && selectedAddress && selectedAddress.flete) ? selectedAddress.flete.nom : ''}}</div>
+        <div class="col-4 col-md-2  orderFields">Condicion de Pago</div>
+        <div class="col-4 col-md-2 orderFields"></div>
+      </div>
+      <div class="row">
+        <div class="col-4 col-md-2 orderFields">Observaciones</div>
+        <div class="col-6 col-md-6 orderFields"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#detallePedido" aria-expanded="true" aria-controls="collapseOne">
+            Detalle del pedido
+          </button>
+        </h5>
+      </div>
+    </div>
+    <div id="detallePedido">
+      <div class="row">
+        <div class="col-4 col-md-2 orderFields">Articulo</div>
+        <div class="col-6 col-md-6 orderFields">
+          <select class="custom-select" (ngModelChange)="onArtSelected($event)" [(ngModel)]="artId" data-live-search="true">
+            <option *ngFor="let art of articulos" [ngValue]=art.id> {{art.nom}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="hasVariantes">
+      <div class="row">
+        <div id= "selectVariante" class="col-md-6">
+          <h6 class="sub-header">Seleccione cantidades</h6>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="col-md-1">codigo</th>
+                  <th class="col-md-3">Descripcion</th>
+                  <th class="col-md-1">cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of variantes">
+                  <td class="col-md-1"> {{item.codigo}} </td>
+                  <td class="col-md-4"> {{item.nom}}</td>
+                  <td class="col-md-1">
+                    <input type="number">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h6 class="sub-header">Detalle del pedido</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                      <tr>
+                          <th class="col-md-1">codigo</th>
+                          <th class="col-md-3">Descripcion</th>
+                          <th class="col-md-1">cantidad</th>
+                        </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let selectedItem of selectedItems">
+                        <td class="col-md-1"> {{selectedItem.codigo}} </td>
+                        <td class="col-md-4"> {{selectedItem.nom}}</td>
+                        <td class="col-md-1"> {{selectedItem.cant}}
+                         
+                        </td>
+                      </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+       <div *ngIf="!hasVariantes">
+          <h6 class="sub-header">Item no disponible</h6>
+      </div>
+    </div>
   </div>
