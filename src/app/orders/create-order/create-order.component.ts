@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { DataService } from '../../services/data.service';
 import { OrdersService } from '../../services/orders.service'
-import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem } from '../../models/models';
+import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum , OrderDetail, Seller} from '../../models/models';
+import { SellerComponent } from '../../commonApp/seller/seller.component';
 
 
 @Component({
@@ -25,15 +26,18 @@ export class CreateOrderComponent implements OnInit {
   variantes: Variante[];
   //expreso : Expreso [];
   selectedItems: Peditem[];
+  price:number;
   constructor(private dataservice: DataService, private userService: UserService, private orderService: OrdersService) {
 
   }
 
   ngOnInit() {
+    this.selectedItems =  [];
     this.sellerId = this.dataservice.getSellerId();
     this.userService.getClientsBySeller(this.sellerId).subscribe((data: Cliente[]) => {
       this.clients = data;
       this.selectedClient = this.clients[0];
+    
     });
     // LOADING ARTICULOS
     this.orderService.getArticulos().subscribe((data: Art[]) => {
@@ -47,6 +51,7 @@ export class CreateOrderComponent implements OnInit {
     console.log('Selected value');
     console.log(event);
     this.clientId = event;
+    this.clientId = "621";
     this.userService.getClient(this.clientId).subscribe((data: Cliente) => {
       this.selectedClient = data;
       this.selectedAddress = this.selectedClient.address[0];
@@ -59,15 +64,80 @@ export class CreateOrderComponent implements OnInit {
   onArtSelected(event: any) {
     this.artId = event;
     this.orderService.getArticuloById(this.artId).subscribe((data: DetalleArticulo) => {
-      this.articulo = data;      
+      this.articulo = data;
       if (this.articulo && this.articulo.variantes && this.articulo.variantes.length > 0) {
         this.variantes = this.articulo.variantes;
         this.hasVariantes = true;
       } else {
         this.hasVariantes = false;
       }
-      console.log("call getArticuloById works... " + this.articulo.art_id + " " +   this.variantes.length)
+      console.log("call getArticuloById works... " + this.articulo.art_id + " " + this.variantes.length)
     });
   }
 
+  addVariante(variante: any) {
+    if (this.selectedItems.length == 0 || !(this.selectedItems.some(e => e.itemdata === variante.itemdata_id))) {
+    let peditem: Peditem;
+  
+    peditem = {
+      itemdata : variante.itemdata_id,
+      can_ped: 0,
+      can_aut:0,
+      pre_ped:0,
+      pre_aut:0,
+      itemdatum: {
+        id : 0,
+        art1: {
+          id: this.artId,
+          codfac:"",
+          nom:"",
+        },
+        variante: {
+          itemdata_id:variante.itemdata_id,
+          codigo: variante.codigo,
+          nom: variante.nom,
+        }
+      }
+    }
+    this.selectedItems.push(peditem);
+    console.log("selectedItems= " + this.selectedItems.length + "   variante nombre=" + this.selectedItems[0].itemdatum.variante.nom);
+  }
+  }
+
+addCount(i : any, selectedCount : any){
+  this.selectedItems[i].can_ped = selectedCount;
+  console.log( "cantidad pedida=" + this.selectedItems[i].can_ped + "   index " + i)
+
 }
+
+ removeVariante(index: number){
+  this.selectedItems.splice(index, 1);
+}
+
+submitOrderDetail(){
+ let order : OrderDetail;
+ let seller : Seller;
+ console.log("submitOrderDetail= ");
+ order = { 
+  id: 0,
+  nro: 0,
+  fem: new Date(),
+  ven: 1,
+  cli:this.selectedClient.id,
+  cliente: this.selectedClient,
+  vend: seller ,
+  address : this.selectedAddress,
+  cliDir:Number(this.addressSelectedId),
+  peditms: this.selectedItems,  
+ };
+
+  this.orderService.submitOrder(order).subscribe((data : OrderDetail) => {
+    console.log("order posteada");
+  });
+  
+ } 
+
+}
+
+
+

@@ -13,6 +13,7 @@ export interface Seller {
     cliente: Cliente;
     vend: Seller;
     address : Address; 
+    cliDir:number;
     peditms: Peditem[];  
 
   }
