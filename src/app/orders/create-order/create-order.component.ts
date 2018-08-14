@@ -27,11 +27,18 @@ export class CreateOrderComponent implements OnInit {
   //expreso : Expreso [];
   selectedItems: Peditem[];
   price:number;
+  isOpen:boolean;
+  isOpen1:boolean;
+  conven:string;
+  observaciones: string;
+
   constructor(private dataservice: DataService, private userService: UserService, private orderService: OrdersService) {
 
   }
 
   ngOnInit() {
+    this.isOpen = true;
+    this.isOpen1 = false;
     this.selectedItems =  [];
     this.sellerId = this.dataservice.getSellerId();
     this.userService.getClientsBySeller(this.sellerId).subscribe((data: Cliente[]) => {
@@ -56,9 +63,13 @@ export class CreateOrderComponent implements OnInit {
       this.selectedClient = data;
       this.selectedAddress = this.selectedClient.address[0];
       this.selectedFlete = this.selectedAddress.flete;
-
+      this.conven = "1";
       console.log("call client works... " + this.clientId)
     });
+  }
+
+  onCondVentSelected(){
+
   }
 
   onArtSelected(event: any) {
@@ -122,12 +133,14 @@ submitOrderDetail(){
   id: 0,
   nro: 0,
   fem: new Date(),
-  ven: 1,
+  ven: Number(this.sellerId) ,
   cli:this.selectedClient.id,
+  conven: this.conven,
+  observ: this.observaciones,
   cliente: this.selectedClient,
   vend: seller ,
   address : this.selectedAddress,
-  cliDir:Number(this.addressSelectedId),
+  clidir:Number(this.selectedAddress.id),
   peditms: this.selectedItems,  
  };
 

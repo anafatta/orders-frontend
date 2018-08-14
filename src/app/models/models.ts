@@ -10,10 +10,12 @@ export interface Seller {
     fem: Date;
     ven: number;
     cli:number;
+    conven: string;
+    observ: string;
     cliente: Cliente;
     vend: Seller;
     address : Address; 
-    cliDir:number;
+    clidir:number;
     peditms: Peditem[];  
 
   }

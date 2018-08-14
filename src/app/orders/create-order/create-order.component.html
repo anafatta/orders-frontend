@@ -7,14 +7,14 @@
     <div class="card">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#datosPedido" aria-expanded="true" aria-controls="collapseOne">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#datosPedido" aria-expanded="true" aria-controls="datosPedido">
             Datos del pedido
           </button>
         </h5>
       </div>
     </div>
 
-    <div id="datosPedido">
+    <div id="datosPedido" class="collapse">
       <div class="row">
         <div class="col-2 col-sd-2 orderFields">Cliente</div>
         <div class="col-10 col-sd-10 orderFields">
@@ -47,23 +47,33 @@
         <div class="col-2 col-sd-2  orderFields">Flete</div>
         <div class="col-4 col-sd-4 orderFields"> {{ (selectedClient && selectedAddress && selectedAddress.flete) ? selectedAddress.flete.nom : ''}}</div>
         <div class="col-2 col-sd-2  orderFields">Pago</div>
-        <div class="col-4 col-sd-4 orderFields"></div>
+        <div class="col-4 col-sd-4 orderFields">
+      <select class="custom-select" [(ngModel)]="conven" data-live-search="true"
+            id="convenId">
+            <option [value]="1" selected="selected">CONTADO</option>
+            <option [value]="2">CHEQUES 30 dias</option>
+            <option [value]="3">CHEQUES 30 - 60 dias</option>
+            <option [value]="4">CHEQUES 30 - 60 - 90 dias</option>            
+          </select>
+        </div>
       </div>
       <div class="row">
         <div class="col-2 col-sd-2 orderFields">Observaciones</div>
-        <div class="col-10 col-sd-10 orderFields"></div>
+        <div class="col-10 col-sd-10 orderFields">
+          <input [(ngModel)]="observaciones">
+        </div>
     </div>
     </div>
     <div class="card">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#detallePedido" aria-expanded="true" aria-controls="collapseOne">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#detallePedido" aria-expanded="false" aria-controls="detallePedido">
             Detalle del pedido
           </button>
         </h5>
       </div>
     </div>
-    <div id="detallePedido">
+    <div id="detallePedido" class="collapse">
       <div class="row">
         <div class="col-2 col-md-2 orderFields">Articulo</div>
         <div class="col-6 col-md-6 orderFields">
@@ -77,10 +87,16 @@
             <input [(ngModel)]="price" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="price" />
       </div>
       <div *ngIf="hasVariantes">
-      <div class="row">
-        <div id= "selectVariante" class="col-md-6">
-          <h6 class="sub-header">Seleccione variante</h6>
-          <div class="table-responsive">
+      <div class="row">     
+          <div class="card col-md-6">
+              <div class="card-header" id="headingtwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#variantesContainer" aria-expanded="false" aria-controls="variantesContainer">
+                    Selccione variantes
+                  </button>
+                </h5>
+              </div>
+            <div id="variantesContainer" class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -98,9 +114,15 @@
             </table>
           </div>
         </div>
-        <div class="col-md-6">
-          <h6 class="sub-header">Detalle del pedido</h6>
-            <div class="table-responsive">
+        <div class="card col-md-6">
+            <div class="card-header" id="headingtwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#detalleContainer" aria-expanded="false" aria-controls="detalleContainer">
+                    Detalle del pedido
+                  </button>
+                </h5>
+              </div>
+            <div id="detalleContainer" class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -115,7 +137,7 @@
                         <td class="col-md-1"> {{item.itemdatum.variante.codigo}} </td>
                         <td class="col-md-4"> {{item.itemdatum.variante.nom}}</td>
                         <td class="col-md-1">
-                            <input #selectedCount (change)="addCount(i, selectedCount.value)"  type="number">
+                            <input #selectedCount onchange="addCount(i, selectedCount)"  type="number">
                           </td>
                         <td>
                         <button id="button" class="btn btn-primary" (click)="removeVariante(i)">-</button> 
@@ -132,4 +154,4 @@
       </div>
     </div>
   </div>
-  <button id="button" class="btn btn-primary" (click)="submitOrderDetail()">submit</button> 
+  <button id="button" class="submit" (click)="submitOrderDetail()">-</button> 
