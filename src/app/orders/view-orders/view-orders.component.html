@@ -1,20 +1,25 @@
 <h3>Mis Pedidos</h3>
-<table class="table table-hover">
+
+<div class="table-responsive">
+    <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Nro</th>
-        <th scope="col">Cliente</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Direccion</th>
+        <th class="col-xs-1">Nro</th>
+        <th class="col-xs-4">Cliente</th>
+        <th class="col-xs-2">Fecha</th>
+        <th class="col-xs-4">Direccion</th>
+        <th class="col-xs-1"></th>
       </tr>
     </thead>
     <tbody>
         <tr *ngFor="let order of orders" >
-        <td>{{order.nro}}</td>
-        <td>{{order.cliente.nom}}</td>
-        <td>{{order.fem| date:'dd-MM-yyyy'}}</td>
-        <td>{{ (order.address && order.address.dir) ?order.address.dir : ""}}</td>
-        <button [routerLink]="['/orders/detail', order.id]">Ver Detalle</button> 
+        <td class="col-xs-1">{{order.nro}}</td>
+        <td class="col-xs-4">{{order.cliente.nom}}</td>
+        <td class="col-xs-2">{{order.fem| date:'dd-MM-yyyy'}}</td>
+        <td class="col-xs-4">{{ (order.address && order.address.dir) ?order.address.dir : ""}}</td>
+        <button class="col-xs-1" [routerLink]="['/orders/detail', order.id]">Ver Detalle</button> 
       </tr>
      </tbody>
   </table>
+  <button  class="btn btn-primary" [routerLink]="['/sellers']">Volver</button> 
+

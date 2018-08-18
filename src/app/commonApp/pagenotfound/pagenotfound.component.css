@@ -1,0 +1,9 @@
+.underConstruccion {
+background-color: lightgrey;
+height: 100px;
+align-content: center!;
+}
+.underConstruccionMessage {
+    font-size:25px;
+    align-content: center ;
+}

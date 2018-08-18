@@ -4,7 +4,7 @@ import { DataService } from '../../services/data.service';
 import { OrdersService } from '../../services/orders.service'
 import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum , OrderDetail, Seller} from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-order',
@@ -32,7 +32,7 @@ export class CreateOrderComponent implements OnInit {
   conven:string;
   observaciones: string;
 
-  constructor(private dataservice: DataService, private userService: UserService, private orderService: OrdersService) {
+  constructor(private router : Router, private dataservice: DataService, private userService: UserService, private orderService: OrdersService) {
 
   }
 
@@ -126,6 +126,12 @@ addCount(i : any, selectedCount : any){
 }
 
 submitOrderDetail(){
+  console.log("precio:" + this.price)
+   
+  for (let item of this.selectedItems) {
+    item.pre_ped = this.price;
+}
+   
  let order : OrderDetail;
  let seller : Seller;
  console.log("submitOrderDetail= ");
@@ -147,7 +153,8 @@ submitOrderDetail(){
   this.orderService.submitOrder(order).subscribe((data : OrderDetail) => {
     console.log("order posteada");
   });
-  
+  var root = "orders/view";
+  this.router.navigate([root]);
  } 
 
 }

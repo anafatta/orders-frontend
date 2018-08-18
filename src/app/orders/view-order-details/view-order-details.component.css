@@ -3,5 +3,14 @@
     padding-bottom: .25rem;
     background-color: rgba(61, 122, 124, 0.15);
     border: 1px solid rgba(86,61,124,.2);
-    font-family: serif;
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+#datosPedido , #detallePedido {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.columnOrderDetail {
+    width: unset;
 }

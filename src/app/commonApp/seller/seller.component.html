@@ -1,13 +1,14 @@
 <h3>Bienvenido</h3>
 <div class="table-responsive table-striped">
-  <p>Dashboard vendedor - comunicaciones - metricas - Si es admin ver lista de vendedores</p>
+  <p>Proximamente Dashboard del vendedor - comunicaciones internas - metricas</p>
   <div ng-if=isAdmin>
+      <p>Usted a iniciado sesión como usuario Admin</p>
     <label  for="selectedSeller">Vendedores</label>
   </div>
-  <select #seller class="custom-select" [(ngModel)]="selectedSeller" data-live-search="true" id= "selectedSeller">
+  <select #seller class="custom-select"  (ngModelChange)="onClick($event)" [(ngModel)]="selectedSeller" data-live-search="true" id= "selectedSeller">
+        <option [value]="selectedAddress" selected="selected">Seleccione un vendedor
+        </option>
     <option *ngFor="let seller of sellers" [ngValue]=seller.id> {{seller.nom}}   
   </option>
   </select>
-  <button id="button" (click)="onClick()">Ver Detalle</button> 
- 
 </div>

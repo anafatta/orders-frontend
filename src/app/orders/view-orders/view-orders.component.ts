@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { OrdersService } from '../../services/orders.service';
+import { DataService } from '../../services/data.service';
 import { Seller, Order } from '../../models/models';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -13,11 +14,12 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class ViewOrdersComponent implements OnInit {
   orders: Order[];
 
-  constructor(private router : Router, private route : ActivatedRoute ,private ordersService: OrdersService) { }
+  constructor(private dataservice: DataService, private router : Router, private route : ActivatedRoute ,private ordersService: OrdersService) { }
 
   ngOnInit() {
     // call service to retrieve orders by seller
-    let sellerId = this.route.snapshot.paramMap.get('sellerId');
+    //let sellerId = this.route.snapshot.paramMap.get('sellerId');
+    let sellerId = this.dataservice.getSellerId();
     console.log('view orders...'+ sellerId);
    
 
