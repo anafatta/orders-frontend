@@ -12,6 +12,8 @@ import { Cliente, Seller } from '../models/models';
 })
 
 export class UserService {
+//  ROOT_URL = 'http://lumasoft.dyndns.org.:8000/api';
+ROOT_URL = 'http://localhost:8000/api';
 
  // constructor(private store: Store<AppState>) { }
  constructor(private httpClient:HttpClient ) { 
@@ -20,15 +22,15 @@ export class UserService {
 
 getSellers(): Observable<Seller[]>  {
   
-  return this.httpClient.get<Seller[]>('http://lumasoft.dyndns.org.:8000/api/vend');
+  return this.httpClient.get<Seller[]>(this.ROOT_URL + '/vend');
 }
 
 getClientsBySeller(id:string) : Observable<Cliente[]> {
-  return this.httpClient.get<Cliente[]>('http://lumasoft.dyndns.org.:8000/api/clientes/vendedor/'+id);
+  return this.httpClient.get<Cliente[]>(this.ROOT_URL + '/clientes/vendedor/' + id);
 }
 
 getClient(id:string) : Observable<Cliente> {
-return this.httpClient.get<Cliente>('http://lumasoft.dyndns.org.:8000/api/clientes/id/'+id);
+return this.httpClient.get<Cliente>(this.ROOT_URL + '/clientes/id/' + id);
 }
 
 }
