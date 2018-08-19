@@ -37,7 +37,7 @@
               id="selectedAddress">
               <option [value]="selectedAddress" selected="selected">{{selectedAddress.dir}} - {{selectedAddress.localidad}}
               </option>
-              <option *ngFor="let addr of selectedClient.address.slice(1)" [ngValue]=addr.id> {{addr.dir}} - {{addr.localidad}}
+              <option *ngFor="let addr of selectedClient.address" [ngValue]=addr.id> {{addr.dir}} - {{addr.localidad}}
               </option>
             </select>
           </div>
@@ -92,7 +92,7 @@
               <div class="card-header" id="headingtwo">
                 <h5 class="mb-0">
                   <button class="btn btn-link" data-toggle="collapse" data-target="#variantesContainer" aria-expanded="false" aria-controls="variantesContainer">
-                    Selccione variantes
+                    Seleccione Variantes
                   </button>
                 </h5>
               </div>
@@ -137,7 +137,7 @@
                         <td class="col-md-1"> {{item.itemdatum.variante.codigo}} </td>
                         <td class="col-md-4"> {{item.itemdatum.variante.nom}}</td>
                         <td class="col-md-1">
-                            <input #selectedCount onchange="addCount(i, selectedCount)"  type="number">
+                            <input #selectedCount (change)="addCount(i, selectedCount.value);">
                           </td>
                         <td>
                         <button id="button" class="btn btn-primary" (click)="removeVariante(i)">-</button> 
@@ -154,4 +154,4 @@
       </div>
     </div>
   </div>
-  <button id="button" class="submit" (click)="submitOrderDetail()">-</button> 
+  <button id="button" class="btn btn-primary" (click)="submitOrderDetail()">enviar</button> 
