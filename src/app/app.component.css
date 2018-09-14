@@ -12,3 +12,6 @@ body {
   height: 100%; 
   /* Center and scale the image nicely */  
 }
+.header img {
+  margin: auto;
+}

@@ -1,14 +1,15 @@
-<h3>Bienvenido</h3>
-<div class="table-responsive table-striped">
+<mat-card>
+  <mat-card-title>Bienvenido</mat-card-title>
   <p>Proximamente Dashboard del vendedor - comunicaciones internas - metricas</p>
   <div ng-if=isAdmin>
-      <p>Usted a iniciado sesión como usuario Admin</p>
-    <label  for="selectedSeller">Vendedores</label>
+    <p>Usted a iniciado sesión como usuario Admin</p>
+    <h3>Vendedores</h3>
   </div>
-  <select #seller class="custom-select"  (ngModelChange)="onClick($event)" [(ngModel)]="selectedSeller" data-live-search="true" id= "selectedSeller">
-        <option [value]="selectedAddress" selected="selected">Seleccione un vendedor
-        </option>
-    <option *ngFor="let seller of sellers" [ngValue]=seller.id> {{seller.nom}}   
-  </option>
-  </select>
-</div>
+  <mat-form-field>
+    <mat-select placeholder="Seleccione un vendedor" (ngModelChange)="onClick($event)" [(ngModel)]="selectedSeller" >
+      <mat-option *ngFor="let seller of sellers" [value]="seller.id">
+          {{seller.nom}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-card>

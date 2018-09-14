@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RouterModule, Routes } from '@angular/router';
+import { MaterialModule } from '../material.module';
 
 const authRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,13 +13,14 @@ const authRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(authRoutes)
+    RouterModule.forChild(authRoutes),
+    MaterialModule
   ],
-    declarations: 
+  declarations:
     [LoginComponent,
-     LogoutComponent
-  ],
-  exports : [
+      LogoutComponent
+    ],
+  exports: [
     LoginComponent,
     LogoutComponent,
   ]

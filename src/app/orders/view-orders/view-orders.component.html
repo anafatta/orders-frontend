@@ -1,7 +1,6 @@
-<h3>Mis Pedidos</h3>
-
-<div class="table-responsive">
-    <table class="table table-striped">
+<mat-card>
+  <mat-card-title>Mis Pedidos</mat-card-title>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th class="col-xs-1">Nro</th>
@@ -12,14 +11,17 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let order of orders" >
+      <tr *ngFor="let order of orders">
         <td class="col-xs-1">{{order.nro}}</td>
         <td class="col-xs-4">{{order.cliente.nom}}</td>
         <td class="col-xs-2">{{order.fem| date:'dd-MM-yyyy'}}</td>
         <td class="col-xs-4">{{ (order.address && order.address.dir) ?order.address.dir : ""}}</td>
-        <button class="col-xs-1" [routerLink]="['/orders/detail', order.id]">Ver Detalle</button> 
+        <button mat-mini-fab color="accent" class="col-xs-1" [routerLink]="['/orders/detail', order.id]">
+          <i class="material-icons">
+            pageview
+          </i></button>
       </tr>
-     </tbody>
+    </tbody>
   </table>
-  <button  class="btn btn-primary" [routerLink]="['/sellers']">Volver</button> 
-
+  <button class="btn btn-primary" [routerLink]="['/sellers']">Volver</button>
+</mat-card>

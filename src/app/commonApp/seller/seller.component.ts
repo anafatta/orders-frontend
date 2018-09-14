@@ -11,25 +11,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./seller.component.css']
 })
 export class SellerComponent implements OnInit {
-  sellers : Seller[];
+  sellers: Seller[];
   isAdmin: boolean;
   selectedSeller: string;
 
-  constructor(private router : Router, private userService : UserService, private dataService : DataService ) { }
+  constructor(private router: Router, private userService: UserService, private dataService: DataService) { }
 
   ngOnInit() {
     // call service to retrieve client by seller
 
     this.isAdmin = true;
-    this.userService.getSellers().subscribe(( data: Seller[] ) => {
+    this.userService.getSellers().subscribe((data: Seller[]) => {
       //salon
       this.sellers = data;
-      console.log("call sellers works... "+ this.sellers)
+      console.log("call sellers works... " + this.sellers)
     });
 
 
   }
-  onClick(ven:any){
+  onClick(ven: any) {
     console.log("click works ... ");
     this.selectedSeller = ven;
     this.dataService.setSellerId(this.selectedSeller);
