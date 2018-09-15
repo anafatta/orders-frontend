@@ -18,7 +18,8 @@ import {
   MatSortModule,
   MatProgressSpinnerModule,
   MatGridListModule,
-  MatDialogModule
+  MatDialogModule,
+  MatExpansionModule
 
 } from '@angular/material';
 
@@ -26,6 +27,7 @@ import {
   imports: [
     MatButtonModule,
     MatMenuModule,
+    MatExpansionModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
@@ -58,7 +60,9 @@ import {
     MatProgressSpinnerModule,
     MatGridListModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
+
   ]
 })
 export class MaterialModule { }

@@ -1,91 +1,69 @@
-<h4>Orden de Pedido</h4>
-<div class="container-fluid">
+<mat-card>
+  <mat-card-title>Detalle del Pedido #{{orderDetail.id}}</mat-card-title>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Datos del pedido
+        </mat-panel-title>
+        <mat-panel-description>
+          Información del cliente
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-  <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+      # Pedido<br />
+      {{orderDetail.id}}<br />
+      Fecha<br />
+      {{orderDetail.fem| date:'dd-MM-yyyy'}}<br />
+      Cliente<br />
+      {{orderDetail.cliente.nom}}<br />
+      Direccion<br />
+      {{orderDetail.address.dir}} - {{orderDetail.address.localidad}}<br />
+      Flete<br />
+      <!-- {{ orderDetail.address.flete.nom }}<br />-->
+      Pago<br />
+      Observaciones
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Detalle del pedido
+        </mat-panel-title>
+        <mat-panel-description>
+          Detalle de la compra
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-  <div id="accordion">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#datosPedido" aria-expanded="true" aria-controls="datosPedido">
-            Datos del pedido
-          </button>
-        </h5>
-      </div>
-    </div>
 
-    <div id="datosPedido" class="collapse">
-        <div class="row">
-            <div class="col-2 col-sd-2  orderFields"># Pedido</div>
-            <div class="col-4 col-sd-4 orderFields"> {{orderDetail.id}}</div>
-            <div class="col-2 col-sd-2  orderFields">Fecha</div>
-            <div class="col-4 col-sd-4 orderFields">
-                {{orderDetail.fem| date:'dd-MM-yyyy'}}
-            </div>
-          </div>
-      <div class="row">
-        <div class="col-2 col-sd-2 orderFields">Cliente</div>
-        <div class="col-10 col-sd-10 orderFields">
-          {{orderDetail.cliente.nom}}
-        </div>
-      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="col-xs-1"># Art</th>
+            <th class="col-xs-4 ">Desc</th>
+            <th class="col-xs-3">Variante</th>
+            <th class="col-xs-1">Cant. Pedida</th>
+            <th class="col-xs-1">Cant. Autor.</th>
+            <th class="col-xs-1">$ pedido</th>
+            <th class="col-xs-1">$ Autot.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of orderDetail.peditms">
+            <td class="col-xs-1"> {{ (item && item.itemdatum && item.itemdatum.art) ? item.itemdatum.art.codfac : ''}}
+            </td>
+            <td class="col-xs-4"> {{ (item && item.itemdatum && item.itemdatum.art) ? item.itemdatum.art.nom : ''}}</td>
+            <td class="col-xs-3"> {{ (item && item.itemdatum && item.itemdatum.variante) ? item.itemdatum.variante.nom:
+              '' }} </td>
+            <td class="col-xs-1"> {{ (item)? item.can_ped: ''}}</td>
+            <td class="col-xs-1"> {{ (item)? item.can_aut: ''}}</td>
+            <td class="col-xs-1"> {{ (item)? item.pre_ped: ''}}</td>
+            <td class="col-xs-1"> {{ (item)? item.pre_aut: '' }}</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <!-- Columns are always 50% wide, on mobile and desktop -->
-
-      <div class="row">
-        <div class="col-2 col-sd-2  orderFields">Direccion</div>
-        <div class="col-10 col-sd-10 orderFields">
-          {{orderDetail.address.dir}} - {{orderDetail.address.localidad}}
-          </div>
-        </div>
-      <div class="row">
-        <div class="col-2 col-sd-2  orderFields">Flete</div>
-        <div class="col-4 col-sd-4 orderFields"> {{ orderDetail.address.flete.nom }}</div>
-        <div class="col-2 col-sd-2  orderFields">Pago</div>
-        <div class="col-4 col-sd-4 orderFields">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 col-sd-2 orderFields">Observaciones</div>
-        <div class="col-10 col-sd-10 orderFields">
-        </div>
-    </div>
-  </div>
-
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#detallePedido" aria-expanded="false" aria-controls="detallePedido">
-            Detalle del pedido
-          </button>
-        </h5>
-      </div>
-    </div>
-    <div id="detallePedido" class="collapse">
-         <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th class="col-xs-1"># Art</th>
-                    <th class="col-xs-4 ">Desc</th>
-                    <th class="col-xs-3">Variante</th>
-                    <th class="col-xs-1">Cant. Pedida</th>
-                    <th class="col-xs-1">Cant. Autor.</th>
-                    <th class="col-xs-1">$ pedido</th>
-                    <th class="col-xs-1">$ Autot.</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of orderDetail.peditms" >
-                    <td class="col-xs-1"> {{ (item && item.itemdatum && item.itemdatum.art) ? item.itemdatum.art.codfac : ''}} </td>
-                    <td class="col-xs-4"> {{ (item && item.itemdatum && item.itemdatum.art) ? item.itemdatum.art.nom : ''}}</td>
-                    <td class="col-xs-3"> {{ (item && item.itemdatum && item.itemdatum.variante) ? item.itemdatum.variante.nom: '' }} </td>
-                    <td class="col-xs-1"> {{ (item)? item.can_ped: ''}}</td>                
-                    <td class="col-xs-1"> {{ (item)? item.can_aut: ''}}</td>
-                    <td class="col-xs-1"> {{ (item)? item.pre_ped: ''}}</td>                
-                    <td class="col-xs-1"> {{ (item)? item.pre_aut: '' }}</td>
-                    </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
