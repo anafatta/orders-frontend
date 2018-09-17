@@ -15,3 +15,9 @@ body {
 .header img {
   margin: auto;
 }
+.header {
+  color: #fff!important;
+}
+.static_label {
+  color: #4caf50;
+}

@@ -1,16 +1,13 @@
-.orderFields {
-    padding-top: .25rem;
-    padding-bottom: .25rem;
-    background-color: rgba(61, 122, 124, 0.15);
-    border: 1px solid rgba(86,61,124,.2);
-    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+.static_field {
+    text-align: left;
+    width: 100%;
+    font-size: 16px;
 }
-
-#datosPedido , #detallePedido {
-    margin-left: 15px;
-    margin-right: 15px;
+.static_label {
+    color: #4caf50;
+    display: block;
+    font-size: 13px;
 }
-
-.columnOrderDetail {
-    width: unset;
+table {
+    width: 100%;
 }

@@ -1,4 +1,77 @@
-<h4>Orden de Pedido</h4>
+<mat-card>
+  <mat-card-title>Orden de Pedido</mat-card-title>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Datos del pedido
+        </mat-panel-title>
+        <mat-panel-description>
+          Información del cliente
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-grid-list cols="3" rowHeight="60px">
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-select class="custom-select" placeholder="Cliente" (ngModelChange)="onClientSelected($event)"
+              [(ngModel)]="clientId" data-live-search="true">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let client of clients" [value]="selectedClient">
+                  {{client.nom}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-select>
+          </mat-form-field>
+          <!--<select class="custom-select" (ngModelChange)="onClientSelected($event)" [(ngModel)]="clientId"
+            data-live-search="true">
+            <option [value]="selectedAddress" selected="selected">selectione un cliente
+            </option>
+            <option *ngFor="let client of clients" [ngValue]=client.id> {{client.nom}}
+            </option>
+          </select>-->
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field *ngIf="selectedClient">
+            <mat-select class="custom-select" placeholder="Domicilio" (ngModelChange)="onAdressSelected($event)"
+              [(ngModel)]="selectedAddress" data-live-search="true">
+              <mat-option [value]="selectedAddress">
+                {{selectedAddress.dir}} - {{selectedAddress.localidad}}
+              </mat-option>
+              <mat-option *ngFor="let addr of selectedClient.address" [value]=addr.id> {{addr.dir}} -
+                {{addr.localidad}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!--<select *ngIf="selectedClient" class="custom-select" (ngModelChange)="onAdressSelected($event)" [(ngModel)]="selectedAddress"
+            data-live-search="true" id="selectedAddress">
+            <option [value]="selectedAddress" selected="selected">{{selectedAddress.dir}} -
+              {{selectedAddress.localidad}}
+            </option>
+            <option *ngFor="let addr of selectedClient.address" [ngValue]=addr.id> {{addr.dir}} - {{addr.localidad}}
+            </option>
+          </select>-->
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Flete</span>
+            {{ (selectedClient && selectedAddress && selectedAddress.flete) ? selectedAddress.flete.nom : ''}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-select placeholder="Pago" [(ngModel)]="conven" data-live-search="true" id="convenId">
+              <mat-option [value]="1" selected="selected">CONTADO</mat-option>
+              <mat-option [value]="2">CHEQUES 30 dias</mat-option>
+              <mat-option [value]="3">CHEQUES 30 - 60 dias</mat-option>
+              <mat-option [value]="4">CHEQUES 30 - 60 - 90 dias</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
 <div class="container-fluid">
 
   <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
@@ -7,7 +80,8 @@
     <div class="card">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#datosPedido" aria-expanded="true" aria-controls="datosPedido">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#datosPedido" aria-expanded="true"
+            aria-controls="datosPedido">
             Datos del pedido
           </button>
         </h5>
@@ -18,12 +92,7 @@
       <div class="row">
         <div class="col-2 col-sd-2 orderFields">Cliente</div>
         <div class="col-10 col-sd-10 orderFields">
-          <select class="custom-select" (ngModelChange)="onClientSelected($event)" [(ngModel)]="clientId" data-live-search="true">
-            <option [value]="selectedAddress" selected="selected">selectione un cliente
-            </option>
-            <option *ngFor="let client of clients" [ngValue]=client.id> {{client.nom}}
-            </option>
-          </select>
+
         </div>
       </div>
 
@@ -33,27 +102,21 @@
         <div class="col-2 col-sd-2  orderFields">Direccion</div>
         <div class="col-10 col-sd-10 orderFields">
           <div *ngIf="selectedClient">
-            <select class="custom-select" (ngModelChange)="onAdressSelected($event)" [(ngModel)]="selectedAddress" data-live-search="true"
-              id="selectedAddress">
-              <option [value]="selectedAddress" selected="selected">{{selectedAddress.dir}} - {{selectedAddress.localidad}}
-              </option>
-              <option *ngFor="let addr of selectedClient.address" [ngValue]=addr.id> {{addr.dir}} - {{addr.localidad}}
-              </option>
-            </select>
+
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-2 col-sd-2  orderFields">Flete</div>
-        <div class="col-4 col-sd-4 orderFields"> {{ (selectedClient && selectedAddress && selectedAddress.flete) ? selectedAddress.flete.nom : ''}}</div>
+        <div class="col-4 col-sd-4 orderFields"> {{ (selectedClient && selectedAddress && selectedAddress.flete) ?
+          selectedAddress.flete.nom : ''}}</div>
         <div class="col-2 col-sd-2  orderFields">Pago</div>
         <div class="col-4 col-sd-4 orderFields">
-      <select class="custom-select" [(ngModel)]="conven" data-live-search="true"
-            id="convenId">
+          <select class="custom-select" [(ngModel)]="conven" data-live-search="true" id="convenId">
             <option [value]="1" selected="selected">CONTADO</option>
             <option [value]="2">CHEQUES 30 dias</option>
             <option [value]="3">CHEQUES 30 - 60 dias</option>
-            <option [value]="4">CHEQUES 30 - 60 - 90 dias</option>            
+            <option [value]="4">CHEQUES 30 - 60 - 90 dias</option>
           </select>
         </div>
       </div>
@@ -62,12 +125,13 @@
         <div class="col-10 col-sd-10 orderFields">
           <input [(ngModel)]="observaciones">
         </div>
-    </div>
+      </div>
     </div>
     <div class="card">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#detallePedido" aria-expanded="false" aria-controls="detallePedido">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#detallePedido" aria-expanded="false"
+            aria-controls="detallePedido">
             Detalle del pedido
           </button>
         </h5>
@@ -84,74 +148,77 @@
         </div>
         <div class="col-2 col-md-2 orderFields">precio</div>
         <div class="col-2 col-md-2 orderFields">
-            <input [(ngModel)]="price" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="price" />
-      </div>
-      <div *ngIf="hasVariantes">
-      <div class="row">     
-          <div class="card col-md-6">
+          <input [(ngModel)]="price" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100"
+            class="form-control currency" id="price" />
+        </div>
+        <div *ngIf="hasVariantes">
+          <div class="row">
+            <div class="card col-md-6">
               <div class="card-header" id="headingtwo">
                 <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#variantesContainer" aria-expanded="false" aria-controls="variantesContainer">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#variantesContainer" aria-expanded="false"
+                    aria-controls="variantesContainer">
                     Seleccione Variantes
                   </button>
                 </h5>
               </div>
-            <div id="variantesContainer" class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th class="col-md-1">codigo</th>
-                  <th class="col-md-3">Descripcion</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of variantes" >
-                  <td class="col-md-1"> {{item.codigo}} </td>
-                  <td class="col-md-4"> {{item.nom}}</td>
-                  <button id="button" class="btn btn-primary" (click)="addVariante(item)">+</button> 
-                  </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="card col-md-6">
-            <div class="card-header" id="headingtwo">
+              <div id="variantesContainer" class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="col-md-1">codigo</th>
+                      <th class="col-md-3">Descripcion</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of variantes">
+                      <td class="col-md-1"> {{item.codigo}} </td>
+                      <td class="col-md-4"> {{item.nom}}</td>
+                      <button id="button" class="btn btn-primary" (click)="addVariante(item)">+</button>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card col-md-6">
+              <div class="card-header" id="headingtwo">
                 <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#detalleContainer" aria-expanded="false" aria-controls="detalleContainer">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#detalleContainer" aria-expanded="false"
+                    aria-controls="detalleContainer">
                     Detalle del pedido
                   </button>
                 </h5>
               </div>
-            <div id="detalleContainer" class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                      <tr>
-                          <th class="col-md-1">codigo</th>
-                          <th class="col-md-3">Descripcion</th>
-                          <th class="col-md-1">cantidad</th>
-                        </tr>
-                </thead>
-                <tbody>
+              <div id="detalleContainer" class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                    <tr>
+                      <th class="col-md-1">codigo</th>
+                      <th class="col-md-3">Descripcion</th>
+                      <th class="col-md-1">cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     <tr *ngFor="let item of selectedItems; let i = index">
-                        <td class="col-md-1"> {{item.itemdatum.variante.codigo}} </td>
-                        <td class="col-md-4"> {{item.itemdatum.variante.nom}}</td>
-                        <td class="col-md-1">
-                            <input #selectedCount (change)="addCount(i, selectedCount.value);">
-                          </td>
-                        <td>
-                        <button id="button" class="btn btn-primary" (click)="removeVariante(i)">-</button> 
-                        </td>
-                      </tr>
-                </tbody>  
-              </table>
+                      <td class="col-md-1"> {{item.itemdatum.variante.codigo}} </td>
+                      <td class="col-md-4"> {{item.itemdatum.variante.nom}}</td>
+                      <td class="col-md-1">
+                        <input #selectedCount (change)="addCount(i, selectedCount.value);">
+                      </td>
+                      <td>
+                        <button id="button" class="btn btn-primary" (click)="removeVariante(i)">-</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-       <div *ngIf="!hasVariantes">
+        <div *ngIf="!hasVariantes">
           <h6 class="sub-header">Item no disponible</h6>
+        </div>
       </div>
     </div>
-  </div>
-  <button id="button" class="btn btn-primary" (click)="submitOrderDetail()">enviar</button> 
+    <button id="button" class="btn btn-primary" (click)="submitOrderDetail()">enviar</button>

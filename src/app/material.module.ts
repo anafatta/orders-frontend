@@ -19,7 +19,8 @@ import {
   MatProgressSpinnerModule,
   MatGridListModule,
   MatDialogModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTooltipModule
 
 } from '@angular/material';
 
@@ -42,7 +43,9 @@ import {
     MatProgressSpinnerModule,
     MatGridListModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatButtonModule,
@@ -61,7 +64,9 @@ import {
     MatGridListModule,
     MatIconModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule,
+    MatAutocompleteModule
 
   ]
 })

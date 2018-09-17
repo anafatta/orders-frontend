@@ -4,40 +4,105 @@
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Datos del pedido
+          <strong>Datos del pedido</strong>
         </mat-panel-title>
         <mat-panel-description>
           Información del cliente
         </mat-panel-description>
       </mat-expansion-panel-header>
-
-      # Pedido<br />
-      {{orderDetail.id}}<br />
-      Fecha<br />
-      {{orderDetail.fem| date:'dd-MM-yyyy'}}<br />
-      Cliente<br />
-      {{orderDetail.cliente.nom}}<br />
-      Direccion<br />
-      {{orderDetail.address.dir}} - {{orderDetail.address.localidad}}<br />
-      Flete<br />
-      <!-- {{ orderDetail.address.flete.nom }}<br />-->
-      Pago<br />
-      Observaciones
+      <mat-grid-list cols="3" rowHeight="50px">
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Cliente</span>
+            {{orderDetail.cliente.nom}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label"># Pedido</span>
+            {{orderDetail.id}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Fecha</span>
+            {{orderDetail.fem| date:'dd-MM-yyyy'}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Dirección</span>
+            {{orderDetail.address.dir}} - {{orderDetail.address.localidad}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Flete</span>
+            <!-- {{ orderDetail.address.flete.nom }} -->
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Pago</span>
+            <!-- {{ orderDetail.address.flete.nom }} -->
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+          <div class="static_field">
+            <span class="static_label">Observaciones</span>
+            <!-- {{ orderDetail.address.flete.nom }} -->
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
     </mat-expansion-panel>
   </mat-accordion>
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Detalle del pedido
+          <strong>Detalle del pedido</strong>
         </mat-panel-title>
         <mat-panel-description>
           Detalle de la compra
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <!--<table mat-table [dataSource]="orderDetail.peditms" class="mat-elevation-z8">
 
 
-      <table class="table table-striped">
+        <ng-container matColumnDef="itemdatum">
+          <th mat-header-cell *matHeaderCellDef># Art</th>
+          <td mat-cell *matCellDef="let item"> {{ (item && item.itemdatum && item.itemdatum.art) ?
+            item.itemdatum.art.codfac : ''}} </td>
+        </ng-container>
+        <ng-container matColumnDef="itemname">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let item"> {{ (item && item.itemdatum && item.itemdatum.art) ?
+            item.itemdatum.art.nom : ''}} </td>
+        </ng-container>
+        <ng-container matColumnDef="itemvariant">
+          <th mat-header-cell *matHeaderCellDef>Variante</th>
+          <td mat-cell *matCellDef="let item"> {{ (item && item.itemdatum && item.itemdatum.variante) ?
+            item.itemdatum.variante.nom: '' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="can_ped">
+          <th mat-header-cell *matHeaderCellDef>Cant. Pedida</th>
+          <td mat-cell *matCellDef="let item"> {{ (item)? item.can_ped: ''}} </td>
+        </ng-container>
+        <ng-container matColumnDef="can_ped">
+          <th mat-header-cell *matHeaderCellDef>Cant. Autorizada</th>
+          <td mat-cell *matCellDef="let item"> {{ (item)? item.can_aut: ''}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pre_ped">
+          <th mat-header-cell *matHeaderCellDef>$ Pedido</th>
+          <td mat-cell *matCellDef="let item"> {{ (item)? item.pre_ped: ''}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pre_ped">
+          <th mat-header-cell *matHeaderCellDef>$ Autorizad0</th>
+          <td mat-cell *matCellDef="let item"> {{ (item)? item.pre_aut: ''}} </td>
+        </ng-container>
+      </table>-->
+
+      <table>
         <thead>
           <tr>
             <th class="col-xs-1"># Art</th>

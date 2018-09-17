@@ -45,6 +45,7 @@ export class CreateOrderComponent implements OnInit {
     this.sellerId = this.dataservice.getSellerId();
     this.userService.getClientsBySeller(this.sellerId).subscribe((data: Cliente[]) => {
       this.clients = data;
+      console.log('Cliente Nro:' + this.clients);
       this.selectedClient = this.clients[0];
 
     });
