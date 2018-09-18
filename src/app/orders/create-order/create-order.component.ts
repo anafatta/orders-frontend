@@ -45,7 +45,9 @@ export class CreateOrderComponent implements OnInit {
     this.sellerId = this.dataservice.getSellerId();
     this.userService.getClientsBySeller(this.sellerId).subscribe((data: Cliente[]) => {
       this.clients = data;
+      
       this.selectedClient = this.clients[0];
+      console.log(this.clients[0]);
 
     });
     // LOADING ARTICULOS
@@ -60,7 +62,7 @@ export class CreateOrderComponent implements OnInit {
     console.log('Selected value');
     console.log(event);
     this.clientId = event;
-    this.clientId = '621';
+    //this.clientId = '621';
     this.userService.getClient(this.clientId).subscribe((data: Cliente) => {
       this.selectedClient = data;
       this.selectedAddress = this.selectedClient.address[0];

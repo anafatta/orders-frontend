@@ -16,12 +16,12 @@
         <td class="col-xs-4">{{order.cliente.nom}}</td>
         <td class="col-xs-2">{{order.fem| date:'dd-MM-yyyy'}}</td>
         <td class="col-xs-4">{{ (order.address && order.address.dir) ?order.address.dir : ""}}</td>
-        <button mat-mini-fab color="accent" class="col-xs-1" [routerLink]="['/orders/detail', order.id]">
-          <i class="material-icons">
-            pageview
-          </i></button>
+        <button mat-mini-fab color="accent" class="col-xs-1" [routerLink]="['/orders/detail', order.id]" matTooltip="Ver pedido"
+        matTooltipPosition="above">
+          <mat-icon aria-label="Ver pedido">search</mat-icon>
+        </button>
       </tr>
     </tbody>
   </table>
-  <button class="btn btn-primary" [routerLink]="['/sellers']">Volver</button>
+  <button mat-raised-button color="accent" [routerLink]="['/sellers']"><mat-icon aria-label="Volver">arrow_back</mat-icon> Volver</button>
 </mat-card>
