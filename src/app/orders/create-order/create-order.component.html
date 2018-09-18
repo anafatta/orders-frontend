@@ -4,7 +4,7 @@
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Datos del pedido
+          <strong>Datos del pedido</strong>
         </mat-panel-title>
         <mat-panel-description>
           Información del cliente
@@ -67,158 +67,90 @@
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+          <mat-form-field>
+            <textarea matInput placeholder="Observaciones"></textarea>
+          </mat-form-field>
+        </mat-grid-tile>
       </mat-grid-list>
-
     </mat-expansion-panel>
   </mat-accordion>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Detalle del pedido</strong>
+        </mat-panel-title>
+        <mat-panel-description>
+          Detalle de la compra
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-grid-list cols="9" rowHeight="60px">
+        <mat-grid-tile [colspan]="8">
+          <mat-form-field>
+            <mat-select placeholder="Artículo" class="custom-select" (ngModelChange)="onArtSelected($event)"
+              [(ngModel)]="artId" data-live-search="true">
+              <mat-option *ngFor="let art of articulos" [value]=art.id> {{art.nom}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+          <mat-form-field>
+            <input matInput placeholder="Precio" [(ngModel)]="price" type="number" min="0" step="0.01"
+              data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="price" />
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-grid-list cols="9" rowHeight="40px">
+        <mat-grid-tile [colspan]="1"><strong>Código</strong></mat-grid-tile>
+        <mat-grid-tile [colspan]="6"><strong>Descripción</strong></mat-grid-tile>
+        <mat-grid-tile [colspan]="2"><strong>Cantidad</strong></mat-grid-tile>
+        <div *ngFor="let item of selectedItems; let i = index">
+          <mat-grid-tile [colspan]="1">{{item.itemdatum.variante.codigo}} </mat-grid-tile>
+          <mat-grid-tile [colspan]="6">{{item.itemdatum.variante.nom}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1">
+            <mat-form-field><input matInput placeholder="Cantidad" #selectedCount (change)="addCount(i, selectedCount.value);"></mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1">
+            <button mat-icon-button color="accent" (click)="removeVariante(i)" matTooltip="Eliminar variante"
+              matTooltipPosition="above">
+              <mat-icon aria-label="Eliminar variante">remove_circle_outline</mat-icon>
+            </button>
+          </mat-grid-tile>
+        </div>
+      </mat-grid-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion *ngIf="hasVariantes">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Seleccione Variantes</strong>
+        </mat-panel-title>
+        <mat-panel-description>
+          Seleccione las variantes del producto que desea agregar al pedido
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-grid-list cols="9" rowHeight="40px">
+        <mat-grid-tile [colspan]="1"><strong>Código</strong></mat-grid-tile>
+        <mat-grid-tile [colspan]="7"><strong>Descripción</strong></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"><strong>Agregar</strong></mat-grid-tile>
+        <div *ngFor="let item of variantes">
+          <mat-grid-tile [colspan]="1">{{item.codigo}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="7">{{item.nom}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1">
+            <button id="button" mat-icon-button color="accent" (click)="addVariante(item)" matTooltip="Agregar variante"
+              matTooltipPosition="above">
+              <mat-icon aria-label="Agregar variante">add_circle_outline</mat-icon>
+            </button>
+          </mat-grid-tile>
+        </div>
+      </mat-grid-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="submitOrderDetail()">Enviar</button>
+  </mat-card-actions>
 </mat-card>
-<div class="container-fluid">
-
-  <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-
-  <div id="accordion">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#datosPedido" aria-expanded="true"
-            aria-controls="datosPedido">
-            Datos del pedido
-          </button>
-        </h5>
-      </div>
-    </div>
-
-    <div id="datosPedido" class="collapse">
-      <div class="row">
-        <div class="col-2 col-sd-2 orderFields">Cliente</div>
-        <div class="col-10 col-sd-10 orderFields">
-
-        </div>
-      </div>
-
-      <!-- Columns are always 50% wide, on mobile and desktop -->
-
-      <div class="row">
-        <div class="col-2 col-sd-2  orderFields">Direccion</div>
-        <div class="col-10 col-sd-10 orderFields">
-          <div *ngIf="selectedClient">
-
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 col-sd-2  orderFields">Flete</div>
-        <div class="col-4 col-sd-4 orderFields"> {{ (selectedClient && selectedAddress && selectedAddress.flete) ?
-          selectedAddress.flete.nom : ''}}</div>
-        <div class="col-2 col-sd-2  orderFields">Pago</div>
-        <div class="col-4 col-sd-4 orderFields">
-          <select class="custom-select" [(ngModel)]="conven" data-live-search="true" id="convenId">
-            <option [value]="1" selected="selected">CONTADO</option>
-            <option [value]="2">CHEQUES 30 dias</option>
-            <option [value]="3">CHEQUES 30 - 60 dias</option>
-            <option [value]="4">CHEQUES 30 - 60 - 90 dias</option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 col-sd-2 orderFields">Observaciones</div>
-        <div class="col-10 col-sd-10 orderFields">
-          <input [(ngModel)]="observaciones">
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#detallePedido" aria-expanded="false"
-            aria-controls="detallePedido">
-            Detalle del pedido
-          </button>
-        </h5>
-      </div>
-    </div>
-    <div id="detallePedido" class="collapse">
-      <div class="row">
-        <div class="col-2 col-md-2 orderFields">Articulo</div>
-        <div class="col-6 col-md-6 orderFields">
-          <select class="custom-select" (ngModelChange)="onArtSelected($event)" [(ngModel)]="artId" data-live-search="true">
-            <option *ngFor="let art of articulos" [ngValue]=art.id> {{art.nom}}
-            </option>
-          </select>
-        </div>
-        <div class="col-2 col-md-2 orderFields">precio</div>
-        <div class="col-2 col-md-2 orderFields">
-          <input [(ngModel)]="price" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100"
-            class="form-control currency" id="price" />
-        </div>
-        <div *ngIf="hasVariantes">
-          <div class="row">
-            <div class="card col-md-6">
-              <div class="card-header" id="headingtwo">
-                <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#variantesContainer" aria-expanded="false"
-                    aria-controls="variantesContainer">
-                    Seleccione Variantes
-                  </button>
-                </h5>
-              </div>
-              <div id="variantesContainer" class="table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th class="col-md-1">codigo</th>
-                      <th class="col-md-3">Descripcion</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of variantes">
-                      <td class="col-md-1"> {{item.codigo}} </td>
-                      <td class="col-md-4"> {{item.nom}}</td>
-                      <button id="button" class="btn btn-primary" (click)="addVariante(item)">+</button>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="card col-md-6">
-              <div class="card-header" id="headingtwo">
-                <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#detalleContainer" aria-expanded="false"
-                    aria-controls="detalleContainer">
-                    Detalle del pedido
-                  </button>
-                </h5>
-              </div>
-              <div id="detalleContainer" class="table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                    <tr>
-                      <th class="col-md-1">codigo</th>
-                      <th class="col-md-3">Descripcion</th>
-                      <th class="col-md-1">cantidad</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of selectedItems; let i = index">
-                      <td class="col-md-1"> {{item.itemdatum.variante.codigo}} </td>
-                      <td class="col-md-4"> {{item.itemdatum.variante.nom}}</td>
-                      <td class="col-md-1">
-                        <input #selectedCount (change)="addCount(i, selectedCount.value);">
-                      </td>
-                      <td>
-                        <button id="button" class="btn btn-primary" (click)="removeVariante(i)">-</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="!hasVariantes">
-          <h6 class="sub-header">Item no disponible</h6>
-        </div>
-      </div>
-    </div>
-    <button id="button" class="btn btn-primary" (click)="submitOrderDetail()">enviar</button>
