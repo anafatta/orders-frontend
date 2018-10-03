@@ -5,6 +5,8 @@ import { CustomersService } from '../../services/customers.service';
 import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum, CustomersDetail, Seller } from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-create-customers',
@@ -33,22 +35,56 @@ export class CreateCustomersComponent implements OnInit {
   observaciones: string;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private dataservice: DataService,
     private userService: UserService,
-    private customersService: CustomersService) { }
-
+    private customersService: CustomersService
+  ) { }
+  NewCustomerForm: FormGroup;
   ngOnInit() {
     this.isOpen = true;
     this.isOpen1 = false;
     this.selectedItems = [];
     this.sellerId = '37';
     // this.sellerId = this.dataservice.getSellerId();
+    this.NewCustomerForm = this.fb.group({
+      nom: ['', Validators.required],
+      cuit: ['', Validators.required],
+      razonsoc: [''],
+      address: this.fb.array([
+        this.initAddress(),
+      ]),
+      salesman: [this.sellerId],
+    });
+  }
+  initAddress() {
+    return this.fb.group({
+      dir: ['', Validators.required],
+      localidad: ['', Validators.required],
+      codpos: ['', Validators.required],
+      prov: [''],
+      flete: this.fb.array([
+        this.initFlete(),
+      ]),
+    });
+  }
+  initFlete() {
+    return this.fb.group({
+      nom: [''],
+    });
+  }
+  addAddress() {
+    const control = <FormArray>this.NewCustomerForm.controls['address'];
+    control.push(this.initAddress());
+  }
+  onSubmit() {
+    this.customersService.setCustomer(this.NewCustomerForm.value).subscribe(data => {
+      console.log(data);
+    });
   }
 
-
-
-  addVariante(variante: any) {
+  /*addVariante(variante: any) {
     if (this.selectedItems.length === 0 || !(this.selectedItems.some(e => e.itemdata === variante.itemdata_id))) {
       let peditem: Peditem;
 
@@ -118,7 +154,7 @@ export class CreateCustomersComponent implements OnInit {
     var root = 'customers/view';
     this.router.navigate([root]);
   }
-
+*/
 }
 
 

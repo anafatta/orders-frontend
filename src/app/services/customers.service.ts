@@ -45,8 +45,14 @@ export class CustomersService {
 
     submitCustomer(customers: Cliente): Observable<Cliente> {
         let postCustomer: Observable<Cliente>;
-        postCustomer = this.httpClient.post<Cliente>(this.ROOT_URL + this.POST_CUSTOMERS_URL, order, this.httpOptions);
+        postCustomer = this.httpClient.post<Cliente>(this.ROOT_URL + this.POST_CUSTOMERS_URL, customers, this.httpOptions);
         return postCustomer;
+    }
+    setCustomer(data) {
+        console.log(data);
+        sessionStorage.setItem('ctype', JSON.stringify(data));
+        const headers = new HttpHeaders().set('Content-Type', 'application/json')
+        return this.httpClient.post(this.ROOT_URL + this.POST_CUSTOMERS_URL, JSON.stringify(data), { headers: headers });
     }
 
 }
