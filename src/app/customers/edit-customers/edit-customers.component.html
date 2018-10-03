@@ -1,75 +1,102 @@
 <mat-card>
   <mat-card-title>Nuevo cliente</mat-card-title>
-  <mat-accordion>
-    <mat-expansion-panel [expanded]="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <strong>Datos del cliente</strong>
-        </mat-panel-title>
-        <mat-panel-description>
-          Información comercial
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-grid-list cols="3" rowHeight="60px">
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput placeholder="Nombre" [(ngModel)]="nom">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput type="number" placeholder="C.U.I.T." [(ngModel)]="cuit">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Razón Social" [(ngModel)]="razonsoc">
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <mat-accordion>
-    <mat-expansion-panel [expanded]="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <strong>Direcciones</strong>
-        </mat-panel-title>
-        <mat-panel-description>
-          Información de facturación y envíos
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-grid-list cols="3" rowHeight="60px">
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput placeholder="Dirección" [(ngModel)]="dir">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Localidad" [(ngModel)]="localidad">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Código Postal" [(ngModel)]="codpos">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput placeholder="Provincia" [(ngModel)]="prov">
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Flete" [(ngModel)]="flete">
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <br />
-  <mat-card-actions align="middle">
-    <div fxFlex></div><button mat-raised-button color="accent" (click)="submitCustomersDetail()">Enviar</button>
-  </mat-card-actions>
+  <form [formGroup]="EditCustomerForm" (ngSubmit)="onSubmit()">
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>Datos del cliente</strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Información comercial
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-grid-list cols="3" rowHeight="60px">
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="Nombre" formControlName="nom" #nom [(ngModel)]="customersDetail.nom">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput type="text" placeholder="C.U.I.T." formControlName="cuit" #cuit [(ngModel)]="customersDetail.cuit">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Razón Social" formControlName="razonsoc" #razonsoc [(ngModel)]="customersDetail.razonsoc">
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>Direcciones</strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Información de facturación y envíos
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let addr of customersDetail.address">
+          <div formArrayName="address" class="address">
+            <div *ngFor="let address of EditCustomerForm.controls.address.controls; let i=index">
+              <div [formGroupName]="i">
+                <mat-grid-list cols="3" rowHeight="60px">
+                  <mat-grid-tile>
+                    <mat-form-field style="display:none">
+                      <input matInput type="text" placeholder="Id" formControlName="id" #id [(ngModel)]="addr.id">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput type="text" placeholder="Dirección" formControlName="dir" #dir [(ngModel)]="addr.dir">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field>
+                      <input matInput type="text" placeholder="Localidad" formControlName="localidad" #localidad [(ngModel)]="addr.localidad">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field>
+                      <input matInput type="text" placeholder="Código Postal" formControlName="codpos" #codpos [(ngModel)]="addr.codpos">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field>
+                      <input matInput placeholder="Provincia" formControlName="prov" #prov  [(ngModel)]="addr.prov">
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+
+                    <!--
+                          <mat-form-field>
+                            <input matInput type="text" placeholder="Flete" formControlName="nom" #flete  [(ngModel)]="addr.dir">
+                          </mat-form-field>
+  -->
+
+                  </mat-grid-tile>
+                </mat-grid-list>
+                <div class="margin-20" align="right">
+                  <div fxFlex>
+                    <a (click)="addAddress()" style="cursor: pointer" matTooltip="Agregar Dirección" matTooltipPosition="above">
+                      <mat-icon>add_circle_outline</mat-icon>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br />
+    <mat-card-actions align="middle">
+      <div fxFlex></div><button mat-raised-button color="accent" type="submit">Enviar</button>
+    </mat-card-actions>
+  </form>
+  <p>
+    Form Value: {{ EditCustomerForm.value | json }}
+  </p>
 </mat-card>

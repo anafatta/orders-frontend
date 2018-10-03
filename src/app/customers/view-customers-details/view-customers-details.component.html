@@ -1,5 +1,6 @@
 <mat-card>
   <mat-card-title>Ficha de Cliente: {{customersDetail.nom}}</mat-card-title>
+
   <mat-accordion>
     <mat-expansion-panel [expanded]="true">
       <mat-expansion-panel-header>
@@ -88,9 +89,11 @@
             </div>
           </mat-grid-tile>
         </mat-grid-list>
-        
+
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-
+  <mat-card-actions align="middle">
+    <div fxFlex></div><button mat-raised-button color="accent" routerLink='/customers/edit/{{customersDetail.id}}'>Editar</button>
+  </mat-card-actions>
 </mat-card>

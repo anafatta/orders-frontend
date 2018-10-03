@@ -51,7 +51,7 @@ export class CustomersService {
     setCustomer(data) {
         console.log(data);
         sessionStorage.setItem('ctype', JSON.stringify(data));
-        const headers = new HttpHeaders().set('Content-Type', 'application/json')
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this.httpClient.post(this.ROOT_URL + this.POST_CUSTOMERS_URL, JSON.stringify(data), { headers: headers });
     }
 

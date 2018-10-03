@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cliente, Seller } from '../models/models';
-//import { Store } from '@ngrx/store';
-//import { AppState } from '../store/reducers';
-//import { appReducerState }  from '../store/reducers/appReducers';
+// import { Store } from '@ngrx/store';
+// import { AppState } from '../store/reducers';
+// import { appReducerState }  from '../store/reducers/appReducers';
 
 
 @Injectable({

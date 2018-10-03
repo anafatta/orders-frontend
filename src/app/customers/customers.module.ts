@@ -6,12 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewCustomersComponent } from './view-customers/view-customers.component';
 import { ViewCustomersDetailsComponent } from './view-customers-details/view-customers-details.component';
 import { MaterialModule } from '../material.module';
+import { EditCustomersDetailsComponent } from './edit-customers/edit-customers.component';
 
 
 const customersRoutes: Routes = [
   { path: 'customers/create', component: CreateCustomersComponent },
   { path: 'customers/view', component: ViewCustomersComponent },
-  { path: 'customers/detail/:id', component: ViewCustomersDetailsComponent }
+  { path: 'customers/detail/:id', component: ViewCustomersDetailsComponent },
+  { path: 'customers/edit/:id', component: EditCustomersDetailsComponent }
 
 ];
 
@@ -26,7 +28,8 @@ const customersRoutes: Routes = [
   declarations: [
     CreateCustomersComponent,
     ViewCustomersComponent,
-    ViewCustomersDetailsComponent
+    ViewCustomersDetailsComponent,
+    EditCustomersDetailsComponent
   ],
   exports: [
     CreateCustomersComponent,

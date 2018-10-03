@@ -4,14 +4,18 @@ import { DataService } from '../../services/data.service';
 import { CustomersService } from '../../services/customers.service';
 import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum, CustomersDetail, Seller } from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-create-customers',
-  templateUrl: './create-customers.component.html',
-  styleUrls: ['./create-customers.component.css']
+  selector: 'app-edit-customers',
+  templateUrl: './edit-customers.component.html',
+  styleUrls: ['./edit-customers.component.css']
 })
-export class CreateCustomersComponent implements OnInit {
+export class EditCustomersDetailsComponent implements OnInit {
+  customersDetail: Cliente;
+  customersId: string;
   sellerId: string;
   clients: Cliente[];
   clientId: string;
@@ -33,22 +37,65 @@ export class CreateCustomersComponent implements OnInit {
   observaciones: string;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private dataservice: DataService,
     private userService: UserService,
-    private customersService: CustomersService) { }
-
+    private customersService: CustomersService,
+    private route: ActivatedRoute,
+  ) { }
+  EditCustomerForm: FormGroup;
   ngOnInit() {
     this.isOpen = true;
     this.isOpen1 = false;
     this.selectedItems = [];
     this.sellerId = '37';
+    console.log('on init');
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log('getid' + id);
+    this.customersService.getCustomer(id).subscribe((data: Cliente) => {
+      this.customersDetail = data;
+      //console.log('Customers Detail DATA: ..' + data);
+    });
     // this.sellerId = this.dataservice.getSellerId();
+    this.EditCustomerForm = this.fb.group({
+      nom: ['', Validators.required],
+      cuit: ['', Validators.required],
+      razonsoc: [''],
+      address: this.fb.array([
+        this.initAddress(),
+      ]),
+      salesman: [this.sellerId],
+    });
+  }
+  initAddress() {
+    return this.fb.group({
+      id: [''],
+      dir: ['', Validators.required],
+      localidad: ['', Validators.required],
+      codpos: ['', Validators.required],
+      prov: [''],
+      flete: this.fb.array([
+        this.initFlete(),
+      ]),
+    });
+  }
+  initFlete() {
+    return this.fb.group({
+      nom: [''],
+    });
+  }
+  addAddress() {
+    const control = <FormArray>this.EditCustomerForm.controls['address'];
+    control.push(this.initAddress());
+  }
+  onSubmit() {
+    this.customersService.setCustomer(this.EditCustomerForm.value).subscribe(data => {
+      console.log(data);
+    });
   }
 
-
-
-  addVariante(variante: any) {
+  /*addVariante(variante: any) {
     if (this.selectedItems.length === 0 || !(this.selectedItems.some(e => e.itemdata === variante.itemdata_id))) {
       let peditem: Peditem;
 
@@ -118,7 +165,7 @@ export class CreateCustomersComponent implements OnInit {
     var root = 'customers/view';
     this.router.navigate([root]);
   }
-
+*/
 }
 
 
