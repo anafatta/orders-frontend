@@ -1,0 +1,13 @@
+.static_field {
+    text-align: left;
+    width: 100%;
+    font-size: 16px;
+}
+.static_label {
+    color: #4caf50;
+    display: block;
+    font-size: 13px;
+}
+table {
+    width: 100%;
+}

@@ -13,6 +13,8 @@ import { OrdersService } from './services/orders.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomersModule } from './customers/customers.module';
+import { CustomersService } from './services/customers.service';
 
 
 const appRoutes: Routes = [
@@ -33,11 +35,13 @@ const appRoutes: Routes = [
     CommonAppModule,
     AuthenticationModule,
     OrdersModule,
+    CustomersModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
   providers: [
-    OrdersService
+    OrdersService,
+    CustomersService
   ],
   bootstrap: [AppComponent]
 })

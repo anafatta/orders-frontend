@@ -4,10 +4,15 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item [matMenuTriggerFor]="clientes">
         <mat-icon>people</mat-icon>
-        <span routerLink='/pageNotFound'>Clientes</span>
+        <span>Clientes</span>
       </button>
+      <mat-menu #clientes="matMenu">
+        <button mat-menu-item routerLink='/customers/view'>Mis Clientes</button>
+        <!--<button mat-menu-item routerLink='/customers/detail'>Ver Pedido</button>-->
+        <button mat-menu-item routerLink='/customers/create'>Nuevo Cliente</button>
+      </mat-menu>
       <button mat-menu-item [matMenuTriggerFor]="pedidos">
         <mat-icon>description</mat-icon>
         <span>Pedidos</span>

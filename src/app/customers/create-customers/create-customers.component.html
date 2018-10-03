@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-title>Nuevo cliente</mat-card-title>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Datos del cliente</strong>
+        </mat-panel-title>
+        <mat-panel-description>
+          Información comercial
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-grid-list cols="3" rowHeight="60px">
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput placeholder="Nombre" [(ngModel)]="nom">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput type="number" placeholder="C.U.I.T." [(ngModel)]="cuit">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Razón Social" [(ngModel)]="razonsoc">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Direcciones</strong>
+        </mat-panel-title>
+        <mat-panel-description>
+          Información de facturación y envíos
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-grid-list cols="3" rowHeight="60px">
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput placeholder="Dirección" [(ngModel)]="dir">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Localidad" [(ngModel)]="localidad">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Código Postal" [(ngModel)]="codpos">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput placeholder="Provincia" [(ngModel)]="prov">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Flete" [(ngModel)]="flete">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br />
+  <mat-card-actions align="middle">
+    <div fxFlex></div><button mat-raised-button color="accent" (click)="submitCustomersDetail()">Enviar</button>
+  </mat-card-actions>
+</mat-card>

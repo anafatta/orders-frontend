@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-title>Mis Clientes</mat-card-title>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="col-xs-1">Código</th>
+        <th class="col-xs-8">Razón Social</th>
+        <th class="col-xs-1"></th>
+        <th class="col-xs-1"></th>
+        <th class="col-xs-1"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td class="col-xs-1">{{customer.id}}</td>
+        <td class="col-xs-8">{{customer.nom}}</td>
+        <td class="col-xs-1">{{customer.razonsoc}}</td>
+        <td class="col-xs-1">{{customer.codfac}}</td>
+        <td class="col-xs-1">
+          <button mat-mini-fab color="accent" class="col-xs-1" [routerLink]="['/customers/detail', customer.id]"
+            matTooltip="Ver detalle" matTooltipPosition="above">
+            <mat-icon aria-label="Ver detalle">search</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button mat-raised-button color="accent" [routerLink]="['/customers/view']">
+    <mat-icon aria-label="Volver">arrow_back</mat-icon> Volver
+  </button>
+</mat-card>
