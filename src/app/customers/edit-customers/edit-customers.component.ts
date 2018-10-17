@@ -55,10 +55,11 @@ export class EditCustomersDetailsComponent implements OnInit {
     console.log('getid' + id);
     this.customersService.getCustomer(id).subscribe((data: Cliente) => {
       this.customersDetail = data;
-      //console.log('Customers Detail DATA: ..' + data);
+      // console.log('Customers Detail DATA: ..' + data);
     });
     // this.sellerId = this.dataservice.getSellerId();
     this.EditCustomerForm = this.fb.group({
+      id: [''],
       nom: ['', Validators.required],
       cuit: ['', Validators.required],
       razonsoc: [''],

@@ -20,7 +20,8 @@ import {
   MatGridListModule,
   MatDialogModule,
   MatExpansionModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatTableDataSource
 
 } from '@angular/material';
 
@@ -45,7 +46,9 @@ import {
     MatIconModule,
     MatDialogModule,
     MatTooltipModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   exports: [
     MatButtonModule,
@@ -66,8 +69,8 @@ import {
     MatDialogModule,
     MatExpansionModule,
     MatTooltipModule,
-    MatAutocompleteModule
-
+    MatAutocompleteModule,
+    MatSortModule
   ]
 })
 export class MaterialModule { }

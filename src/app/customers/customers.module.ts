@@ -29,7 +29,7 @@ const customersRoutes: Routes = [
     CreateCustomersComponent,
     ViewCustomersComponent,
     ViewCustomersDetailsComponent,
-    EditCustomersDetailsComponent
+    EditCustomersDetailsComponent,
   ],
   exports: [
     CreateCustomersComponent,

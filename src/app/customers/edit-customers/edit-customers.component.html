@@ -13,6 +13,9 @@
         </mat-expansion-panel-header>
         <mat-grid-list cols="3" rowHeight="60px">
           <mat-grid-tile>
+            <mat-form-field style="display:none">
+              <input matInput type="text" placeholder="Id" formControlName="id" #id [(ngModel)]="customersDetail.id">
+            </mat-form-field>
             <mat-form-field>
               <input matInput placeholder="Nombre" formControlName="nom" #nom [(ngModel)]="customersDetail.nom">
             </mat-form-field>
@@ -55,17 +58,19 @@
                   </mat-grid-tile>
                   <mat-grid-tile>
                     <mat-form-field>
-                      <input matInput type="text" placeholder="Localidad" formControlName="localidad" #localidad [(ngModel)]="addr.localidad">
+                      <input matInput type="text" placeholder="Localidad" formControlName="localidad" #localidad
+                        [(ngModel)]="addr.localidad">
                     </mat-form-field>
                   </mat-grid-tile>
                   <mat-grid-tile>
                     <mat-form-field>
-                      <input matInput type="text" placeholder="Código Postal" formControlName="codpos" #codpos [(ngModel)]="addr.codpos">
+                      <input matInput type="text" placeholder="Código Postal" formControlName="codpos" #codpos
+                        [(ngModel)]="addr.codpos">
                     </mat-form-field>
                   </mat-grid-tile>
                   <mat-grid-tile>
                     <mat-form-field>
-                      <input matInput placeholder="Provincia" formControlName="prov" #prov  [(ngModel)]="addr.prov">
+                      <input matInput placeholder="Provincia" formControlName="prov" #prov [(ngModel)]="addr.prov">
                     </mat-form-field>
                   </mat-grid-tile>
                   <mat-grid-tile>
