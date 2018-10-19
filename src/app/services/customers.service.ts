@@ -16,7 +16,7 @@ export class CustomersService {
     GET_CUSTOMER_URL = '/clientes/id/';
     GET_ARTICULOS_URL = '/articulos/';
     GET_ART_URL = '/articulos/id/';
-    POST_CUSTOMERS_URL = '/clientes/';
+    CUSTOMERS_URL = '/clientes/';
 
     constructor(private httpClient: HttpClient) { }
 
@@ -45,14 +45,14 @@ export class CustomersService {
 
     submitCustomer(customers: Cliente): Observable<Cliente> {
         let postCustomer: Observable<Cliente>;
-        postCustomer = this.httpClient.post<Cliente>(this.ROOT_URL + this.POST_CUSTOMERS_URL, customers, this.httpOptions);
+        postCustomer = this.httpClient.post<Cliente>(this.ROOT_URL + this.CUSTOMERS_URL, customers, this.httpOptions);
         return postCustomer;
     }
     setCustomer(data) {
         console.log(data);
         sessionStorage.setItem('ctype', JSON.stringify(data));
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this.httpClient.post(this.ROOT_URL + this.POST_CUSTOMERS_URL, JSON.stringify(data), { headers: headers });
+        return this.httpClient.put(this.ROOT_URL + this.CUSTOMERS_URL, JSON.stringify(data), { headers: headers });
     }
 
 }
