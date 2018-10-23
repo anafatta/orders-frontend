@@ -45,6 +45,7 @@ export class EditCustomersDetailsComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
   EditCustomerForm: FormGroup;
+  address: FormArray;
   ngOnInit() {
     this.isOpen = true;
     this.isOpen1 = false;
@@ -86,9 +87,18 @@ export class EditCustomersDetailsComponent implements OnInit {
       nom: [''],
     });
   }
-  addAddress() {
-    const control = <FormArray>this.EditCustomerForm.controls['address'];
-    control.push(this.initAddress());
+  /*  addAddress() {
+      const control = <FormArray>this.EditCustomerForm.controls['address'];
+      control.push(this.initAddress());
+    } */
+  addAddress(i: number): void {
+    this.address = this.EditCustomerForm.get('address') as FormArray;
+    this.address.push(this.initAddress());
+    // this.address.reset();
+  }
+  removeAddress(i: number) {
+    const address = this.EditCustomerForm.get('address') as FormArray;
+    address.removeAt(i);
   }
   onSubmit() {
     this.customersService.setCustomer(this.EditCustomerForm.value).subscribe(data => {

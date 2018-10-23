@@ -7,6 +7,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { SellerComponent } from './seller/seller.component';
 import { MaterialModule } from '../material.module';
+import { SpeedDialFabComponent } from './speed-dial-fab/speed-dial-fab.component';
 
 const commonAppRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -26,7 +27,8 @@ const commonAppRoutes: Routes = [
     NavbarComponent,
     HomepageComponent,
     PagenotfoundComponent,
-    SellerComponent
+    SellerComponent,
+    SpeedDialFabComponent
   ],
   exports: [
     NavbarComponent,
