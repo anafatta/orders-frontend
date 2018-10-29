@@ -105,9 +105,10 @@
       <table>
         <thead>
           <tr>
+            <th class="col-xs-1">Imagen</th>
             <th class="col-xs-1"># Art</th>
             <th class="col-xs-4 ">Desc</th>
-            <th class="col-xs-3">Variante</th>
+            <th class="col-xs-2">Variante</th>
             <th class="col-xs-1">Cant. Pedida</th>
             <th class="col-xs-1">Cant. Autor.</th>
             <th class="col-xs-1">$ pedido</th>
@@ -116,11 +117,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of orderDetail.peditms">
+            <td class="col-xs-1" (click)="getProdPict(item.itemdatum.art.codfac, item.itemdatum.variante.codigo)"><i class="material-icons">photo </i><div *ngFor="let pict of imgUrl"><img src="{{pict.image_url}}" alt="Producto" width="25"/></div></td>
             <td class="col-xs-1"> {{ (item && item.itemdatum && item.itemdatum.art) ? item.itemdatum.art.codfac : ''}}
             </td>
             <td class="col-xs-4"> {{ (item && item.itemdatum && item.itemdatum.art) ? item.itemdatum.art.nom : ''}}</td>
-            <td class="col-xs-3"> {{ (item && item.itemdatum && item.itemdatum.variante) ? item.itemdatum.variante.nom:
-              '' }} </td>
+            <td class="col-xs-2"> {{ (item && item.itemdatum && item.itemdatum.variante) ?
+              item.itemdatum.variante.nom:'' }} </td>
             <td class="col-xs-1"> {{ (item)? item.can_ped: ''}}</td>
             <td class="col-xs-1"> {{ (item)? item.can_aut: ''}}</td>
             <td class="col-xs-1"> {{ (item)? item.pre_ped: ''}}</td>

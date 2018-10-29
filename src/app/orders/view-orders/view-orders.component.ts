@@ -14,12 +14,18 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class ViewOrdersComponent implements OnInit {
   orders: Order[];
 
-  constructor(private dataservice: DataService, private router: Router, private route: ActivatedRoute, private ordersService: OrdersService) { }
+  constructor(
+    private dataservice: DataService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private ordersService: OrdersService
+  ) { }
 
   ngOnInit() {
     // call service to retrieve orders by seller
     // let sellerId = this.route.snapshot.paramMap.get('sellerId');
     let sellerId = this.dataservice.getSellerId();
+    sessionStorage.setItem('sellerId', JSON.stringify(sellerId));
     console.log('view orders...' + sellerId);
 
 

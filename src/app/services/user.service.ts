@@ -12,7 +12,7 @@ import { Cliente, Seller } from '../models/models';
 })
 
 export class UserService {
-  ROOT_URL = 'http://lumasoft.dyndns.org.:8000/api';
+  ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
   // ROOT_URL = 'http://localhost:8000/api';
 
   // constructor(private store: Store<AppState>) { }

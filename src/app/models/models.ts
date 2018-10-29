@@ -3,6 +3,11 @@ export interface Seller {
   id: number;
   nom: String;
 }
+export interface ImgInfo {
+  codigo: string;
+  color: string;
+  img_url: string;
+}
 
 export interface OrderDetail {
   id: number;
