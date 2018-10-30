@@ -66,7 +66,7 @@
                 </mat-grid-tile>
                 <mat-grid-tile>
 
-<!--
+                  <!--
                         <mat-form-field>
                           <input matInput type="text" placeholder="Flete" formControlName="nom" #flete>
                         </mat-form-field>
@@ -75,12 +75,20 @@
                 </mat-grid-tile>
               </mat-grid-list>
               <div class="margin-20" align="right">
-                  <div fxFlex>
-                <a (click)="addAddress()" style="cursor: pointer" matTooltip="Agregar Dirección" matTooltipPosition="above">
-                  <mat-icon>add_circle_outline</mat-icon>
-                </a>
+                <div fxFlex>
+                  <a (click)="removeAddress()" style="cursor: pointer" matTooltip="Eliminar Dirección"
+                    matTooltipPosition="above">
+                    <mat-icon color="warn">remove_circle</mat-icon>
+                  </a>
+                </div>
               </div>
-              </div>
+            </div>
+          </div>
+          <div class="margin-20" align="right">
+            <div fxFlex>
+              <a (click)="addAddress()" style="cursor: pointer" matTooltip="Agregar Dirección" matTooltipPosition="above">
+                <mat-icon color="accent">add_circle</mat-icon>
+              </a>
             </div>
           </div>
         </div>
@@ -91,7 +99,7 @@
       <div fxFlex></div><button mat-raised-button color="accent" type="submit">Enviar</button>
     </mat-card-actions>
   </form>
-  <p>
+  <!--<p>
     Form Value: {{ NewCustomerForm.value | json }}
-  </p>
+  </p>-->
 </mat-card>

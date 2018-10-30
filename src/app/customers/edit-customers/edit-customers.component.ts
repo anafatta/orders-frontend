@@ -52,15 +52,12 @@ export class EditCustomersDetailsComponent implements OnInit {
     this.isOpen1 = false;
     this.selectedItems = [];
     this.sellerId = '37';
-    console.log('on init');
     const id = this.route.snapshot.paramMap.get('id');
-    console.log('getid' + id);
     this.customersService.getCustomer(id).subscribe((data: Cliente) => {
       this.customersDetail = data;
       this.initForm();
     });
   }
-
   initForm() {
     return this.EditCustomerForm = this.fb.group({
       id: [this.customersDetail.id],
@@ -77,7 +74,6 @@ export class EditCustomersDetailsComponent implements OnInit {
   initAddress() {
     let i = 0;
     let address = this.customersDetail.address;
-    console.log(address);
     return this.addressForm = this.fb.group({
       id: [address[i].id],
       dir: [address[i].dir, Validators.required],

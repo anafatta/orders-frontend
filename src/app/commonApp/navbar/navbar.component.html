@@ -32,9 +32,9 @@
         <span *ngIf="logout" class="nav-link" routerLink="/login">Login</span>
       </button>
     </mat-menu>
-    <img src="assets/img/Simsiroglu-Logo-Blanco.svg" alt="{{title}}" [routerLink]="['/']" />
+    <img src="assets/img/Simsiroglu-Logo-Blanco.svg" alt="{{title}}"/>
 
-    <i class="material-icons" matBadge="21" matBadgeColor="warn" matBadgePosition="above after">chat</i>
+    <i class="material-icons" matBadge="0" matBadgeColor="warn" matBadgePosition="above after" style="cursor: pointer" matTooltip="Mensajes - Proximamente" matTooltipPosition="left">chat</i>
   </mat-toolbar>
 </div>
 <app-speed-dial-fab></app-speed-dial-fab>

@@ -42,13 +42,18 @@ export class CreateCustomersComponent implements OnInit {
     private customersService: CustomersService
   ) { }
   NewCustomerForm: FormGroup;
+  addressForm: FormGroup;
+  address: FormArray;
   ngOnInit() {
     this.isOpen = true;
     this.isOpen1 = false;
     this.selectedItems = [];
     this.sellerId = '37';
     // this.sellerId = this.dataservice.getSellerId();
-    this.NewCustomerForm = this.fb.group({
+    this.initForm();
+  }
+  initForm() {
+    return this.NewCustomerForm = this.fb.group({
       nom: ['', Validators.required],
       cuit: ['', Validators.required],
       razonsoc: [''],
@@ -75,8 +80,13 @@ export class CreateCustomersComponent implements OnInit {
     });
   }
   addAddress() {
-    const control = <FormArray>this.NewCustomerForm.controls['address'];
-    control.push(this.initAddress());
+    this.address = this.NewCustomerForm.get('address') as FormArray;
+    this.address.push(this.initAddress());
+    this.addressForm.patchValue({ id: '', dir: '', localidad: '', codpos: '', prov: '' });
+  }
+  removeAddress(i: number) {
+    const address = this.NewCustomerForm.get('address') as FormArray;
+    address.removeAt(i);
   }
   onSubmit() {
     this.customersService.setCustomer(this.NewCustomerForm.value).subscribe(data => {

@@ -23,7 +23,8 @@ import {
   MatTooltipModule,
   MatTableDataSource,
   MatSidenavModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatDividerModule
 
 } from '@angular/material';
 
@@ -52,7 +53,8 @@ import {
     MatSortModule,
     MatPaginatorModule,
     MatSidenavModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDividerModule
   ],
   exports: [
     MatButtonModule,
@@ -76,7 +78,8 @@ import {
     MatAutocompleteModule,
     MatSortModule,
     MatSidenavModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDividerModule
   ]
 })
 export class MaterialModule { }

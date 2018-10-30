@@ -1,15 +1,12 @@
-<mat-grid-list cols="3" valign="top">
-  <mat-grid-tile>
-    <mat-card class="example-card">
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card>
+<mat-card ng-if=isAdmin>
+  <mat-grid-list cols="3" rowHeight="10:1">
+    <mat-grid-tile>
       <mat-card-title>Bienvenido</mat-card-title>
-      <div ng-if=isAdmin>
-        <p>Usted a iniciado sesión como usuario Admin</p>
-        <h3>Vendedores</h3>
-      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p>Usted a iniciado sesión como usuario Admin</p>
+    </mat-grid-tile>
+    <mat-grid-tile>
       <mat-form-field>
         <mat-select placeholder="Seleccione un vendedor" (ngModelChange)="onClick($event)" [(ngModel)]="selectedSeller">
           <mat-option *ngFor="let seller of sellers" [value]="seller.id">
@@ -17,14 +14,61 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card></mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
-<mat-grid-list cols="3">
-  <mat-grid-tile [colspan]="3">
 
-  </mat-grid-tile>
-</mat-grid-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+<mat-card>
+  <mat-card-title>Dashboard</mat-card-title>
+  <mat-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Pedidos</mat-card-title>
+        <mat-card-subtitle>Estado de pedidos</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <p></p>
+          <p> <button mat-mini-fab color="primary">123</button> <strong>Aprobados</strong> </p>
+          <p><button mat-mini-fab class="alert">23</button> <strong>Pendientes</strong></p>
+          <p><button mat-mini-fab color="warn">12</button> <strong>Rechazados</strong> </p>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions align="right">
+          <button mat-raised-button color="primary">VER</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Clientes</mat-card-title>
+        <mat-card-subtitle>Estado de clientes</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <p></p>
+          <p> <button mat-mini-fab color="primary">123</button> <strong>Aprobados</strong> </p>
+          <p><button mat-mini-fab class="alert">23</button> <strong>A confirmar</strong></p>
+          <p><button mat-mini-fab color="warn">12</button> <strong>Con revisiones</strong> </p>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions align="right">
+          <button mat-raised-button color="primary">VER</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Reportes</mat-card-title>
+        <mat-card-subtitle>Al 31/10/2018</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <p></p>
+          <p>Proximamente </p>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions align="right">
+          <button mat-raised-button color="primary">VER</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>

@@ -5,7 +5,8 @@ import { OrdersService } from '../../services/orders.service';
 import { Seller, OrderDetail, ItemDatum, Art, Variante, Peditem, ImgInfo } from '../../models/models';
 import { ImageService } from 'src/app/services/image.service';
 import { stringify } from '@angular/compiler/src/util';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Directive, Output, EventEmitter } from '@angular/core';
 
 export interface ViewOrderDetails {
   name: string;
@@ -40,7 +41,7 @@ export class ViewOrderDetailsComponent implements OnInit {
     });
     // this.getProdPict(105, 100);
   }
-  getProdPict(cod, col) {
+  public getProdPict(cod, col) {
     return this.imgService.getImg(cod, col).subscribe((img: ImgInfo) => {
       this.imgUrl = img;
       console.log('Image URL ' + img);
