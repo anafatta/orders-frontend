@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>Nuevo cliente</mat-card-title>
+  <mat-card-title>Editar cliente</mat-card-title>
   <form [formGroup]="EditCustomerForm" (ngSubmit)="onSubmit()">
     <mat-accordion>
       <mat-expansion-panel [expanded]="true">
@@ -14,20 +14,20 @@
         <mat-grid-list cols="3" rowHeight="60px">
           <mat-grid-tile>
             <mat-form-field style="display:none">
-              <input matInput type="text" placeholder="Id" formControlName="id" #id [ngModel]="customersDetail.id">
+              <input matInput type="text" placeholder="Id" formControlName="id" #id>
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Nombre" formControlName="nom" #nom [ngModel]="customersDetail.nom">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field>
-              <input matInput type="text" placeholder="C.U.I.T." formControlName="cuit" #cuit [ngModel]="customersDetail.cuit">
+              <input matInput placeholder="Nombre" formControlName="nom" #nom>
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field>
-              <input matInput type="text" placeholder="Razón Social" formControlName="razonsoc" #razonsoc [ngModel]="customersDetail.razonsoc">
+              <input matInput type="text" placeholder="C.U.I.T." formControlName="cuit" #cuit>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Razón Social" formControlName="razonsoc" #razonsoc>
             </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
@@ -50,27 +50,25 @@
                 <mat-grid-list cols="3" rowHeight="60px">
                   <mat-grid-tile>
                     <mat-form-field style="display:none">
-                      <input matInput type="text" placeholder="Id" formControlName="id" #id [ngModel]="addr.id">
+                      <input matInput type="text" placeholder="Id" formControlName="id" #id>
                     </mat-form-field>
                     <mat-form-field>
-                      <input matInput type="text" placeholder="Dirección" formControlName="dir" #dir [ngModel]="addr.dir">
-                    </mat-form-field>
-                  </mat-grid-tile>
-                  <mat-grid-tile>
-                    <mat-form-field>
-                      <input matInput type="text" placeholder="Localidad" formControlName="localidad" #localidad
-                        [ngModel]="addr.localidad">
+                      <input matInput type="text" placeholder="Dirección" formControlName="dir" #dir>
                     </mat-form-field>
                   </mat-grid-tile>
                   <mat-grid-tile>
                     <mat-form-field>
-                      <input matInput type="text" placeholder="Código Postal" formControlName="codpos" #codpos
-                        [ngModel]="addr.codpos">
+                      <input matInput type="text" placeholder="Localidad" formControlName="localidad" #localidad>
                     </mat-form-field>
                   </mat-grid-tile>
                   <mat-grid-tile>
                     <mat-form-field>
-                      <input matInput placeholder="Provincia" formControlName="prov" #prov [ngModel]="addr.prov">
+                      <input matInput type="text" placeholder="Código Postal" formControlName="codpos" #codpos>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field>
+                      <input matInput placeholder="Provincia" formControlName="prov" #prov>
                     </mat-form-field>
                   </mat-grid-tile>
                   <mat-grid-tile>

@@ -45,6 +45,7 @@ export class EditCustomersDetailsComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
   EditCustomerForm: FormGroup;
+  addressForm: FormGroup;
   address: FormArray;
   ngOnInit() {
     this.isOpen = true;
@@ -56,27 +57,33 @@ export class EditCustomersDetailsComponent implements OnInit {
     console.log('getid' + id);
     this.customersService.getCustomer(id).subscribe((data: Cliente) => {
       this.customersDetail = data;
-      // console.log('Customers Detail DATA: ..' + data);
+      this.initForm();
     });
-    // this.sellerId = this.dataservice.getSellerId();
-    this.EditCustomerForm = this.fb.group({
-      id: [''],
-      nom: ['', Validators.required],
-      cuit: ['', Validators.required],
-      razonsoc: [''],
+  }
+
+  initForm() {
+    return this.EditCustomerForm = this.fb.group({
+      id: [this.customersDetail.id],
+      nom: [this.customersDetail.nom, Validators.required],
+      cuit: [this.customersDetail.cuit, Validators.required],
+      razonsoc: [this.customersDetail.razonsoc],
       address: this.fb.array([
         this.initAddress(),
       ]),
       salesman: [this.sellerId],
     });
   }
+
   initAddress() {
-    return this.fb.group({
-      id: [''],
-      dir: ['', Validators.required],
-      localidad: ['', Validators.required],
-      codpos: ['', Validators.required],
-      prov: [''],
+    let i = 0;
+    let address = this.customersDetail.address;
+    console.log(address);
+    return this.addressForm = this.fb.group({
+      id: [address[i].id],
+      dir: [address[i].dir, Validators.required],
+      localidad: [address[i].localidad, Validators.required],
+      codpos: [address[i].codpos, Validators.required],
+      prov: [address[i].prov],
       flete: this.fb.array([
         this.initFlete(),
       ]),
@@ -87,14 +94,10 @@ export class EditCustomersDetailsComponent implements OnInit {
       nom: [''],
     });
   }
-  /*  addAddress() {
-      const control = <FormArray>this.EditCustomerForm.controls['address'];
-      control.push(this.initAddress());
-    } */
-  addAddress(i: number): void {
+  addAddress() {
     this.address = this.EditCustomerForm.get('address') as FormArray;
     this.address.push(this.initAddress());
-    // this.address.reset();
+    this.addressForm.patchValue({ id: '', dir: '', localidad: '', codpos: '', prov: '' });
   }
   removeAddress(i: number) {
     const address = this.EditCustomerForm.get('address') as FormArray;
