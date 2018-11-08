@@ -39,7 +39,6 @@ export class ViewOrderDetailsComponent implements OnInit {
       this.orderDetail = data;
       console.log('Order Detail DATA: ..' + data);
     });
-    // this.getProdPict(105, 100);
   }
   public getProdPict(cod, col) {
     return this.imgService.getImg(cod, col).subscribe((img: ImgInfo) => {

@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { DataService } from '../../services/data.service';
 import { OrdersService } from '../../services/orders.service';
+import { SidenavService } from '../../services/sidenav.service';
+
 import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum, OrderDetail, Seller } from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-create-order',
@@ -31,12 +34,12 @@ export class CreateOrderComponent implements OnInit {
   isOpen1: boolean;
   conven: string;
   observaciones: string;
-
   constructor(
     private router: Router,
     private dataservice: DataService,
     private userService: UserService,
-    private orderService: OrdersService) { }
+    private orderService: OrdersService,
+    private sidenavend: SidenavService) { }
 
   ngOnInit() {
     this.isOpen = true;
@@ -45,7 +48,7 @@ export class CreateOrderComponent implements OnInit {
     this.sellerId = this.dataservice.getSellerId();
     this.userService.getClientsBySeller(this.sellerId).subscribe((data: Cliente[]) => {
       this.clients = data;
-      
+
       this.selectedClient = this.clients[0];
       console.log(this.clients[0]);
 
@@ -54,10 +57,15 @@ export class CreateOrderComponent implements OnInit {
     this.orderService.getArticulos().subscribe((data: Art[]) => {
       this.articulos = data;
     });
-
-
   }
-
+  //toggleActive:boolean = false;
+  sidenavopen(data) {
+    let img = data;
+		//this.toggleActive = !this.toggleActive;
+    this.sidenavend.open();
+    localStorage.setItem('img', img);
+    console.log(img);
+  }
   onClientSelected(event: any) {
     console.log('Selected value');
     console.log(event);

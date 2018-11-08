@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomersModule } from './customers/customers.module';
 import { CustomersService } from './services/customers.service';
 import { ImageService } from './services/image.service';
+import { SidenavService } from './services/sidenav.service';
 
 
 const appRoutes: Routes = [
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
   providers: [
     OrdersService,
     CustomersService,
-    ImageService
+    ImageService,
+    SidenavService
   ],
   bootstrap: [AppComponent]
 })
