@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateOrderComponent } from './create-order/create-order.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
-import { ViewOrderDetailsComponent } from './view-order-details/view-order-details.component';
+import { ViewOrderDetailsComponent, ViewOrderDetails } from './view-order-details/view-order-details.component';
+import { MaterialModule } from '../material.module';
 
 
 const ordersRoutes: Routes = [
@@ -18,12 +19,15 @@ const ordersRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(ordersRoutes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule
   ],
   declarations: [
     CreateOrderComponent,
     ViewOrdersComponent,
     ViewOrderDetailsComponent
+
   ],
   exports: [
     CreateOrderComponent,

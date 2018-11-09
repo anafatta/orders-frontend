@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -6,18 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  inputEmail:string;
-  inputPassword:string;
-  rememberme: boolean;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  login(){
-    console.log(this.inputEmail);
-    console.log(this.inputPassword);
-    console.log(this.rememberme);
   }
 }

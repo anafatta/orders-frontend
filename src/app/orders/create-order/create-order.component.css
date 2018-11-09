@@ -1,12 +1,29 @@
-.orderFields {
-    padding-top: .25rem;
-    padding-bottom: .25rem;
-    background-color: rgba(61, 122, 124, 0.15);
-    border: 1px solid rgba(86,61,124,.2);
-    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+.mat-form-field {
+    width: 94%;
 }
 
-#datosPedido , #detallePedido {
-    margin-left: 15px;
-    margin-right: 15px;
+.static_field {
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    min-height: 35px;
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    top: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #949494;
+}
+
+.static_label {
+    color: #aaa;
+    display: block;
+    font-size: 11px;
+    height: 15px;
+    position: relative;
+    top: -3px;
+}
+
+table {
+    width: 100%;
 }

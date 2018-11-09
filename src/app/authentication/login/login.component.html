@@ -1,26 +1,23 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-
-    <title>Simsi</title>
-  </head>
-
-  <body class="text-center">
-    <form (ngSubmit)="login()" class="form-signin">
-      <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Simsiroglu</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Usuario" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-
-      <button routerLink="/sellers" class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
-      <p class="mt-5 mb-3 text-muted">&copy;2018</p>
-    </form>
-  </body>
-</html>
+<mat-grid-list cols="3" rowHeight="2:2">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="login">
+      <mat-card-title>Iniciar sesión</mat-card-title>
+      <form (ngSubmit)="login()">
+        <mat-form-field>
+          <input matInput type="email" placeholder="Usuario" dividerColor="accent" formControlName="user" #user
+            required autofocus>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Contraseña" dividerColor="accent" formControlName="password"
+            #password required>
+        </mat-form-field>
+        <mat-card-actions align="middle">
+          <button mat-raised-button color="accent" routerLink="/sellers" type="submit">Iniciar Sesión</button>
+          <p class="mt-5 mb-3 text-muted">&copy;2018</p>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,29 @@
+.mat-form-field {
+    width: 94%;
+}
+
+.static_field {
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    min-height: 35px;
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    top: 0;
+    padding-bottom: 5px;
+    bcustomers-bottom: 1px solid #949494;
+}
+
+.static_label {
+    color: #aaa;
+    display: block;
+    font-size: 11px;
+    height: 15px;
+    position: relative;
+    top: -3px;
+}
+
+table {
+    width: 100%;
+}

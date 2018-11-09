@@ -1,0 +1,99 @@
+<mat-card>
+  <mat-card-title>Ficha de Cliente: {{customersDetail.nom}}</mat-card-title>
+
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Datos del cliente</strong>
+        </mat-panel-title>
+        <mat-panel-description>
+          Información comercial
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-grid-list cols="3" rowHeight="50px">
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Cliente</span>
+            {{customersDetail.nom}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">C.U.I.T.</span>
+            {{customersDetail.cuit}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Código de Facturación</span>
+            {{customersDetail.codfac}}
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="static_field">
+            <span class="static_label">Razón Social</span>
+            {{customersDetail.razonsoc}}
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile *ngIf="customersDetail.salesman.id == '37'" [colspan]="3">
+          <div class="static_field">
+            <span class="static_label">Vendedor</span>
+            {{customersDetail.salesman.nom}}
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong>Direcciones</strong>
+        </mat-panel-title>
+        <mat-panel-description>
+          Información de facturación y envíos
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngFor="let addr of customersDetail.address">
+        <mat-grid-list cols="3" rowHeight="50px">
+          <mat-grid-tile>
+            <div class="static_field">
+              <span class="static_label">Dirección</span>
+              {{addr.dir}}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="static_field">
+              <span class="static_label">Localidad</span>
+              {{addr.localidad}}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="static_field">
+              <span class="static_label">Código Postal</span>
+              {{addr.codpos}}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="static_field">
+              <span class="static_label">Provincia</span>
+              {{addr.prov}}
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="static_field">
+              <span class="static_label">Flete</span>
+              {{addr.flete.nom}}
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-card-actions align="middle">
+    <div fxFlex></div><button mat-raised-button color="accent" routerLink='/customers/edit/{{customersDetail.id}}'>Editar</button>
+  </mat-card-actions>
+</mat-card>

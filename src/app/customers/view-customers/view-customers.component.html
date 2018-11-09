@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-title>Mis Clientes</mat-card-title>
+  <mat-grid-list cols="2" rowHeight="80px">
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar resultados">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let customer"> {{customer.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+      <td mat-cell *matCellDef="let customer"> {{ (customer.nom)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="button">
+      <th mat-header-cell *matHeaderCellDef> Ver </th>
+      <td mat-cell *matCellDef="let customer">
+        <button mat-mini-fab color="accent" class="col-xs-1" [routerLink]="['/customers/detail', customer.id]"
+          matTooltip="Ver detalle" matTooltipPosition="above">
+          <mat-icon aria-label="Ver detalle">search</mat-icon>
+        </button> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <button mat-raised-button color="accent" [routerLink]="['/customers/view']">
+    <mat-icon aria-label="Volver">arrow_back</mat-icon> Volver
+  </button>
+</mat-card>
