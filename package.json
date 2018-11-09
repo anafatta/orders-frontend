@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/router": "^6.0.0",
     "core-js": "^2.5.4",
+    "jquery": "^1.9.1",
+    "lightbox2": "^2.10.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

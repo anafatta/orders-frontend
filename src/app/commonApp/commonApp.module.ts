@@ -27,8 +27,7 @@ const commonAppRoutes: Routes = [
     NavbarComponent,
     HomepageComponent,
     PagenotfoundComponent,
-    SellerComponent,
-    SpeedDialFabComponent
+    SellerComponent
   ],
   exports: [
     NavbarComponent,

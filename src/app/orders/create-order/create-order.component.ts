@@ -34,6 +34,9 @@ export class CreateOrderComponent implements OnInit {
   isOpen1: boolean;
   conven: string;
   observaciones: string;
+  /*Ligthbox */
+  myImgUrl: string = 'https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';
+
   constructor(
     private router: Router,
     private dataservice: DataService,
@@ -57,15 +60,14 @@ export class CreateOrderComponent implements OnInit {
     this.orderService.getArticulos().subscribe((data: Art[]) => {
       this.articulos = data;
     });
+
   }
   //toggleActive:boolean = false;
-  sidenavopen(data) {
-    let img = data;
-		//this.toggleActive = !this.toggleActive;
+  /*sidenavopen(data) {
     this.sidenavend.open();
     localStorage.setItem('img', img);
     console.log(img);
-  }
+  }*/
   onClientSelected(event: any) {
     console.log('Selected value');
     console.log(event);

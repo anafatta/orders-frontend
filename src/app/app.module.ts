@@ -17,6 +17,7 @@ import { CustomersModule } from './customers/customers.module';
 import { CustomersService } from './services/customers.service';
 import { ImageService } from './services/image.service';
 import { SidenavService } from './services/sidenav.service';
+import { SpeedDialFabComponent } from './commonApp/speed-dial-fab/speed-dial-fab.component';
 
 
 const appRoutes: Routes = [
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SpeedDialFabComponent
   ],
   imports: [
     BrowserModule,

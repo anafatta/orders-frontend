@@ -14,9 +14,10 @@
     <mat-sidenav #sidenavmenu mode="side" closed class="example-sidenav" (keydown.escape)="close('escape')"
       disableClose>
       <button mat-button>
-        <mat-icon>timeline</mat-icon>
-        <span routerLink='/pageNotFound'>Reportes</span>
+        <mat-icon>home</mat-icon>
+        <span routerLink='/sellers'>Dashboard</span>
       </button>
+      <mat-divider></mat-divider>
       <mat-list>
         <mat-list-item>
           <mat-icon>people</mat-icon> <span>Clientes</span>
@@ -39,6 +40,7 @@
         <mat-icon>timeline</mat-icon>
         <span routerLink='/pageNotFound'>Reportes</span>
       </button>
+      <mat-divider></mat-divider>
       <button mat-button>
         <mat-icon>lock</mat-icon>
         <span *ngIf="!logout" class="nav-link" routerLink="/logout">Logout</span>
@@ -51,7 +53,9 @@
     </mat-sidenav-content>
     <mat-sidenav #sidenav closed mode="side" position="end" class="sidenavend">
       <h3>Foto de producto</h3>
-       <img src="{{this.imgName}}" alt="Producto" width="250"/>
+      <img src="{{this.imgName}}" alt="Producto" width="250" />
     </mat-sidenav>
   </mat-sidenav-container>
+
 </ng-container>
+<app-speed-dial-fab></app-speed-dial-fab>

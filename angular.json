@@ -24,18 +24,20 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/sim-app-theme.scss"
+              "src/sim-app-theme.scss",
+              "./node_modules/lightbox2/dist/css/lightbox.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/jquery.min.js",
+              "./node_modules/lightbox2/dist/js/lightbox.min.js"
+            ]
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

@@ -136,8 +136,19 @@
         <mat-grid-tile [colspan]="5"><strong>Descripción</strong></mat-grid-tile>
         <mat-grid-tile [colspan]="1"><strong>Stock</strong></mat-grid-tile>
         <mat-grid-tile [colspan]="1"><strong>Agregar</strong></mat-grid-tile>
-        <div *ngFor="let item of variantes">
-          <mat-grid-tile [colspan]="1"><img (click)="sidenavopen(item.imagen)" src="{{item.imagen}}" onError="this.src='https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';" alt="Producto" width="25" style="border-radius:25px; height:25px; overflow:hidden; cursor:pointer" class="pict"/></mat-grid-tile>
+        <div *ngFor="let item of variantes; let i = index">
+          <mat-grid-tile [colspan]="1">
+              <a *ngIf="item.imagen !== ''" [href]="item.imagen" data-lightbox="image" data-title="Artículo: {{item.codigo}} - Variante: {{item.nom}}">
+                <img [src]="item.imagen" onError="this.src='https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';"
+                  alt="Producto" width="25" style="border-radius:25px; height:25px; overflow:hidden; cursor:pointer"
+                  class="pict" />
+              </a>
+              <a *ngIf="item.imagen == ''" href="https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png" data-lightbox="image" data-title="Artículo: {{item.codigo}} - Variante: {{item.nom}}">
+                  <img [src]="item.imagen" onError="this.src='https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';"
+                    alt="Producto" width="25" style="border-radius:25px; height:25px; overflow:hidden; cursor:pointer"
+                    class="pict" />
+                </a>
+          </mat-grid-tile>
           <mat-grid-tile [colspan]="1">{{item.codigo}}</mat-grid-tile>
           <mat-grid-tile [colspan]="5">{{item.nom}}</mat-grid-tile>
           <mat-grid-tile [colspan]="1">{{item.nom}}</mat-grid-tile>
