@@ -90,7 +90,7 @@ export class CreateCustomersComponent implements OnInit {
   }
   onSubmit() {
     this.customersService.setCustomer(this.NewCustomerForm.value).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
   }
 

@@ -100,8 +100,8 @@ export class EditCustomersDetailsComponent implements OnInit {
     address.removeAt(i);
   }
   onSubmit() {
-    this.customersService.setCustomer(this.EditCustomerForm.value).subscribe(data => {
-      console.log(data);
+    this.customersService.submitCustomer(this.EditCustomerForm.value).subscribe(data => {
+      // console.log(data);
     });
   }
 

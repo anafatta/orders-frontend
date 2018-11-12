@@ -43,16 +43,17 @@ export class CustomersService {
         return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.GET_ART_URL + id);
     }
 
-    submitCustomer(customers: Cliente): Observable<Cliente> {
-        let postCustomer: Observable<Cliente>;
-        postCustomer = this.httpClient.post<Cliente>(this.ROOT_URL + this.CUSTOMERS_URL, customers, this.httpOptions);
-        return postCustomer;
+    submitCustomer(data) {
+        console.log(data);
+        sessionStorage.setItem('ctype', JSON.stringify(data));
+        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.httpClient.put(this.ROOT_URL + this.GET_CUSTOMER_URL + data.id, JSON.stringify(data), { headers: headers });
     }
     setCustomer(data) {
         console.log(data);
         sessionStorage.setItem('ctype', JSON.stringify(data));
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this.httpClient.put(this.ROOT_URL + this.GET_CUSTOMER_URL + data.id, JSON.stringify(data), { headers: headers });
+        return this.httpClient.put(this.ROOT_URL + this.GET_CUSTOMER_URL, JSON.stringify(data), { headers: headers });
     }
 
 }
