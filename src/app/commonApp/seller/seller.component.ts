@@ -24,7 +24,7 @@ export class SellerComponent implements OnInit {
     this.userService.getSellers().subscribe((data: Seller[]) => {
       //salon
       this.sellers = data;
-      console.log("call sellers works... " + this.sellers)
+      // console.log("call sellers works... " + this.sellers)
     });
 
 

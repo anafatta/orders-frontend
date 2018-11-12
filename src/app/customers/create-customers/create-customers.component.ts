@@ -48,8 +48,8 @@ export class CreateCustomersComponent implements OnInit {
     this.isOpen = true;
     this.isOpen1 = false;
     this.selectedItems = [];
-    this.sellerId = '37';
-    // this.sellerId = this.dataservice.getSellerId();
+    // this.sellerId = '37';
+    this.sellerId = this.dataservice.getSellerId();
     this.initForm();
   }
   initForm() {

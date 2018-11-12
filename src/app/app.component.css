@@ -53,6 +53,7 @@ body {
   color: #fff !important;
 }
 
+
 .static_label {
   color: #4caf50;
 }
@@ -88,4 +89,9 @@ body {
 }
 .sidenavend {
   min-width: 200px;
+}
+@media only screen and (max-width: 768px) {
+  .header img {
+    max-height: 20px;
+  }
 }

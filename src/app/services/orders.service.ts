@@ -9,8 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     providedIn: 'root'
 })
 export class OrdersService {
-    //ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
-    ROOT_URL = 'http://lumasoft.dyndns.org:8000/api';
+    ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
+    // ROOT_URL = 'http://lumasoft.dyndns.org:8000/api';
 
     GET_ORDERS_URL = '/pedcab/vendedor/';
     GET_ORDER_URL = '/pedcab/id/';
@@ -32,7 +32,7 @@ export class OrdersService {
     }
 
     getOrder(id: string): Observable<OrderDetail> {
-        return this.httpClient.get<OrderDetail>(this.ROOT_URL + this.GET_ORDER_URL + + id)
+        return this.httpClient.get<OrderDetail>(this.ROOT_URL + this.GET_ORDER_URL + + id);
     }
 
     getArticulos(): Observable<Art[]> {
@@ -46,6 +46,7 @@ export class OrdersService {
     submitOrder(order: OrderDetail): Observable<OrderDetail> {
         let postOrder: Observable<OrderDetail>
         postOrder = this.httpClient.post<OrderDetail>(this.ROOT_URL + this.POST_ORDER_URL, order, this.httpOptions);
+
         return postOrder;
     }
 

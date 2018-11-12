@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 // import { StoreModule } from '@ngrx/store';
@@ -20,6 +21,7 @@ import { SidenavService } from './services/sidenav.service';
 import { SpeedDialFabComponent } from './commonApp/speed-dial-fab/speed-dial-fab.component';
 
 
+
 const appRoutes: Routes = [
   { path: '**', component: PagenotfoundComponent }
 ];
@@ -31,6 +33,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    LayoutModule,
     FormsModule,
     MaterialModule,
     HttpClientModule,

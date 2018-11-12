@@ -16,7 +16,7 @@
             <mat-select class="custom-select" placeholder="Cliente" (ngModelChange)="onClientSelected($event)"
               [(ngModel)]="clientId" data-live-search="true">
               <mat-option *ngFor="let client of clients" [value]="client.id">
-                {{client.nom}}
+                {{client.id}} - {{client.nom}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -138,20 +138,22 @@
         <mat-grid-tile [colspan]="1"><strong>Agregar</strong></mat-grid-tile>
         <div *ngFor="let item of variantes; let i = index">
           <mat-grid-tile [colspan]="1">
-              <a *ngIf="item.imagen !== ''" [href]="item.imagen" data-lightbox="image" data-title="Artículo: {{item.codigo}} - Variante: {{item.nom}}">
+              <a *ngIf="item.imagen !== ''" [href]="item.imagen" data-lightbox="image" data-title="Artículo: {{item.codigo}} - Variante: {{item.nom}}  - Stock: {{item.pza}}">
                 <img [src]="item.imagen" onError="this.src='https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';"
                   alt="Producto" width="25" style="border-radius:25px; height:25px; overflow:hidden; cursor:pointer"
-                  class="pict" />
+                  class="pict" matTooltip="Ver imagen"
+                  matTooltipPosition="above" />
               </a>
-              <a *ngIf="item.imagen == ''" href="https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png" data-lightbox="image" data-title="Artículo: {{item.codigo}} - Variante: {{item.nom}}">
+              <a *ngIf="item.imagen == ''" href="https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png" data-lightbox="image" data-title="Stock: {{item.codigo}} - Variante: {{item.nom}}  - Variante: {{item.pza}}">
                   <img [src]="item.imagen" onError="this.src='https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';"
                     alt="Producto" width="25" style="border-radius:25px; height:25px; overflow:hidden; cursor:pointer"
-                    class="pict" />
+                    class="pict"  matTooltip="Ver imagen"
+                    matTooltipPosition="above"/>
                 </a>
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1">{{item.codigo}}</mat-grid-tile>
           <mat-grid-tile [colspan]="5">{{item.nom}}</mat-grid-tile>
-          <mat-grid-tile [colspan]="1">{{item.nom}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1">{{item.pza}}</mat-grid-tile>
           <mat-grid-tile [colspan]="1">
             <button id="button" mat-icon-button color="accent" (click)="addVariante(item)" matTooltip="Agregar variante"
               matTooltipPosition="above">

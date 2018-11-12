@@ -1,23 +1,17 @@
-<mat-grid-list cols="3" rowHeight="2:2">
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card class="login">
-      <mat-card-title>Iniciar sesión</mat-card-title>
-      <form (ngSubmit)="login()">
-        <mat-form-field>
-          <input matInput type="email" placeholder="Usuario" dividerColor="accent" formControlName="user" #user
-            required autofocus>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="password" placeholder="Contraseña" dividerColor="accent" formControlName="password"
-            #password required>
-        </mat-form-field>
-        <mat-card-actions align="middle">
-          <button mat-raised-button color="accent" routerLink="/sellers" type="submit">Iniciar Sesión</button>
-          <p class="mt-5 mb-3 text-muted">&copy;2018</p>
-        </mat-card-actions>
-      </form>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile></mat-grid-tile>
-</mat-grid-list>
+<mat-card class="login">
+  <mat-card-title>Iniciar sesión</mat-card-title>
+  <form (ngSubmit)="login()">
+    <mat-form-field>
+      <input matInput type="email" placeholder="Usuario" dividerColor="accent" formControlName="user" #user required
+        autofocus>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Contraseña" dividerColor="accent" formControlName="password"
+        #password required>
+    </mat-form-field>
+    <mat-card-actions align="middle">
+      <button mat-raised-button color="accent" routerLink="/sellers" type="submit">Iniciar Sesión</button>
+      <p class="mt-5 mb-3 text-muted">&copy;2018</p>
+    </mat-card-actions>
+  </form>
+</mat-card>
