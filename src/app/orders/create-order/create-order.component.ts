@@ -49,20 +49,22 @@ export class CreateOrderComponent implements OnInit {
     this.isOpen1 = false;
     this.selectedItems = [];
     this.sellerId = this.dataservice.getSellerId();
-    this.userService.getClientsBySeller(this.sellerId).subscribe((data: Cliente[]) => {
-      this.clients = data;
-
-      this.selectedClient = this.clients[0];
-      console.log(this.clients[0]);
-
-    });
+    this.userService.getClientsBySeller(this.sellerId).subscribe(
+      (data: Cliente[]) => {
+        this.clients = data;
+        this.selectedClient = this.clients[0];
+        console.log('Success');
+      },
+      (err) => {
+        console.log('Failure');
+      });
     // LOADING ARTICULOS
     this.orderService.getArticulos().subscribe((data: Art[]) => {
       this.articulos = data;
     });
 
   }
-  //toggleActive:boolean = false;
+  // toggleActive:boolean = false;
   /*sidenavopen(data) {
     this.sidenavend.open();
     localStorage.setItem('img', img);
@@ -164,11 +166,15 @@ export class CreateOrderComponent implements OnInit {
       peditms: this.selectedItems,
     };
 
-    this.orderService.submitOrder(order).subscribe((data: OrderDetail) => {
-      console.log('order posteada');
+    this.orderService.submitOrder(order).subscribe(
+      (data: OrderDetail) => {
+      console.log('Order Sent' + order);
+    },
+    (err) => {
+      console.log('Failure');
     });
-    var root = 'orders/view';
-    this.router.navigate([root]);
+    // var root = 'orders/view';
+    // this.router.navigate([root]);
   }
 
 }

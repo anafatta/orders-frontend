@@ -43,7 +43,6 @@
             Información de facturación y envíos
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <div *ngFor="let addr of customersDetail.address">
           <div formArrayName="address" class="address">
             <div *ngFor="let address of EditCustomerForm.get('address').controls; let i=index">
               <div [formGroupName]="i">
@@ -83,7 +82,7 @@
                 </mat-grid-list>
                 <div class="margin-20" align="right">
                   <div fxFlex>
-                    <a (click)="removeAddress()" style="cursor: pointer" matTooltip="Eliminar Dirección"
+                    <a (click)="removeAddress(i)" style="cursor: pointer" matTooltip="Eliminar Dirección"
                       matTooltipPosition="above">
                       <mat-icon color="warn">remove_circle</mat-icon>
                     </a>
@@ -92,14 +91,14 @@
               </div>
             </div>
           </div>
-          <div class="margin-20" align="right">
+          
+        <div class="margin-20" align="right">
             <div fxFlex>
               <a (click)="addAddress()" style="cursor: pointer" matTooltip="Agregar Dirección" matTooltipPosition="above">
                 <mat-icon color="accent">add_circle</mat-icon>
               </a>
             </div>
           </div>
-        </div>
       </mat-expansion-panel>
     </mat-accordion>
     <br />
@@ -108,6 +107,6 @@
     </mat-card-actions>
   </form>
   <p>
-    <!--Form Value: {{ EditCustomerForm.value | json }}-->
+    Form Value: {{ EditCustomerForm.value | json }}
   </p>
 </mat-card>

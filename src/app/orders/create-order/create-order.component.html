@@ -144,7 +144,7 @@
                   class="pict" matTooltip="Ver imagen"
                   matTooltipPosition="above" />
               </a>
-              <a *ngIf="item.imagen == ''" href="https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png" data-lightbox="image" data-title="Stock: {{item.codigo}} - Variante: {{item.nom}}  - Variante: {{item.pza}}">
+              <a *ngIf="item.imagen == ''" href="https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png" data-lightbox="image" data-add="(item)" data-title="Stock: {{item.codigo}} - Variante: {{item.nom}}  - Variante: {{item.pza}}">
                   <img [src]="item.imagen" onError="this.src='https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';"
                     alt="Producto" width="25" style="border-radius:25px; height:25px; overflow:hidden; cursor:pointer"
                     class="pict"  matTooltip="Ver imagen"

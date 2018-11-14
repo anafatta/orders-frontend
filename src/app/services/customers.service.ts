@@ -44,13 +44,11 @@ export class CustomersService {
     }
 
     submitCustomer(data) {
-        console.log(data);
-        sessionStorage.setItem('ctype', JSON.stringify(data));
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
+        sessionStorage.setItem('customers', JSON.stringify(data));
         return this.httpClient.put(this.ROOT_URL + this.GET_CUSTOMER_URL + data.id, JSON.stringify(data), { headers: headers });
     }
     setCustomer(data) {
-        console.log(data);
         sessionStorage.setItem('ctype', JSON.stringify(data));
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this.httpClient.put(this.ROOT_URL + this.GET_CUSTOMER_URL, JSON.stringify(data), { headers: headers });

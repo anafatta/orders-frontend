@@ -36,17 +36,16 @@ export class OrdersService {
     }
 
     getArticulos(): Observable<Art[]> {
-        return this.httpClient.get<Art[]>(this.ROOT_URL + this.GET_ARTICULOS_URL)
+        return this.httpClient.get<Art[]>(this.ROOT_URL + this.GET_ARTICULOS_URL);
     }
 
     getArticuloById(id: number): Observable<DetalleArticulo> {
-        return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.GET_ART_URL + id)
+        return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.GET_ART_URL + id);
     }
 
     submitOrder(order: OrderDetail): Observable<OrderDetail> {
-        let postOrder: Observable<OrderDetail>
+        let postOrder: Observable<OrderDetail>;
         postOrder = this.httpClient.post<OrderDetail>(this.ROOT_URL + this.POST_ORDER_URL, order, this.httpOptions);
-
         return postOrder;
     }
 
