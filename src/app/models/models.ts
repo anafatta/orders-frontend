@@ -53,8 +53,6 @@ export interface CustomersDetail {
   codfac: number;
   razonsoc: string;
   address: Address[];
-
-
 }
 
 export interface Address {
