@@ -45,6 +45,12 @@ export interface Cliente {
   address: Address[];
   salesman: string;
 }
+
+export interface Provincia {
+  id: number;
+  nom: string;
+}
+
 export interface CustomersDetail {
   id: number;
   nombre: string;
@@ -90,7 +96,17 @@ export interface Art {
   codfac: string;
   nom: string;
 }
-
+export interface Expreso {
+  id: number;
+  nom: string;
+  dir: string;
+  localidad: string;
+  codpos: number;
+  prov: number;
+  cuit: number;
+  tel: string;
+  horario: string;
+}
 
 export interface DetalleArticulo {
   art_id: number;

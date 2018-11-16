@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { DataService } from '../../services/data.service';
 import { CustomersService } from '../../services/customers.service';
-import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum, CustomersDetail, Seller } from '../../models/models';
-import { SellerComponent } from '../../commonApp/seller/seller.component';
+import { OtherdataService } from '../../services/otherdata.service';
+import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, Provincia } from '../../models/models';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,17 +33,21 @@ export class CreateCustomersComponent implements OnInit {
   isOpen1: boolean;
   conven: string;
   observaciones: string;
+  provincias: Provincia[];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private dataservice: DataService,
     private userService: UserService,
-    private customersService: CustomersService
+    private customersService: CustomersService,
+    private odService: OtherdataService
   ) { }
+
   NewCustomerForm: FormGroup;
   addressForm: FormGroup;
   address: FormArray;
+
   ngOnInit() {
     this.isOpen = true;
     this.isOpen1 = false;
@@ -51,6 +55,9 @@ export class CreateCustomersComponent implements OnInit {
     // this.sellerId = '37';
     this.sellerId = this.dataservice.getSellerId();
     this.initForm();
+    this.odService.getProvincias().subscribe((data: Provincia[]) => {
+      this.provincias = data;
+    });
   }
   initForm() {
     return this.NewCustomerForm = this.fb.group({
@@ -69,6 +76,7 @@ export class CreateCustomersComponent implements OnInit {
       localidad: ['', Validators.required],
       codpos: ['', Validators.required],
       prov: [''],
+      expreso: ['1'],
       flete: this.fb.array([
         this.initFlete(),
       ]),
@@ -93,78 +101,6 @@ export class CreateCustomersComponent implements OnInit {
       // console.log(data);
     });
   }
-
-  /*addVariante(variante: any) {
-    if (this.selectedItems.length === 0 || !(this.selectedItems.some(e => e.itemdata === variante.itemdata_id))) {
-      let peditem: Peditem;
-
-      peditem = {
-        itemdata: variante.itemdata_id,
-        can_ped: 0,
-        can_aut: 0,
-        pre_ped: 0,
-        pre_aut: 0,
-        itemdatum: {
-          id: 0,
-          art1: {
-            id: this.artId,
-            codfac: '',
-            nom: '',
-          },
-          variante: {
-            itemdata_id: variante.itemdata_id,
-            codigo: variante.codigo,
-            nom: variante.nom,
-          }
-        }
-      };
-      this.selectedItems.push(peditem);
-      console.log('selectedItems= ' + this.selectedItems.length + '   variante nombre=' + this.selectedItems[0].itemdatum.variante.nom);
-    }
-  }
-
-  addCount(i: any, selectedCount: any) {
-    this.selectedItems[i].can_ped = selectedCount;
-    console.log('cantidad pedida=' + this.selectedItems[i].can_ped + '   index ' + i);
-
-  }
-
-  removeVariante(index: number) {
-    this.selectedItems.splice(index, 1);
-  }
-
-  submitCustomersDetail() {
-    console.log('precio:' + this.price);
-
-    for (const item of this.selectedItems) {
-      item.pre_ped = this.price;
-    }
-
-    let customers: Cliente;
-    let seller: Seller;
-    console.log('submitCustomersDetail= ');
-    customers = {
-      id: 0,
-      nro: 0,
-      fem: new Date(),
-      ven: Number(this.sellerId),
-      cli: this.selectedClient.id,
-      conven: this.conven,
-      observ: this.observaciones,
-      cliente: this.selectedClient,
-      vend: seller,
-      address: this.selectedAddress,
-      clidir: Number(this.selectedAddress.id),
-      peditms: this.selectedItems,
-    };
-
-    this.customersService.submitCustomer(customers).subscribe((data: Cliente) => {
-      console.log('customers posteada');
-    });
-    var root = 'customers/view';
-    this.router.navigate([root]);
-  }
-*/
 }
 
 

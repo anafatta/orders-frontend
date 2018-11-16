@@ -61,7 +61,11 @@
                 </mat-grid-tile>
                 <mat-grid-tile>
                   <mat-form-field>
-                    <input matInput placeholder="Provincia" formControlName="prov" #prov>
+                    <mat-select placeholder="Seleccione una provincia" formControlName="prov">
+                      <mat-option *ngFor="let prov of provincias" [value]="prov.id">
+                        {{prov.nom}}
+                      </mat-option>
+                    </mat-select>
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
@@ -99,7 +103,7 @@
       <div fxFlex></div><button mat-raised-button color="accent" type="submit">Enviar</button>
     </mat-card-actions>
   </form>
-  <!--<p>
+  <p>
     Form Value: {{ NewCustomerForm.value | json }}
-  </p>-->
+  </p>
 </mat-card>

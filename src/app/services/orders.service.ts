@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OrderDetail, Order, Art, DetalleArticulo } from '../models/models';
+import { OrderDetail, Order, Art, DetalleArticulo, Expreso } from '../models/models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -17,6 +17,8 @@ export class OrdersService {
     GET_ARTICULOS_URL = '/articulos/';
     GET_ART_URL = '/articulos/id/';
     POST_ORDER_URL = '/pedcab/';
+    Get_Expresos = '/api/expresos';
+    Get_Expreso_Id = '/api/expresos/id/';
 
     constructor(private httpClient: HttpClient) { }
 
@@ -26,7 +28,7 @@ export class OrdersService {
 
         })
     };
-
+    // Retrieve Orders
     getOrders(sellereId: string): Observable<Order[]> {
         return this.httpClient.get<Order[]>(this.ROOT_URL + this.GET_ORDERS_URL + sellereId);
     }
@@ -48,5 +50,4 @@ export class OrdersService {
         postOrder = this.httpClient.post<OrderDetail>(this.ROOT_URL + this.POST_ORDER_URL, order, this.httpOptions);
         return postOrder;
     }
-
 }

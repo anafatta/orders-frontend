@@ -16,6 +16,7 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomersModule } from './customers/customers.module';
 import { CustomersService } from './services/customers.service';
+import { OtherdataService } from './services/otherdata.service';
 import { ImageService } from './services/image.service';
 import { SidenavService } from './services/sidenav.service';
 import { SpeedDialFabComponent } from './commonApp/speed-dial-fab/speed-dial-fab.component';
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
     OrdersService,
     CustomersService,
     ImageService,
-    SidenavService
+    SidenavService,
+    OtherdataService
   ],
   bootstrap: [AppComponent]
 })

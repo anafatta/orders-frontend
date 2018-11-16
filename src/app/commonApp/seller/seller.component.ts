@@ -22,18 +22,15 @@ export class SellerComponent implements OnInit {
 
     this.isAdmin = true;
     this.userService.getSellers().subscribe((data: Seller[]) => {
-      //salon
       this.sellers = data;
-      // console.log("call sellers works... " + this.sellers)
     });
 
 
   }
   onClick(ven: any) {
-    console.log("click works ... ");
     this.selectedSeller = ven;
     this.dataService.setSellerId(this.selectedSeller);
-    var root = "orders/view";
+    var root = 'orders/view';
     this.router.navigate([root]);
   }
 

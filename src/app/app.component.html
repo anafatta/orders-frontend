@@ -4,16 +4,16 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-    <img src="assets/img/Simsiroglu-Logo-Blanco.svg" alt="{{title}}" />
+    <img src="assets/img/Simsiroglu-Logo-Blanco.svg" alt="{{title}}" (click)="sidenavmenu.close()" />
 
     <i class="material-icons" matBadge="0" matBadgeColor="warn" matBadgePosition="above after" style="cursor: pointer"
-      matTooltip="Mensajes - Proximamente" matTooltipPosition="left">chat</i>
+      matTooltip="Mensajes - Proximamente" matTooltipPosition="left" (click)="sidenavmenu.close()">chat</i>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-container" (backdropClick)="close()">
     <mat-sidenav #sidenavmenu mode="side" closed class="example-sidenav" (keydown.escape)="close('escape')"
       disableClose>
-      <button mat-button>
+      <button mat-button (click)="sidenavmenu.close()">
         <mat-icon>home</mat-icon>
         <span routerLink='/sellers'>Dashboard</span>
       </button>
@@ -22,8 +22,8 @@
         <mat-list-item>
           <mat-icon>people</mat-icon> <span>Clientes</span>
         </mat-list-item>
-        <mat-list-item><button mat-button routerLink='/customers/view'>Mis Clientes</button></mat-list-item>
-        <mat-list-item><button mat-button routerLink='/customers/create'>Nuevo Cliente</button></mat-list-item>
+        <mat-list-item><button mat-button (click)="sidenavmenu.close()" routerLink='/customers/view'>Mis Clientes</button></mat-list-item>
+        <mat-list-item><button mat-button (click)="sidenavmenu.close()" routerLink='/customers/create'>Nuevo Cliente</button></mat-list-item>
         <mat-divider></mat-divider>
       </mat-list>
       <!--<button mat-menu-item routerLink='/customers/detail'>Ver Pedido</button>-->
@@ -32,23 +32,23 @@
           <mat-icon>people</mat-icon> <span>Pedidos</span>
         </mat-list-item>
       </mat-list>
-      <mat-list-item><button mat-button routerLink='/orders/view'>Mis Pedidos</button></mat-list-item>
-      <mat-list-item><button mat-button routerLink='/orders/detail'>Ver Pedido</button></mat-list-item>
-      <mat-list-item><button mat-button routerLink='/orders/create'>Nuevo Pedido</button></mat-list-item>
+      <mat-list-item><button mat-button (click)="sidenavmenu.close()" routerLink='/orders/view'>Mis Pedidos</button></mat-list-item>
+      <mat-list-item><button mat-button (click)="sidenavmenu.close()" routerLink='/orders/detail'>Ver Pedido</button></mat-list-item>
+      <mat-list-item><button mat-button (click)="sidenavmenu.close()" routerLink='/orders/create'>Nuevo Pedido</button></mat-list-item>
       <mat-divider></mat-divider>
-      <button mat-button>
+      <button mat-button (click)="sidenavmenu.close()">
         <mat-icon>timeline</mat-icon>
         <span routerLink='/pageNotFound'>Reportes</span>
       </button>
       <mat-divider></mat-divider>
-      <button mat-button>
+      <button mat-button (click)="sidenavmenu.close()">
         <mat-icon>lock</mat-icon>
         <span *ngIf="!logout" class="nav-link" routerLink="/logout">Logout</span>
         <span *ngIf="logout" class="nav-link" routerLink="/login">Login</span>
       </button>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content (click)="sidenavmenu.close()">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
     <mat-sidenav #sidenav closed mode="side" position="end" class="sidenavend">

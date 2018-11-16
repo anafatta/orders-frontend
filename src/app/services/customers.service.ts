@@ -58,7 +58,6 @@ export class CustomersService {
     getArticuloById(id: number): Observable<DetalleArticulo> {
         return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.GET_ART_URL + id);
     }
-
     submitCustomer(data) {
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
         sessionStorage.setItem('customers', JSON.stringify(data));

@@ -7,8 +7,14 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { OtherdataService } from 'src/app/services/otherdata.service';
 
 export interface CustomersList {
+  id: number;
+  nom: string;
+  // button: string;
+}
+export interface Provincia {
   id: number;
   nom: string;
   // button: string;
@@ -22,14 +28,17 @@ export interface CustomersList {
 })
 export class ViewCustomersComponent implements OnInit {
   customers: Cliente[];
+  provincia: Provincia[];
   customersData = null;
   displayedColumns: string[] = ['id', 'nom', 'button'];
   dataSource = new MatTableDataSource(this.customers);
   public services;
   constructor(
     private dataservice: DataService,
-    private router: Router, private route: ActivatedRoute,
-    private customersService: CustomersService) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    private customersService: CustomersService,
+    private odService: OtherdataService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,6 +49,10 @@ export class ViewCustomersComponent implements OnInit {
     this.customersService.getCustomers(sellerId).subscribe((data: Cliente[]) => {
       this.customersData = data;
       this.dataSource.data = this.customersData;
+    });
+
+    this.odService.getProvincia(this.customersData.prov).subscribe((data: Provincia[]) => {
+      this.provincia = data;
     });
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

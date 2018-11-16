@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { DataService } from '../../services/data.service';
 import { CustomersService } from '../../services/customers.service';
-import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum, CustomersDetail, Seller } from '../../models/models';
+import { Cliente, Provincia} from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OtherdataService } from 'src/app/services/otherdata.service';
 
 @Component({
   selector: 'app-edit-customers',
@@ -22,13 +23,14 @@ export class EditCustomersDetailsComponent implements OnInit {
   id: number;
   addressForm: FormGroup;
   address: FormArray;
+  provincias: Provincia[];
+  provincia: Provincia[];
 
   constructor(
     private service: CustomersService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
-    private dataservice: DataService,
+    private odService: OtherdataService,
   ) { }
 
   ngOnInit() {
@@ -46,6 +48,9 @@ export class EditCustomersDetailsComponent implements OnInit {
     this.service.getCustomer(customerid).subscribe((data: Cliente) => {
       this.customersDetail = data;
       this.initForm();
+    });
+    this.odService.getProvincias().subscribe((data: Provincia[]) => {
+      this.provincias = data;
     });
   }
   initForm() {
@@ -73,14 +78,14 @@ export class EditCustomersDetailsComponent implements OnInit {
     this.address = this.EditCustomerForm.get('address') as FormArray;
     this.address.push(
       this.fb.group({
-        id: [''],
         dir: ['', Validators.required],
         localidad: ['', Validators.required],
         codpos: ['', Validators.required],
         prov: [''],
+        expreso: [''],
       })
     );
-    // this.addressForm.patchValue({ id: '', dir: '', localidad: '', codpos: '', prov: '' });
+    // this.addressForm.patchValue({ dir: '', localidad: '', codpos: '', prov: '', expreso: '1' });
   }
   removeAddress(i: number) {
     const address = this.EditCustomerForm.get('address') as FormArray;
@@ -88,6 +93,7 @@ export class EditCustomersDetailsComponent implements OnInit {
   }
   onSubmit() {
     this.service.submitCustomer(this.EditCustomerForm.value).subscribe(data => {
+     // console.log();
     });
   }
 }
