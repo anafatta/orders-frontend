@@ -10,21 +10,28 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
+  auth : string;
   message : string;
+
   constructor(private router: Router,  private userService: UserService) { }
 
   ngOnInit() {
   }
 
-  changePassword(user: string, oldpassword: string, newpassword: string){
+  changePassword(user: string, oldpassword: string, newpassword: string ){
+    // ADD duplicatedPass
     this.userService.changePassword(user, oldpassword, newpassword)
     .subscribe((data: any) => {
-        var auth = data['auth'];
-        var token =  data['token'];
-        this.message = data['message'];
-        console.log("auth:" + auth + "   token:" + token);
-        sessionStorage.setItem('token', JSON.stringify(token));
-        // se recupera con   sessionStorage.getItem('token'))
+      this.auth = data['auth'];
+      var userId = data['userId'];
+      var username = data['firstname'] + " " +  data['lastname'];
+      var token =  data['token'];
+      this.message = data['message'];
+      console.log("auth:" + this.auth + "   token:" + token);
+      sessionStorage.setItem('token', JSON.stringify(token));
+      sessionStorage.setItem('username', JSON.stringify(username));
+      sessionStorage.setItem('userId', JSON.stringify(userId));
+      // se recupera con   sessionStorage.getItem('token'))
     });
     var root = "/sellers";
     this.router.navigate([root]);

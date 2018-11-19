@@ -1,8 +1,12 @@
 <mat-card ng-if=isAdmin>
   <mat-grid-list cols="3" rowHeight="10:1">
     <mat-grid-tile>
-      <mat-card-title>Bienvenido</mat-card-title>
+      <mat-card-title>Bienvenido {{username}}</mat-card-title>
     </mat-grid-tile>
+    <!-- 1- chaquear si es admin mostrar para "seleccionar un vendedor" sino no mostrar
+      2- una vez elegido el vendedor no redirigir a view order.. mostrar algo asi como
+         " Usted esta operando en representacion del vendedor tal.."
+        3- que las ordenes se muestren si vas a "Mis pedidos"-->
     <mat-grid-tile>
       <p>Usted a iniciado sesión como usuario Admin</p>
     </mat-grid-tile>

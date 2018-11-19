@@ -14,25 +14,35 @@ export class SellerComponent implements OnInit {
   sellers: Seller[];
   isAdmin: boolean;
   selectedSeller: string;
+  username : string;
 
   constructor(private router: Router, private userService: UserService, private dataService: DataService) { }
 
   ngOnInit() {
     // call service to retrieve client by seller
-
-    this.isAdmin = true;
-    this.userService.getSellers().subscribe((data: Seller[]) => {
-      //salon
-      this.sellers = data;
-      console.log("call sellers works... " + this.sellers)
+    console.log("entro al seller oninit")
+    var userId = sessionStorage.getItem('userId');
+    this.username = sessionStorage.getItem('username');
+     this.userService.getSelleById(userId).subscribe((seller: Seller) => {
+      console.log(seller.id + " " + seller.nom)
+      if (seller) {
+        this.isAdmin = false;
+        sessionStorage.setItem('sellerId', JSON.stringify(seller.id));
+      } else {
+        this.isAdmin = true;
+        this.userService.getSellers().subscribe((sellers: Seller[]) => {
+          //salon
+          this.sellers = sellers;
+          console.log("call sellers works... " + this.sellers)
+        });
+      }
     });
-
-
   }
   onClick(ven: any) {
     console.log("click works ... ");
-    this.selectedSeller = ven;
-    this.dataService.setSellerId(this.selectedSeller);
+    //this.selectedSeller = ven;
+    //this.dataService.setSellerId(this.selectedSeller);
+    sessionStorage.setItem('sellerId', JSON.stringify(ven));
     var root = "orders/view";
     this.router.navigate([root]);
   }

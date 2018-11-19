@@ -24,10 +24,10 @@ export class ViewOrdersComponent implements OnInit {
   ngOnInit() {
     // call service to retrieve orders by seller
     // let sellerId = this.route.snapshot.paramMap.get('sellerId');
-    let sellerId = this.dataservice.getSellerId();
-    sessionStorage.setItem('sellerId', JSON.stringify(sellerId));
+   // let sellerId = this.dataservice.getSellerId();
+    //sessionStorage.setItem('sellerId', JSON.stringify(sellerId));
+    let sellerId = sessionStorage.getItem('sellerId');
     console.log('view orders...' + sellerId);
-
 
     this.ordersService.getOrders(sellerId).subscribe((data: Order[]) => {
       console.log('ViewOrdersComponent orders...' + data);

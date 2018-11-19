@@ -14,6 +14,7 @@ import { Cliente, Seller } from '../models/models';
 export class UserService {
   ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
   //ROOT_URL = 'http://lumasoft.dyndns.org:8000/api';
+  
   LOGIN_URL = '/login';
   CHANGE_PASS_URL = "/changepass"
   // constructor(private store: Store<AppState>) { }
@@ -57,5 +58,10 @@ export class UserService {
     "oldpassword":oldpassword
     }
  return this.httpClient.put(this.ROOT_URL + this.CHANGE_PASS_URL, changeForm, this.httpOptions);
+}
+
+getSelleById(userId : string) {
+  console.log("user: " +userId)
+  return this.httpClient.get<Seller>(this.ROOT_URL + '/vend/'+ userId);
 }
 }
