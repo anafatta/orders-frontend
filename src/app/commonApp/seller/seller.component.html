@@ -7,8 +7,9 @@
       2- una vez elegido el vendedor no redirigir a view order.. mostrar algo asi como
          " Usted esta operando en representacion del vendedor tal.."
         3- que las ordenes se muestren si vas a "Mis pedidos"-->
+    <div id="test" *ngIf="isAdmin">    
     <mat-grid-tile>
-      <p>Usted a iniciado sesión como usuario Admin</p>
+      <p>{{message}}</p>
     </mat-grid-tile>
     <mat-grid-tile>
       <mat-form-field>
@@ -20,6 +21,7 @@
       </mat-form-field>
 
     </mat-grid-tile>
+  </div>
   </mat-grid-list>
 </mat-card>
 <mat-card>

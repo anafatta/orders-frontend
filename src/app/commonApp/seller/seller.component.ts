@@ -15,36 +15,51 @@ export class SellerComponent implements OnInit {
   isAdmin: boolean;
   selectedSeller: string;
   username : string;
+  message : string;
+  userId : string;
 
   constructor(private router: Router, private userService: UserService, private dataService: DataService) { }
 
   ngOnInit() {
-    // call service to retrieve client by seller
-    console.log("entro al seller oninit")
-    var userId = sessionStorage.getItem('userId');
-    this.username = sessionStorage.getItem('username');
-     this.userService.getSelleById(userId).subscribe((seller: Seller) => {
-      console.log(seller.id + " " + seller.nom)
-      if (seller) {
-        this.isAdmin = false;
-        sessionStorage.setItem('sellerId', JSON.stringify(seller.id));
-      } else {
-        this.isAdmin = true;
-        this.userService.getSellers().subscribe((sellers: Seller[]) => {
-          //salon
-          this.sellers = sellers;
-          console.log("call sellers works... " + this.sellers)
-        });
-      }
-    });
+    this.getVendId().then(() => {
+      this.userService.getSelleById(this.userId).subscribe((seller: Seller) => {
+        console.log(seller.id + " " + seller.nom)
+        if (seller) {
+          this.isAdmin = false;
+          sessionStorage.setItem('sellerId', JSON.stringify(seller.id));
+        } else {
+          this.isAdmin = true;
+          this.message = "Usted a iniciado sesión como usuario Admin";
+          this.userService.getSellers().subscribe((sellers: Seller[]) => {
+            //salon
+            this.sellers = sellers;
+            console.log("call sellers works... " + this.sellers)
+          });
+        }
+      });
+    })
   }
+  
+getVendId() {
+  return new Promise(resolve => {
+    setTimeout(() =>
+     {
+      this.userId = sessionStorage.getItem('userId');
+      this.username = sessionStorage.getItem('username');
+      resolve()
+    }
+    , 1000)
+  })
+}
+
   onClick(ven: any) {
     console.log("click works ... ");
     //this.selectedSeller = ven;
     //this.dataService.setSellerId(this.selectedSeller);
     sessionStorage.setItem('sellerId', JSON.stringify(ven));
-    var root = "orders/view";
-    this.router.navigate([root]);
+    this.message = "Usted esta operando en representacion del vendedor: " + ven.nom;
+/*     var root = "orders/view";
+    this.router.navigate([root]); */
   }
 
 }

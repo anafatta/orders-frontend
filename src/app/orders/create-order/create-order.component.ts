@@ -45,7 +45,8 @@ export class CreateOrderComponent implements OnInit {
     this.isOpen = true;
     this.isOpen1 = false;
     this.selectedItems = [];
-    this.sellerId = this.dataservice.getSellerId();
+    //this.sellerId = this.dataservice.getSellerId();
+    this.sellerId = sessionStorage.getItem('sellerId');
     this.userService.getClientsBySeller(this.sellerId).subscribe((data: Cliente[]) => {
       this.clients = data;
 

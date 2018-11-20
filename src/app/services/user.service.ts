@@ -41,7 +41,7 @@ export class UserService {
     return this.httpClient.get<Cliente>(this.ROOT_URL + '/clientes/id/' + id);
   }
 
- login(user: string, password: string) {
+ login(user: string, password: string){
    console.log("user: " +user + "     password:  " + password)
    var login = {
     username: user,

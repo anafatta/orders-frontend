@@ -10,67 +10,53 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  auth : string;
-  message : string;
+  auth: string;
+  message: string;
 
-  constructor(private router: Router,  private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
   }
 
   login(user: string, password: string) {
-     this.userService.login(user, password)
-        .subscribe((data: any) => {
-          console.log("data:" + data);
-            this.auth = data['auth'];
-            var userId = data['userId'];
-            var username = data['firstname'] + " " +  data['lastname'];
-            var token =  data['token'];
-            this.message = data['message'];
-            console.log("auth:" + this.auth + "   token:" + token + "  username  " + username +  "  userId   " + userId);
-            sessionStorage.setItem('token', JSON.stringify(token));
-            sessionStorage.setItem('username', JSON.stringify(username));
-            sessionStorage.setItem('userId', JSON.stringify(userId));
-            // se recupera con   sessionStorage.getItem('token'))
-            
-        }); 
-        var root = "/sellers";
-        this.router.navigate([root]);
+    console.log("login:");
+    if(!user){
+      this.message = "Ingrese el usuario"
+      console.log(this.message);
+      return;
+    }
+    if(!password){
+      this.message = "Ingrese la contraseña"
+      console.log(this.message);
+      return;
+    }
+    this.userService.login(user, password)
+      .subscribe((data: any) => {
+        console.log("data:" + data);
+        if(data['auth'] == "false"){
+          this.message = data['message'];
+          console.log(this.message);
+          return;
+        }
+        this.auth = data['auth'];
+        var userId = data['userId'];
+        var username = data['firstname'] + " " + data['lastname'];
+        var token = data['token'];
+        this.message = data['message'];
+        console.log("auth:" + this.auth + "   token:" + token + "  username  " + username + "  userId   " + userId);
+        sessionStorage.setItem('token', JSON.stringify(token));
+        sessionStorage.setItem('username', JSON.stringify(username));
+        sessionStorage.setItem('userId', JSON.stringify(userId));
+        // se recupera con   sessionStorage.getItem('token'))
+      });
+     var root = "/sellers";
+     this.router.navigate([root]);
 
-/*         this.doAsyncTask(user, password).then(() => 
-        { 
-          console.log("Task Complete!");
-         var root = "/sellers";
-         this.router.navigate([root]);
-        }); */
   }
 
-/*   doAsyncTask(user:string, password:string) {
-    var promise = new Promise((resolve, reject) => {
-      this.userService.login(user, password)
-        .subscribe((data: any) => {
-          console.log("data:" + data);
-            this.auth = data['auth'];
-            var userId = data['userId'];
-            var username = data['firstname'] + " " +  data['lastname'];
-            var token =  data['token'];
-            this.message = data['message'];
-            console.log("auth:" + this.auth + "   token:" + token + "  username  " + username +  "  userId   " + userId);
-            sessionStorage.setItem('token', JSON.stringify(token));
-            sessionStorage.setItem('username', JSON.stringify(username));
-            sessionStorage.setItem('userId', JSON.stringify(userId));
-            // se recupera con   sessionStorage.getItem('token'))
-            if(data) {
-               resolve();
-            } else {
-              reject();
-            }
-        })
-      });
-    return promise;
-  } */
 
-  changePass(){
+
+  changePass() {
     var root = "/changepassword";
     this.router.navigate([root]);
   }

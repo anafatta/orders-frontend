@@ -18,8 +18,12 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  changePassword(user: string, oldpassword: string, newpassword: string ){
+  changePassword(user: string, oldpassword: string, newpassword: string, duplicatedPass: string){
     // ADD duplicatedPass
+    if(newpassword != duplicatedPass) {
+      this.message = 'La nueva password no coincide'
+      return;
+    }
     this.userService.changePassword(user, oldpassword, newpassword)
     .subscribe((data: any) => {
       this.auth = data['auth'];
