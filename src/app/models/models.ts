@@ -115,8 +115,11 @@ export interface DetalleArticulo {
 }
 
 
-
 export interface Flete {
   id: number;
   nom: string;
+}
+
+export interface Precio {
+  precio: number;
 }

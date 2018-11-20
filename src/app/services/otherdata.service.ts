@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Expreso, Provincia } from '../models/models';
+import { Expreso, Provincia, Precio } from '../models/models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -12,6 +12,7 @@ export class OtherdataService {
   Get_Expreso_Id = '/expresos/id/';
   Get_Provincia = '/provincia';
   Get_Provincia_Id = '/provincia/id/';
+  Get_Precio_id = '/precio/id_articulo/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -36,4 +37,11 @@ export class OtherdataService {
   getProvincia(id): Observable<Provincia[]> {
     return this.httpClient.get<Provincia[]>(this.ROOT_URL + this.Get_Provincia_Id + id);
   }
+  getPrecio(id_articulo, id_conpag, id_cliente): Observable<Precio> {
+    return this.httpClient.get<Precio>(this.ROOT_URL +
+          this.Get_Precio_id + id_articulo +
+          '/id_conpag/' + id_conpag +
+          '/id_cliente/' + id_cliente);
+  }
+
 }

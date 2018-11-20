@@ -37,7 +37,7 @@ export class ViewCustomersDetailsComponent implements OnInit {
       let address = this.customersDetail.address[0].prov;
       this.odService.getProvincia(address).subscribe((datax: Provincia[]) => {
         this.provincia = datax;
-        console.log('La prov es ' + this.provincia.nom);
+        // console.log('La prov es ' + this.provincia.nom);
       });
     });
 

@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { DataService } from '../../services/data.service';
-import { OrdersService } from '../../services/orders.service';
+import { OrdersService, } from '../../services/orders.service';
+import { OtherdataService } from '../../services/otherdata.service';
 import { SidenavService } from '../../services/sidenav.service';
 
 import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum, OrderDetail, Seller } from '../../models/models';
+import { Precio } from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -42,6 +44,7 @@ export class CreateOrderComponent implements OnInit {
     private dataservice: DataService,
     private userService: UserService,
     private orderService: OrdersService,
+    private otherService: OtherdataService,
     private sidenavend: SidenavService) { }
 
   ngOnInit() {
@@ -74,7 +77,7 @@ export class CreateOrderComponent implements OnInit {
     console.log('Selected value');
     console.log(event);
     this.clientId = event;
-    //this.clientId = '621';
+    // this.clientId = '621';
     this.userService.getClient(this.clientId).subscribe((data: Cliente) => {
       this.selectedClient = data;
       this.selectedAddress = this.selectedClient.address[0];
@@ -98,6 +101,10 @@ export class CreateOrderComponent implements OnInit {
       } else {
         this.hasVariantes = false;
       }
+      this.otherService.getPrecio(this.articulo.art_id, 1, this.selectedClient.id).subscribe((data: Precio ) => {
+        this.price = data.precio;
+        console.log('Precio = ' + this.price)
+      });
       console.log('call getArticuloById works... ' + this.articulo.art_id + ' ' + this.variantes.length)
     });
   }

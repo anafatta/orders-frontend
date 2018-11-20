@@ -82,7 +82,7 @@ export class EditCustomersDetailsComponent implements OnInit {
         localidad: ['', Validators.required],
         codpos: ['', Validators.required],
         prov: [''],
-        expreso: [''],
+        expreso: ['1'],
       })
     );
     // this.addressForm.patchValue({ dir: '', localidad: '', codpos: '', prov: '', expreso: '1' });
