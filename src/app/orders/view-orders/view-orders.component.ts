@@ -40,9 +40,8 @@ export class ViewOrdersComponent implements OnInit {
 
   ngOnInit() {
     // call service to retrieve orders by seller
-    const salesman = JSON.parse(localStorage.getItem('currentUser'));
-    const sellerId = salesman.userId;
-    this.ordersService.getOrders(sellerId).subscribe((data: Order[]) => {
+    const salesman = JSON.parse(localStorage.getItem('sellerId'));
+    this.ordersService.getOrders(salesman.id).subscribe((data: Order[]) => {
       this.ordersData = data;
       this.dataSource.data = this.ordersData;
       // error => this.error = error

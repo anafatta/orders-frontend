@@ -18,8 +18,10 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   getSellers(): Observable<Seller[]> {
-
     return this.httpClient.get<Seller[]>(this.ROOT_URL + '/vend');
+  }
+  getSeller(id: any): Observable<Seller[]> {
+    return this.httpClient.get<Seller[]>(this.ROOT_URL + '/vend/' + id);
   }
 
   getClientsBySeller(id: string): Observable<Cliente[]> {

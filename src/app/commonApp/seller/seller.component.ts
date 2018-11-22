@@ -37,5 +37,8 @@ export class SellerComponent implements OnInit {
   get user(): any {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
+  get seller(): any {
+    return JSON.parse(localStorage.getItem('sellerId'));
+  }
 }
 

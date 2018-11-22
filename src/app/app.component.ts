@@ -1,7 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { SidenavService } from './services/sidenav.service';
 import { MatSidenav } from '@angular/material';
-
+import { UserService } from './services/user.service';
+import { Seller } from './models/models';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +13,26 @@ import { MatSidenav } from '@angular/material';
 export class AppComponent implements OnInit {
   title = 'Simsiroglu Sales System';
   imgName: string;
+  sellerData: Seller[];
   @ViewChild('sidenav') public sidenavend: MatSidenav;
 
-  constructor(private sidenavService: SidenavService) {
+  constructor(private sidenavService: SidenavService,
+    private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.sidenavService.setSidenav(this.sidenavend);
+    const salesman = JSON.parse(localStorage.getItem('currentUser'));
+    this.userService.getSeller(salesman.userId).subscribe((data: Seller[]) => {
+      this.sellerData = data;
+      localStorage.setItem('sellerId', JSON.stringify(this.sellerData));
+    });
   }
   get user(): any {
     return JSON.parse(localStorage.getItem('currentUser'));
+  }
+  get seller(): any {
+    return JSON.parse(localStorage.getItem('sellerId'));
   }
 
 }

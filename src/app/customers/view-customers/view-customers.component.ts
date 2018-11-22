@@ -8,16 +8,19 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { OtherdataService } from 'src/app/services/otherdata.service';
+import { UserService } from 'src/app/services/user.service';
 
 export interface CustomersList {
   id: number;
   nom: string;
-  // button: string;
 }
 export interface Provincia {
   id: number;
   nom: string;
-  // button: string;
+}
+export interface Seller {
+  id: number;
+  nom: string;
 }
 
 @Component({
@@ -30,6 +33,7 @@ export class ViewCustomersComponent implements OnInit {
   customers: Cliente[];
   provincia: Provincia[];
   customersData = null;
+  sellerData: Seller[];
   displayedColumns: string[] = ['id', 'nom', 'button'];
   dataSource = new MatTableDataSource(this.customers);
   public services;
@@ -38,6 +42,7 @@ export class ViewCustomersComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private customersService: CustomersService,
+    private userService: UserService,
     private odService: OtherdataService) { }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -45,10 +50,9 @@ export class ViewCustomersComponent implements OnInit {
 
   ngOnInit() {
     // call service to retrieve customers by seller
-    const salesman = JSON.parse(localStorage.getItem('currentUser'));
-    const sellerId = salesman.userId;
-    console.log('El vendedor es ' + sellerId);
-    this.customersService.getCustomers(sellerId).subscribe((data: Cliente[]) => {
+    const salesman = JSON.parse(localStorage.getItem('sellerId'));
+    console.log('Este vendedor es ' + salesman.id);
+    this.customersService.getCustomers(salesman.id).subscribe((data: Cliente[]) => {
       this.customersData = data;
       this.dataSource.data = this.customersData;
     });
@@ -74,8 +78,8 @@ export class CustomersSource extends DataSource<any> {
     super();
   }
   connect(collectionViewer: CollectionViewer): Observable<CustomersList[]> {
-    const salesman = JSON.parse(localStorage.getItem('currentUser'));
-    const sellerId = salesman.userId;
+    const salesman = JSON.parse(localStorage.getItem('sellerId'));
+    const sellerId = salesman.id;
     console.log('view customers...' + sellerId);
     return this.customersService.getCustomers(sellerId);
     // return this.customersSubject.asObservable();

@@ -1,7 +1,7 @@
 
 export interface Seller {
   id: number;
-  nom: String;
+  nom: string;
 }
 export interface ImgInfo {
   codigo: string;

@@ -34,8 +34,8 @@ export class EditCustomersDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const salesman = JSON.parse(localStorage.getItem('currentUser'));
-    this.sellerId = salesman.userId;
+    const salesman = JSON.parse(localStorage.getItem('sellerId'));
+    this.sellerId = salesman.id;
     this.EditCustomerForm = this.fb.group({
       id: [''],
       nom: ['', Validators.required],
