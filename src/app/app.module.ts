@@ -11,7 +11,7 @@ import { OrdersModule } from './orders/orders.module';
 import { CommonAppModule } from './commonApp/commonApp.module';
 import { PagenotfoundComponent } from './commonApp/pagenotfound/pagenotfound.component';
 import { OrdersService } from './services/orders.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomersModule } from './customers/customers.module';
@@ -20,7 +20,12 @@ import { OtherdataService } from './services/otherdata.service';
 import { ImageService } from './services/image.service';
 import { SidenavService } from './services/sidenav.service';
 import { SpeedDialFabComponent } from './commonApp/speed-dial-fab/speed-dial-fab.component';
-
+import { AuthenticationService } from './services/authentication.service';
+import { AlertService } from './services/alert.service';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { GlobalApp } from './_helpers/global';
+import { AlertsComponent } from './commonApp/alerts/alerts.component';
 
 
 const appRoutes: Routes = [
@@ -30,7 +35,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    SpeedDialFabComponent
+    SpeedDialFabComponent,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,12 @@ const appRoutes: Routes = [
     CustomersService,
     ImageService,
     SidenavService,
-    OtherdataService
+    OtherdataService,
+    AuthenticationService,
+    AlertService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    GlobalApp
   ],
   bootstrap: [AppComponent]
 })

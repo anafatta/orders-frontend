@@ -19,7 +19,8 @@ export class SellerComponent implements OnInit {
 
   ngOnInit() {
     // call service to retrieve client by seller
-
+    const salesman = JSON.parse(localStorage.getItem('currentUser'));
+    console.log('El vendedor es: ' + salesman.lastname);
     this.isAdmin = true;
     this.userService.getSellers().subscribe((data: Seller[]) => {
       this.sellers = data;
@@ -33,6 +34,8 @@ export class SellerComponent implements OnInit {
     var root = 'orders/view';
     this.router.navigate([root]);
   }
-
+  get user(): any {
+    return JSON.parse(localStorage.getItem('currentUser'));
+  }
 }
 

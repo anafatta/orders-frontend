@@ -9,7 +9,7 @@ import { MatSidenav } from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Simsiroglu Sales System';
   imgName: string;
   @ViewChild('sidenav') public sidenavend: MatSidenav;
@@ -19,8 +19,9 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.sidenavService.setSidenav(this.sidenavend);
-    this.imgName = localStorage.getItem('img');
-    console.log('Lo guardado es ' + this.imgName);
   }
-  
+  get user(): any {
+    return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
 }

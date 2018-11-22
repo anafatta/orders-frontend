@@ -38,25 +38,10 @@ export class ViewOrdersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-/*  ngOnInit() {
-    // call service to retrieve orders by seller
-    // let sellerId = this.route.snapshot.paramMap.get('sellerId');
-    let sellerId = this.dataservice.getSellerId();
-    sessionStorage.setItem('sellerId', JSON.stringify(sellerId));
-    console.log('view orders...' + sellerId);
-
-
-    this.ordersService.getOrders(sellerId).subscribe((data: Order[]) => {
-      console.log('ViewOrdersComponent orders...' + data);
-      this.orders = data;
-      for (let order of this.orders)
-        console.log("address " + order.address + "fem" + order.fem)
-    })
-      ;
-  } */
   ngOnInit() {
     // call service to retrieve orders by seller
-    const sellerId = '37';
+    const salesman = JSON.parse(localStorage.getItem('currentUser'));
+    const sellerId = salesman.userId;
     this.ordersService.getOrders(sellerId).subscribe((data: Order[]) => {
       this.ordersData = data;
       this.dataSource.data = this.ordersData;

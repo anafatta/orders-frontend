@@ -45,7 +45,9 @@ export class ViewCustomersComponent implements OnInit {
 
   ngOnInit() {
     // call service to retrieve customers by seller
-    const sellerId = '37';
+    const salesman = JSON.parse(localStorage.getItem('currentUser'));
+    const sellerId = salesman.userId;
+    console.log('El vendedor es ' + sellerId);
     this.customersService.getCustomers(sellerId).subscribe((data: Cliente[]) => {
       this.customersData = data;
       this.dataSource.data = this.customersData;
@@ -72,14 +74,15 @@ export class CustomersSource extends DataSource<any> {
     super();
   }
   connect(collectionViewer: CollectionViewer): Observable<CustomersList[]> {
-    const sellerId = '37';
+    const salesman = JSON.parse(localStorage.getItem('currentUser'));
+    const sellerId = salesman.userId;
     console.log('view customers...' + sellerId);
     return this.customersService.getCustomers(sellerId);
     // return this.customersSubject.asObservable();
   }
   disconnect(collectionViewer: CollectionViewer): void {
-    //this.customersService.complete();
-    //this.loadingSubject.complete();
+    // this.customersService.complete();
+    // this.loadingSubject.complete();
   }
 }
 

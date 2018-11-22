@@ -9,7 +9,6 @@ mat-card {
 .login .mat-form-field {
   min-width: 100% !important;
 }
-
 @media only screen and (max-width: 768px) {
   .login {
     max-width: 90%;

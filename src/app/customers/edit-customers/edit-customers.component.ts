@@ -34,7 +34,8 @@ export class EditCustomersDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sellerId = '37';
+    const salesman = JSON.parse(localStorage.getItem('currentUser'));
+    this.sellerId = salesman.userId;
     this.EditCustomerForm = this.fb.group({
       id: [''],
       nom: ['', Validators.required],
@@ -44,7 +45,6 @@ export class EditCustomersDetailsComponent implements OnInit {
       salesman: this.sellerId,
     });
     const customerid = this.route.snapshot.paramMap.get('id');
-    console.log('el id es ' + customerid);
     this.service.getCustomer(customerid).subscribe((data: Cliente) => {
       this.customersDetail = data;
       this.initForm();

@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const authRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,7 +15,9 @@ const authRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(authRoutes),
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations:
     [LoginComponent,

@@ -52,8 +52,8 @@ export class CreateCustomersComponent implements OnInit {
     this.isOpen = true;
     this.isOpen1 = false;
     this.selectedItems = [];
-    // this.sellerId = '37';
-    this.sellerId = this.dataservice.getSellerId();
+    const salesman = JSON.parse(localStorage.getItem('currentUser'));
+    this.sellerId = salesman.userId;
     this.initForm();
     this.odService.getProvincias().subscribe((data: Provincia[]) => {
       this.provincias = data;

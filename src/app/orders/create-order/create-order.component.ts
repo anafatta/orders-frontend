@@ -101,7 +101,7 @@ export class CreateOrderComponent implements OnInit {
       } else {
         this.hasVariantes = false;
       }
-      this.otherService.getPrecio(this.articulo.art_id, 1, this.selectedClient.id).subscribe((data: Precio ) => {
+      this.otherService.getPrecio(this.articulo.art_id, 1, this.selectedClient.id).subscribe((data: Precio) => {
         this.price = data.precio;
         console.log('Precio = ' + this.price)
       });
@@ -140,7 +140,7 @@ export class CreateOrderComponent implements OnInit {
 
   addCount(i: any, selectedCount: any) {
     this.selectedItems[i].can_ped = selectedCount;
-    console.log('cantidad pedida=' + this.selectedItems[i].can_ped + '   index ' + i)
+    console.log('cantidad pedida=' + this.selectedItems[i].can_ped + '   index ' + i);
 
   }
 
@@ -149,7 +149,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   submitOrderDetail() {
-    console.log('precio:' + this.price)
+    console.log('precio:' + this.price);
 
     for (let item of this.selectedItems) {
       item.pre_ped = this.price;
@@ -175,11 +175,11 @@ export class CreateOrderComponent implements OnInit {
 
     this.orderService.submitOrder(order).subscribe(
       (data: OrderDetail) => {
-      console.log('Order Sent' + order);
-    },
-    (err) => {
-      console.log('Failure');
-    });
+        console.log('Order Sent' + order);
+      },
+      (err) => {
+        console.log('Failure');
+      });
     // var root = 'orders/view';
     // this.router.navigate([root]);
   }
