@@ -1,0 +1,41 @@
+<mat-card class="login">
+  <mat-card-title>Iniciar sesión</mat-card-title>
+  <form [formGroup]="cpForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput type="email" placeholder="Usuario" dividerColor="accent" formControlName="username" #username
+        required autofocus [ngClass]="{ 'is-invalid': submitted && f.username.errors }" autocomplete="username" />
+      <mat-error *ngIf="submitted && f.username.errors">
+        <div *ngIf="f.username.errors.required">Debe ingresar su usuario</div>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Contraseña actual" dividerColor="accent" formControlName="oldpassword"
+        #oldpassword required [ngClass]="{ 'is-invalid': submitted && f.oldpassword.errors }" autocomplete="current-password">
+      <mat-error *ngIf="submitted && f.oldpassword.errors">
+        <div *ngIf="f.oldpassword.errors.required">Debe ingresar su clave actual</div>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Contraseña nueva" dividerColor="accent" formControlName="newpassword"
+        #newpassword required [ngClass]="{ 'is-invalid': submitted && f.newpassword.errors }">
+      <mat-error *ngIf="submitted && f.newpassword.errors">
+        <div *ngIf="f.newpassword.errors.required">Debe ingresar su clave nueva</div>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Reingrese la contraseña nueva" dividerColor="accent" formControlName="duplicatedpassword"
+        #duplicatedpassword required [ngClass]="{ 'is-invalid': submitted && f.duplicatedpassword.errors }">
+      <mat-error *ngIf="submitted && f.duplicatedpassword.errors">
+        <div *ngIf="f.duplicatedpassword.errors.required">Ingrese de nuevo la nueva clave</div>
+      </mat-error>
+      <mat-error *ngIf="f.duplicatedpassword?.errors?.nomatch">Las nuevas contraseñas no coinciden, reintente</mat-error>
+    </mat-form-field>
+    <mat-card-actions align="middle">
+      <button mat-raised-button color="accent" type="submit">Guardar clave</button>
+    </mat-card-actions>
+  </form>
+  <p>
+    {{cpForm.value | json}}
+    {{cpForm.errors | json}}
+  </p>
+</mat-card>

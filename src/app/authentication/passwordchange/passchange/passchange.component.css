@@ -1,0 +1,17 @@
+mat-card {
+    width: 90%;
+    margin: 2em auto;
+    text-align: left;
+  }
+  .login {
+      max-width: 350px;
+    }
+  .login .mat-form-field {
+    min-width: 100% !important;
+  }
+  @media only screen and (max-width: 768px) {
+    .login {
+      max-width: 90%;
+    }
+  }
+  
