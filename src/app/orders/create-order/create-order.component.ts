@@ -96,7 +96,7 @@ export class CreateOrderComponent implements OnInit {
     return user ? user.codnom : undefined;
   }
   displayFnArt(art?: Art): string | undefined {
-    return art ? art.codnom : undefined;
+    return art ? art.codfac : undefined;
   }
 
   // Autocomplete filter
@@ -106,7 +106,7 @@ export class CreateOrderComponent implements OnInit {
   }
   private _filterArt(value: string): Art[] {
     const filterValueArt = value;
-    return this.articulos.filter(option => option.codnom.toLowerCase().includes(filterValueArt));
+    return this.articulos.filter(option => option.codfac.toLowerCase().includes(filterValueArt));
   }
   // Autocomplete filter
   onClientSelected(event: any) {

@@ -7,10 +7,12 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { SellerComponent } from './seller/seller.component';
 import { MaterialModule } from '../material.module';
+import { MessagesComponent } from './messages/messages.component';
 
 const commonAppRoutes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'sellers', component: SellerComponent }
+  { path: 'sellers', component: SellerComponent },
+  { path: 'messages', component: MessagesComponent }
 ];
 
 
@@ -26,13 +28,15 @@ const commonAppRoutes: Routes = [
     NavbarComponent,
     HomepageComponent,
     PagenotfoundComponent,
-    SellerComponent
+    SellerComponent,
+    MessagesComponent
   ],
   exports: [
     NavbarComponent,
     HomepageComponent,
     PagenotfoundComponent,
-    SellerComponent
+    SellerComponent,
+    MessagesComponent
   ]
 })
 export class CommonAppModule { }

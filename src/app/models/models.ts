@@ -126,10 +126,26 @@ export interface Flete {
 export interface Precio {
   precio: number;
 }
+
 // Condición de pago
 export interface CondicionPago {
   id: number;
   nom: string;
   descuento: number;
   incremento: number;
+
+}
+export interface User {
+  nro: number;
+  firstname: string;
+  lastname: string;
+
+}
+export interface Message {
+  _id: number;
+  fromUser: string;
+  toUser: string;
+  message: string;
+  createdD: Date;
+
 }
