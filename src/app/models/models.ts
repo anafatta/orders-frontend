@@ -123,3 +123,9 @@ export interface Flete {
 export interface Precio {
   precio: number;
 }
+
+export interface User {
+  nro: number;
+  firstname: string;
+  lastname: string;
+}

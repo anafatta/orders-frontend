@@ -1,0 +1,25 @@
+<mat-grid-list cols="3" rowHeight="2:2">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="login">
+      <mat-card-title>Mensajes</mat-card-title>
+      <form [formGroup]="messageForm" (ngSubmit)="send()">
+        <mat-form-field>
+            <mat-select dividerColor="accent" placeholder="Para" formControlName="to" data-live-search="true">
+            <mat-option *ngFor="let user of users" [value]="user.nro">
+              {{user.firstname}} {{user.lastname}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput type="text" placeholder="Mensaje" dividerColor="accent" formControlName="message"
+            #message required cdkTextareaAutosize></textarea>
+        </mat-form-field>
+        <mat-card-actions align="middle">
+          <button mat-raised-button color="accent" (submit)="send();">Enviar</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

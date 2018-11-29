@@ -42,6 +42,11 @@
       </button>
       <mat-divider></mat-divider>
       <button mat-button (click)="sidenavmenu.close()">
+      <button mat-button>
+        <mat-icon>timeline</mat-icon>
+        <span routerLink='/messages'>Mensajes</span>
+      </button>
+      <button mat-button>
         <mat-icon>lock</mat-icon>
         <span class="nav-link" routerLink="/login" *ngIf="user" (click)="logOut()">Logout</span>
         <span class="nav-link" routerLink="/" *ngIf="!user">Login</span>
