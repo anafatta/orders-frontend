@@ -12,6 +12,7 @@ export class AuthenticationService {
   };
   ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
   Auth = '/login';
+  ChangePass = '/changepass';
 
   login(username: string, password: string) {
     return this.http.post<any>(this.ROOT_URL + this.Auth, { username: username, password: password })
@@ -25,7 +26,9 @@ export class AuthenticationService {
         return user;
       }));
   }
-
+  changePassword(user: string, oldpassword: string, newpassword: string) {
+    return this.http.put<any>(this.ROOT_URL + this.ChangePass, { username: user, newpassword: newpassword, oldpassword: oldpassword });
+  }
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
