@@ -21,9 +21,11 @@ export class SellerComponent implements OnInit {
     // call service to retrieve client by seller
     const salesman = JSON.parse(localStorage.getItem('currentUser'));
     console.log('El vendedor es: ' + salesman.lastname);
-    const isSeller = JSON.parse(localStorage.getItem('sellerId'))
+    const isSeller = JSON.parse(localStorage.getItem('sellerId'));
+    console.log('El vendedor es: ' + isSeller);
     if (!isSeller) {
       this.isAdmin = true;
+      console.log(this.isAdmin);
       this.userService.getSellers().subscribe((data: Seller[]) => {
         this.sellers = data;
         console.log(this.sellers);

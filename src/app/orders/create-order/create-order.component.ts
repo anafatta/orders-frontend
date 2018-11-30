@@ -10,7 +10,12 @@ import { Precio } from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
-
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+export interface User {
+  nom: string;
+}
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
@@ -36,16 +41,15 @@ export class CreateOrderComponent implements OnInit {
   isOpen1: boolean;
   conven: string;
   observaciones: string;
+  myControl = new FormControl();
+  filteredOptions: Observable<Cliente[]>;
   /*Ligthbox */
   myImgUrl: string = 'https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';
 
   constructor(
-    private router: Router,
-    private dataservice: DataService,
     private userService: UserService,
     private orderService: OrdersService,
-    private otherService: OtherdataService,
-    private sidenavend: SidenavService) { }
+    private otherService: OtherdataService) { }
 
   ngOnInit() {
     this.isOpen = true;
@@ -72,14 +76,20 @@ export class CreateOrderComponent implements OnInit {
     this.orderService.getArticulos().subscribe((data: Art[]) => {
       this.articulos = data;
     });
-
+    // Autocomplete filter
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(null),
+        map(value => value ? this._filter(value) : this.clients)
+      );
   }
-  // toggleActive:boolean = false;
-  /*sidenavopen(data) {
-    this.sidenavend.open();
-    localStorage.setItem('img', img);
-    console.log(img);
-  }*/
+  displayFn(user?: Cliente): string | undefined {
+    return user ? user.nom : undefined;
+  }
+  private _filter(value: string): Cliente[] {
+    const filterValue = value.toLowerCase();
+    return this.clients.filter(option => option.nom.toLowerCase().includes(filterValue));
+  }
   onClientSelected(event: any) {
     console.log('Selected value');
     console.log(event);
@@ -95,7 +105,6 @@ export class CreateOrderComponent implements OnInit {
   }
 
   onCondVentSelected() {
-
   }
 
   onArtSelected(event: any) {
