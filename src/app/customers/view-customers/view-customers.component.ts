@@ -50,12 +50,20 @@ export class ViewCustomersComponent implements OnInit {
 
   ngOnInit() {
     // call service to retrieve customers by seller
-    const salesman = JSON.parse(localStorage.getItem('sellerId'));
-    console.log('Este vendedor es ' + salesman.id);
-    this.customersService.getCustomers(salesman.id).subscribe((data: Cliente[]) => {
-      this.customersData = data;
-      this.dataSource.data = this.customersData;
-    });
+    if (localStorage.getItem('sellerId')) {
+      const salesman = JSON.parse(localStorage.getItem('sellerId'));
+      this.customersService.getCustomers(salesman.id).subscribe((data: Cliente[]) => {
+        this.customersData = data;
+        this.dataSource.data = this.customersData;
+      });
+    }
+    if (localStorage.getItem('sellerIdMaster')) {
+      const salesman = JSON.parse(localStorage.getItem('sellerIdMaster'));
+      this.customersService.getCustomers(salesman).subscribe((data: Cliente[]) => {
+        this.customersData = data;
+        this.dataSource.data = this.customersData;
+      });
+    }
 
     this.odService.getProvincia(this.customersData.prov).subscribe((data: Provincia[]) => {
       this.provincia = data;
@@ -78,11 +86,16 @@ export class CustomersSource extends DataSource<any> {
     super();
   }
   connect(collectionViewer: CollectionViewer): Observable<CustomersList[]> {
-    const salesman = JSON.parse(localStorage.getItem('sellerId'));
-    const sellerId = salesman.id;
-    console.log('view customers...' + sellerId);
-    return this.customersService.getCustomers(sellerId);
-    // return this.customersSubject.asObservable();
+    if (localStorage.getItem('sellerId')) {
+      const salesman = JSON.parse(localStorage.getItem('sellerId'));
+      const sellerId = salesman.id;
+      return this.customersService.getCustomers(sellerId);
+    }
+    if (localStorage.getItem('sellerIdMaster')) {
+      const salesman = JSON.parse(localStorage.getItem('sellerIdMaster'));
+      const sellerId = salesman;
+      return this.customersService.getCustomers(sellerId);
+    }
   }
   disconnect(collectionViewer: CollectionViewer): void {
     // this.customersService.complete();

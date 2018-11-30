@@ -32,6 +32,7 @@ export class SellerComponent implements OnInit {
   }
   onClick(ven: any) {
     this.selectedSeller = ven;
+    localStorage.setItem('sellerIdMaster', JSON.stringify(ven));
     this.dataService.setSellerId(this.selectedSeller);
     var root = 'orders/view';
     this.router.navigate([root]);

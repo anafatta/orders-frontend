@@ -40,12 +40,23 @@ export class ViewOrdersComponent implements OnInit {
 
   ngOnInit() {
     // call service to retrieve orders by seller
-    const salesman = JSON.parse(localStorage.getItem('sellerId'));
-    this.ordersService.getOrders(salesman.id).subscribe((data: Order[]) => {
-      this.ordersData = data;
-      this.dataSource.data = this.ordersData;
-      // error => this.error = error
-    });
+    if (localStorage.getItem('sellerId')) {
+      const salesman = JSON.parse(localStorage.getItem('sellerId'));
+      this.ordersService.getOrders(salesman.id).subscribe((data: Order[]) => {
+        this.ordersData = data;
+        this.dataSource.data = this.ordersData;
+        // error => this.error = error
+      });
+    }
+    if (localStorage.getItem('sellerIdMaster')) {
+      const salesman = JSON.parse(localStorage.getItem('sellerIdMaster'));
+      this.ordersService.getOrders(salesman).subscribe((data: Order[]) => {
+        this.ordersData = data;
+        this.dataSource.data = this.ordersData;
+        // error => this.error = error
+      });
+    }
+
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
