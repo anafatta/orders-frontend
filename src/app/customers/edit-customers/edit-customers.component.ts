@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { DataService } from '../../services/data.service';
 import { CustomersService } from '../../services/customers.service';
-import { Cliente, Provincia} from '../../models/models';
+import { Cliente, Provincia } from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
@@ -34,8 +34,14 @@ export class EditCustomersDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const salesman = JSON.parse(localStorage.getItem('sellerId'));
-    this.sellerId = salesman.id;
+    if (localStorage.getItem('sellerId')) {
+      const salesman = JSON.parse(localStorage.getItem('sellerId'));
+      this.sellerId = salesman.id;
+    }
+    if (localStorage.getItem('sellerIdMaster')) {
+      const salesman = JSON.parse(localStorage.getItem('sellerIdMaster'));
+      this.sellerId = salesman;
+    }
     this.EditCustomerForm = this.fb.group({
       id: [''],
       nom: ['', Validators.required],
@@ -93,7 +99,7 @@ export class EditCustomersDetailsComponent implements OnInit {
   }
   onSubmit() {
     this.service.submitCustomer(this.EditCustomerForm.value).subscribe(data => {
-     // console.log();
+      // console.log();
     });
   }
 }
