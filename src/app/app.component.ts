@@ -23,9 +23,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.sidenavService.setSidenav(this.sidenavend);
     const salesman = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(salesman.userId);
     this.userService.getSeller(salesman.userId).subscribe((data: Seller[]) => {
-      const sellerData = data;
       if (data) {
         localStorage.setItem('sellerId', JSON.stringify(data));
       }
