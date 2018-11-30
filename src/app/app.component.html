@@ -1,13 +1,13 @@
 <ng-container>
   <mat-toolbar color="primary" class="header">
-    <button mat-icon-button (click)="sidenavmenu.toggle()" *ngIf="user">
+    <button mat-icon-button (click)="sidenavmenu.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
 
     <img src="assets/img/Simsiroglu-Logo-Blanco.svg" alt="{{title}}" (click)="sidenavmenu.close()" />
-    <p class="user" *ngIf="user">Bienvenido, {{user.firstname}} {{user.lastname}}</p>
+    <p class="user">Bienvenido, {{user.firstname}} {{user.lastname}}</p>
     <i class="material-icons" matBadge="0" matBadgeColor="warn" matBadgePosition="above after" style="cursor: pointer"
-      matTooltip="Mensajes - Proximamente" matTooltipPosition="left" (click)="sidenavmenu.close()" *ngIf="user">chat</i>
+      matTooltip="Mensajes - Proximamente" matTooltipPosition="left" (click)="sidenavmenu.close()">chat</i>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-container" (backdropClick)="close()">
@@ -44,8 +44,7 @@
       <button mat-button><i class="material-icons">settings</i> <span class="nav-link" routerLink="/change-password">Cambiar clave</span></button>
       <button mat-button (click)="sidenavmenu.close()">
         <mat-icon>lock</mat-icon>
-        <span class="nav-link" routerLink="/login" *ngIf="user" (click)="logOut()">Logout</span>
-        <span class="nav-link" routerLink="/" *ngIf="!user">Login</span>
+        <span class="nav-link" routerLink="/login" (click)="logOut()">Logout</span>
       </button>
     </mat-sidenav>
 

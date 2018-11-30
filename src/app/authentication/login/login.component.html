@@ -29,9 +29,11 @@
         <div *ngIf="f.password.errors.required">Password is required</div>
       </div>
     </div>-->
+    <button mat-button><i class="material-icons">settings</i> <span class="nav-link" routerLink="/change-password">Cambiar clave</span></button>
     <mat-card-actions align="middle">
       <button mat-raised-button color="accent" type="submit">Iniciar Sesión</button>
       <p class="mt-5 mb-3 text-muted">S.H.K. S.A. - &copy;2018</p>
     </mat-card-actions>
+
   </form>
 </mat-card>

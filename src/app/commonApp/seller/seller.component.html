@@ -1,7 +1,7 @@
-<mat-card *ngIf="!seller.id">
+<mat-card *ngIf="isAdmin">
   <mat-grid-list cols="3" rowHeight="10:1">
     <mat-grid-tile>
-      <mat-card-title>Bienvenido {{seller.nom}}</mat-card-title>
+      <mat-card-title>Bienvenido, {{user.firstname}} {{user.lastname}}</mat-card-title>
     </mat-grid-tile>
     <mat-grid-tile>
       <p>Usted a iniciado sesión como usuario Admin</p>

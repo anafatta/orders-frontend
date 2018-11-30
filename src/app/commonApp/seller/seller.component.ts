@@ -21,12 +21,14 @@ export class SellerComponent implements OnInit {
     // call service to retrieve client by seller
     const salesman = JSON.parse(localStorage.getItem('currentUser'));
     console.log('El vendedor es: ' + salesman.lastname);
-    this.isAdmin = true;
-    this.userService.getSellers().subscribe((data: Seller[]) => {
-      this.sellers = data;
-    });
-
-
+    const isSeller = JSON.parse(localStorage.getItem('sellerId'))
+    if (!isSeller) {
+      this.isAdmin = true;
+      this.userService.getSellers().subscribe((data: Seller[]) => {
+        this.sellers = data;
+        console.log(this.sellers);
+      });
+    }
   }
   onClick(ven: any) {
     this.selectedSeller = ven;
@@ -38,7 +40,9 @@ export class SellerComponent implements OnInit {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
   get seller(): any {
-    return JSON.parse(localStorage.getItem('sellerId'));
+    if (localStorage.getItem('sellerId')) {
+      return JSON.parse(localStorage.getItem('sellerId'));
+    }
   }
 }
 
