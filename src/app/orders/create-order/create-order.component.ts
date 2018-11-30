@@ -93,8 +93,8 @@ export class CreateOrderComponent implements OnInit {
   onClientSelected(event: any) {
     console.log('Selected value');
     console.log(event);
-    this.clientId = event;
-    // this.clientId = '621';
+    this.clientId = event.id;
+    console.log(this.clientId);
     this.userService.getClient(this.clientId).subscribe((data: Cliente) => {
       this.selectedClient = data;
       this.selectedAddress = this.selectedClient.address[0];
