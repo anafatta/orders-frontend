@@ -15,7 +15,7 @@
           <mat-form-field class="example-full-width">
             <input type="text" placeholder="Cliente" aria-label="Cliente" matInput [formControl]="myControl"
               [matAutocomplete]="auto" (ngModelChange)="onClientSelected($event)" [(ngModel)]="clientId">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option.nom}}
               </mat-option>
