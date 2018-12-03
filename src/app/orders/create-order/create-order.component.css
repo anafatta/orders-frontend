@@ -11,7 +11,7 @@
     vertical-align: top;
     position: absolute;
     top: 0;
-    padding-bottom: 5px;
+    padding-top: 5px;
     border-bottom: 1px solid #949494;
 }
 
@@ -21,7 +21,7 @@
     font-size: 11px;
     height: 15px;
     position: relative;
-    top: -3px;
+    top: -8px;
 }
 
 table {

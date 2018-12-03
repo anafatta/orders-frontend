@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OrderDetail, Order, Art, DetalleArticulo, Precio } from '../models/models';
+import { OrderDetail, Order, Art, DetalleArticulo, Precio, CondicionPago } from '../models/models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -22,6 +22,8 @@ export class OrdersService {
     Get_Precio_id = '/precio/id_articulo/';
     Get_Packings = '/packings/id/';
     Get_Stock = '/articulos/id/';
+    Get_CondVen = '/conpag/';
+    Get_CondVen_Id = '/conpag/id/';
 
     constructor(private httpClient: HttpClient) { }
 
@@ -62,6 +64,12 @@ export class OrdersService {
         return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.Get_Packings + id);
     }
 
+    getCondPag(): Observable<CondicionPago[]> {
+        return this.httpClient.get<CondicionPago[]>(this.ROOT_URL + this.Get_CondVen);
+    }
+    getCondPagId(id): Observable<CondicionPago[]> {
+        return this.httpClient.get<CondicionPago[]>(this.ROOT_URL + this.Get_CondVen_Id + id);
+    }
     submitOrder(order: OrderDetail): Observable<OrderDetail> {
         let postOrder: Observable<OrderDetail>;
         postOrder = this.httpClient.post<OrderDetail>(this.ROOT_URL + this.POST_ORDER_URL, order, this.httpOptions);

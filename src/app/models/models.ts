@@ -37,6 +37,7 @@ export interface Order {
 
 export interface Cliente {
   id: number;
+  codnom: string;
   nombre: string;
   nom: string;
   cuit: string;
@@ -74,6 +75,7 @@ export interface Variante {
   itemdata_id: number;
   codigo: string;
   nom: string;
+  pza: number;
 }
 
 export interface Peditem {
@@ -123,4 +125,11 @@ export interface Flete {
 
 export interface Precio {
   precio: number;
+}
+// Condición de pago
+export interface CondicionPago {
+  id: number;
+  nom: string;
+  descuento: number;
+  incremento: number;
 }

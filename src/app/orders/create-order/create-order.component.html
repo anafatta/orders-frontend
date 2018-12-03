@@ -13,11 +13,10 @@
       <mat-grid-list cols="3" rowHeight="60px">
         <mat-grid-tile>
           <mat-form-field>
-            <input type="text" placeholder="Cliente" aria-label="Cliente" matInput [formControl]="myControl"
-              [matAutocomplete]="auto" (ngModelChange)="onClientSelected($event)" [(ngModel)]="clientId">
+            <input type="text" placeholder="Cliente" aria-label="Cliente" matInput [formControl]="myControl" [matAutocomplete]="auto" (ngModelChange)="onClientSelected($event)">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option.id}} - {{option.nom}}
+                {{option.codnom}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -59,11 +58,10 @@
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-form-field>
-            <mat-select placeholder="Pago" [(ngModel)]="conven" data-live-search="true" id="convenId">
-              <mat-option [value]="1" selected="selected">CONTADO</mat-option>
-              <mat-option [value]="2">CHEQUES 30 dias</mat-option>
-              <mat-option [value]="3">CHEQUES 30 - 60 dias</mat-option>
-              <mat-option [value]="4">CHEQUES 30 - 60 - 90 dias</mat-option>
+            <mat-select placeholder="Condición de Pago" [(ngModel)]="conven" (ngModelChange)="onCondVentSelected($event)" data-live-search="true" id="convenId">
+              <mat-option *ngFor="let cond of conpag" [value]="cond">
+                {{cond.nom}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>
@@ -86,14 +84,14 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-grid-list cols="9" rowHeight="60px">
-        <mat-grid-tile [colspan]="6">
+        <mat-grid-tile [colspan]="7">
 
           <mat-form-field>
             <input type="text" placeholder="Artículo" aria-label="Artículo" matInput [formControl]="myControlArt"
-              [matAutocomplete]="autoArt" (ngModelChange)="onArtSelected($event)" [(ngModel)]="artId">
+              [matAutocomplete]="autoArt" (ngModelChange)="onArtSelected($event)">
             <mat-autocomplete autoActiveFirstOption #autoArt="matAutocomplete" [displayWith]="displayFnArt">
               <mat-option *ngFor="let art of filteredOptionsArt | async" [value]="art">
-                {{art.id}} - {{art.nom}}
+                {{art.codfac}} - {{art.nom}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -102,7 +100,7 @@
         <mat-grid-tile [colspan]="1">
           <div class="static_field">
             <span class="static_label">Precio Sugerido</span>
-            {{ precio }}
+            $ {{ sugPrice }}
           </div>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1">
@@ -114,13 +112,18 @@
       </mat-grid-list>
       <mat-grid-list cols="9" rowHeight="40px">
         <mat-grid-tile [colspan]="1"><strong>Código</strong></mat-grid-tile>
-        <mat-grid-tile [colspan]="6"><strong>Descripción</strong></mat-grid-tile>
-        <mat-grid-tile [colspan]="2"><strong>Cantidad</strong></mat-grid-tile>
+        <mat-grid-tile [colspan]="5"><strong>Descripción</strong></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"><strong>Stock</strong></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"><strong>Cantidad</strong></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"><strong>Eliminar</strong></mat-grid-tile>
         <div *ngFor="let item of selectedItems; let i = index">
           <mat-grid-tile [colspan]="1">{{item.itemdatum.variante.codigo}} </mat-grid-tile>
-          <mat-grid-tile [colspan]="6">{{item.itemdatum.variante.nom}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="5">{{item.itemdatum.variante.nom}}</mat-grid-tile>
+          <mat-grid-tile [colspan]="1">{{item.itemdatum.variante.pza}}</mat-grid-tile>
           <mat-grid-tile [colspan]="1">
-            <mat-form-field><input matInput placeholder="Cantidad" #selectedCount (change)="addCount(i, selectedCount.value);"></mat-form-field>
+            <mat-form-field>
+            <input matInput required placeholder="Cantidad" #selectedCount (change)="addCount(i, selectedCount.value);">
+            </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1">
             <button mat-icon-button color="accent" (click)="removeVariante(i)" matTooltip="Eliminar variante"

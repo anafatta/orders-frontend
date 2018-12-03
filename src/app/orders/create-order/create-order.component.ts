@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Pipe } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { OrdersService, } from '../../services/orders.service';
 import { OtherdataService } from '../../services/otherdata.service';
 
-import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, OrderDetail, Seller } from '../../models/models';
+import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, OrderDetail, Seller, CondicionPago } from '../../models/models';
 import { Precio } from '../../models/models';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -35,9 +35,13 @@ export class CreateOrderComponent implements OnInit {
   conven: string;
   observaciones: string;
   myControl = new FormControl();
-  filteredOptions: Observable<Cliente[]>;
+  filteredOptions: Observable<any[]>;
   myControlArt = new FormControl();
   filteredOptionsArt: Observable<Art[]>;
+  conpag: CondicionPago[];
+  sugPrice: number;
+  convenId: number;
+  codnom: string;
   /*Ligthbox */
   myImgUrl: 'https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';
 
@@ -74,44 +78,56 @@ export class CreateOrderComponent implements OnInit {
     // Autocomplete filter
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
-        startWith(null),
+        startWith(''),
         map(value => value ? this._filter(value) : this.clients)
       );
     this.filteredOptionsArt = this.myControlArt.valueChanges
       .pipe(
-        startWith(null),
+        startWith(''),
         map(value => value ? this._filterArt(value) : this.articulos)
       );
+    this.orderService.getCondPag().subscribe((data: CondicionPago[]) => {
+      this.conpag = data;
+    });
   }
+  
   // Autocomplete filter
   displayFn(user?: Cliente): string | undefined {
-    return user ? user.nom : undefined;
+    return user ? user.codnom : undefined;
   }
   displayFnArt(art?: Art): string | undefined {
-    return art ? art.nom : undefined;
+    return art ? art.codnom : undefined;
   }
+
   // Autocomplete filter
   private _filter(value: string): Cliente[] {
     const filterValue = value.toLowerCase();
-    return this.clients.filter(option => option.nom.toLowerCase().includes(filterValue));
+    return this.clients.filter(option => option.codnom.toLowerCase().includes(filterValue));
   }
   private _filterArt(value: string): Art[] {
-    const filterValueArt = value.toLowerCase();
-    return this.articulos.filter(option => option.nom.toLowerCase().includes(filterValueArt));
+    const filterValueArt = value;
+    return this.articulos.filter(option => option.codnom.toLowerCase().includes(filterValueArt));
   }
   // Autocomplete filter
   onClientSelected(event: any) {
     this.clientId = event.id;
+    console.log(this.clientId);
     this.userService.getClient(this.clientId).subscribe(
       (data: Cliente) => {
         this.selectedClient = data;
         this.selectedAddress = this.selectedClient.address[0];
         this.selectedFlete = this.selectedAddress.flete;
-        this.conven = '1';
+        this.convenId = 1;
       });
   }
 
-  onCondVentSelected() {
+  onCondVentSelected(event: any) {
+this.convenId = event.id;
+    console.log('Condición: ' + this.convenId);
+          this.orderService.getPrecio(this.articulo.art_id, this.convenId, this.selectedClient.id).subscribe((price: Precio) => {
+        console.log('El art es: ' + this.articulo.art_id + ' el conven es ' + this.convenId + ' el cliente es' + this.selectedClient.id);
+        this.sugPrice = price.precio;
+      });
   }
   onArtSelected(event: any) {
     console.log('Art = ' + event);
@@ -124,9 +140,9 @@ export class CreateOrderComponent implements OnInit {
       } else {
         this.hasVariantes = false;
       }
-      this.orderService.getPrecio(this.articulo.art_id, 1, this.selectedClient.id).subscribe((price: Precio) => {
-        this.price = price.precio;
-        console.log('Precio = ' + this.price);
+      this.orderService.getPrecio(this.articulo.art_id, this.convenId, this.selectedClient.id).subscribe((price: Precio) => {
+        console.log('El art es: ' + this.articulo.art_id + ' el conven es ' + this.convenId + ' el cliente es' + this.selectedClient.id);
+        this.sugPrice = price.precio;
       });
     });
   }
@@ -152,6 +168,7 @@ export class CreateOrderComponent implements OnInit {
             itemdata_id: variante.itemdata_id,
             codigo: variante.codigo,
             nom: variante.nom,
+            pza: variante.pza,
           }
         }
       };
