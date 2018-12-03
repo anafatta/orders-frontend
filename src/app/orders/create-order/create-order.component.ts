@@ -5,17 +5,15 @@ import { OrdersService, } from '../../services/orders.service';
 import { OtherdataService } from '../../services/otherdata.service';
 import { SidenavService } from '../../services/sidenav.service';
 
-import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, ItemDatum, OrderDetail, Seller } from '../../models/models';
+import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, OrderDetail, Seller } from '../../models/models';
 import { Precio } from '../../models/models';
 import { SellerComponent } from '../../commonApp/seller/seller.component';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-export interface User {
-  nom: string;
-}
+import { map, startWith, filter } from 'rxjs/operators';
+
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
@@ -43,6 +41,8 @@ export class CreateOrderComponent implements OnInit {
   observaciones: string;
   myControl = new FormControl();
   filteredOptions: Observable<Cliente[]>;
+  myControlArt = new FormControl();
+  filteredOptionsArt: Observable<Art[]>;
   /*Ligthbox */
   myImgUrl: string = 'https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';
 
@@ -82,31 +82,42 @@ export class CreateOrderComponent implements OnInit {
         startWith(null),
         map(value => value ? this._filter(value) : this.clients)
       );
+    this.filteredOptionsArt = this.myControlArt.valueChanges
+      .pipe(
+        startWith(null),
+        map(value => value ? this._filterArt(value) : this.articulos)
+      );
   }
+  // Autocomplete filter
   displayFn(user?: Cliente): string | undefined {
     return user ? user.nom : undefined;
   }
+  displayFnArt(art?: Art): string | undefined {
+    return art ? art.nom : undefined;
+  }
+  // Autocomplete filter
   private _filter(value: string): Cliente[] {
     const filterValue = value.toLowerCase();
     return this.clients.filter(option => option.nom.toLowerCase().includes(filterValue));
   }
+  private _filterArt(value: string): Art[] {
+    const filterValueArt = value.toLowerCase();
+    return this.articulos.filter(option => option.nom.toLowerCase().includes(filterValueArt));
+  }
+  // Autocomplete filter
   onClientSelected(event: any) {
-    console.log('Selected value');
-    console.log(event);
     this.clientId = event.id;
-    console.log(this.clientId);
-    this.userService.getClient(this.clientId).subscribe((data: Cliente) => {
-      this.selectedClient = data;
-      this.selectedAddress = this.selectedClient.address[0];
-      this.selectedFlete = this.selectedAddress.flete;
-      this.conven = '1';
-      console.log('call client works... ' + this.clientId)
-    });
+    this.userService.getClient(this.clientId).subscribe(
+      (data: Cliente) => {
+        this.selectedClient = data;
+        this.selectedAddress = this.selectedClient.address[0];
+        this.selectedFlete = this.selectedAddress.flete;
+        this.conven = '1';
+      });
   }
 
   onCondVentSelected() {
   }
-
   onArtSelected(event: any) {
     this.artId = event;
     this.orderService.getArticuloById(this.artId).subscribe((data: DetalleArticulo) => {
@@ -119,14 +130,14 @@ export class CreateOrderComponent implements OnInit {
       }
       this.otherService.getPrecio(this.articulo.art_id, 1, this.selectedClient.id).subscribe((data: Precio) => {
         this.price = data.precio;
-        console.log('Precio = ' + this.price)
+        console.log('Precio = ' + this.price);
       });
       console.log('call getArticuloById works... ' + this.articulo.art_id + ' ' + this.variantes.length)
     });
   }
 
   addVariante(variante: any) {
-    if (this.selectedItems.length == 0 || !(this.selectedItems.some(e => e.itemdata === variante.itemdata_id))) {
+    if (this.selectedItems.length === 0 || !(this.selectedItems.some(e => e.itemdata === variante.itemdata_id))) {
       let peditem: Peditem;
 
       peditem = {

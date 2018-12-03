@@ -12,7 +12,7 @@
       </mat-expansion-panel-header>
       <mat-grid-list cols="3" rowHeight="60px">
         <mat-grid-tile>
-          <mat-form-field class="example-full-width">
+          <mat-form-field>
             <input type="text" placeholder="Cliente" aria-label="Cliente" matInput [formControl]="myControl"
               [matAutocomplete]="auto" (ngModelChange)="onClientSelected($event)" [(ngModel)]="clientId">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
@@ -69,7 +69,7 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2">
           <mat-form-field>
-            <textarea matInput placeholder="Observaciones"></textarea>
+            <input type="text" matInput placeholder="Observaciones">
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -87,13 +87,17 @@
       </mat-expansion-panel-header>
       <mat-grid-list cols="9" rowHeight="60px">
         <mat-grid-tile [colspan]="8">
+
           <mat-form-field>
-            <mat-select placeholder="Artículo" class="custom-select" (ngModelChange)="onArtSelected($event)"
-              [(ngModel)]="artId" data-live-search="true">
-              <mat-option *ngFor="let art of articulos" [value]=art.id> {{art.id}} - {{art.nom}}
+            <input type="text" placeholder="Artículo" aria-label="Artículo" matInput [formControl]="myControlArt"
+              [matAutocomplete]="autoArt" (ngModelChange)="onArtSelected($event)" [(ngModel)]="artId">
+            <mat-autocomplete autoActiveFirstOption #autoArt="matAutocomplete" [displayWith]="displayFnArt">
+              <mat-option *ngFor="let art of filteredOptionsArt | async" [value]="art">
+                {{art.nom}}
               </mat-option>
-            </mat-select>
+            </mat-autocomplete>
           </mat-form-field>
+
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1">
           <mat-form-field>

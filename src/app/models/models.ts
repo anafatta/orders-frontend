@@ -109,6 +109,7 @@ export interface Expreso {
 }
 
 export interface DetalleArticulo {
+  id: number;
   art_id: number;
   nom: string;
   variantes: Variante[];
