@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OrderDetail, Order, Art, DetalleArticulo, Expreso } from '../models/models';
+import { OrderDetail, Order, Art, DetalleArticulo, Precio } from '../models/models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -17,8 +17,11 @@ export class OrdersService {
     GET_ARTICULOS_URL = '/articulos/';
     GET_ART_URL = '/articulos/id/';
     POST_ORDER_URL = '/pedcab/';
-    Get_Expresos = '/api/expresos';
-    Get_Expreso_Id = '/api/expresos/id/';
+    Get_Expresos = '/expresos';
+    Get_Expreso_Id = '/expresos/id/';
+    Get_Precio_id = '/precio/id_articulo/';
+    Get_Packings = '/packings/id/';
+    Get_Stock = '/articulos/id/';
 
     constructor(private httpClient: HttpClient) { }
 
@@ -43,6 +46,20 @@ export class OrdersService {
 
     getArticuloById(id: number): Observable<DetalleArticulo> {
         return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.GET_ART_URL + id);
+    }
+    getPrecio(id_articulo, id_conpag, id_cliente): Observable<Precio> {
+        return this.httpClient.get<Precio>(this.ROOT_URL +
+            this.Get_Precio_id + id_articulo +
+            '/id_conpag/' + id_conpag +
+            '/id_cliente/' + id_cliente);
+    }
+
+    getStock(id: number): Observable<DetalleArticulo> {
+        return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.Get_Stock + id);
+    }
+
+    getPacking(id: number): Observable<DetalleArticulo> {
+        return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.Get_Packings + id);
     }
 
     submitOrder(order: OrderDetail): Observable<OrderDetail> {

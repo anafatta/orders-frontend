@@ -17,7 +17,7 @@
               [matAutocomplete]="auto" (ngModelChange)="onClientSelected($event)" [(ngModel)]="clientId">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option.nom}}
+                {{option.id}} - {{option.nom}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -86,18 +86,24 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-grid-list cols="9" rowHeight="60px">
-        <mat-grid-tile [colspan]="8">
+        <mat-grid-tile [colspan]="6">
 
           <mat-form-field>
             <input type="text" placeholder="Artículo" aria-label="Artículo" matInput [formControl]="myControlArt"
               [matAutocomplete]="autoArt" (ngModelChange)="onArtSelected($event)" [(ngModel)]="artId">
             <mat-autocomplete autoActiveFirstOption #autoArt="matAutocomplete" [displayWith]="displayFnArt">
               <mat-option *ngFor="let art of filteredOptionsArt | async" [value]="art">
-                {{art.nom}}
+                {{art.id}} - {{art.nom}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
 
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+          <div class="static_field">
+            <span class="static_label">Precio Sugerido</span>
+            {{ precio }}
+          </div>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1">
           <mat-form-field>

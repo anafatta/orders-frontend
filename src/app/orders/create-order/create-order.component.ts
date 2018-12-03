@@ -1,15 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { DataService } from '../../services/data.service';
 import { OrdersService, } from '../../services/orders.service';
 import { OtherdataService } from '../../services/otherdata.service';
-import { SidenavService } from '../../services/sidenav.service';
 
 import { Cliente, Address, Flete, Art, DetalleArticulo, Variante, Peditem, OrderDetail, Seller } from '../../models/models';
 import { Precio } from '../../models/models';
-import { SellerComponent } from '../../commonApp/seller/seller.component';
-import { Router } from '@angular/router';
-import { MatSidenav } from '@angular/material/sidenav';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith, filter } from 'rxjs/operators';
@@ -44,7 +39,7 @@ export class CreateOrderComponent implements OnInit {
   myControlArt = new FormControl();
   filteredOptionsArt: Observable<Art[]>;
   /*Ligthbox */
-  myImgUrl: string = 'https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';
+  myImgUrl: 'https://simsiroglu.com.ar/sim/wp-content/uploads/2017/07/polish.png';
 
   constructor(
     private userService: UserService,
@@ -119,7 +114,8 @@ export class CreateOrderComponent implements OnInit {
   onCondVentSelected() {
   }
   onArtSelected(event: any) {
-    this.artId = event;
+    console.log('Art = ' + event);
+    this.artId = event.id;
     this.orderService.getArticuloById(this.artId).subscribe((data: DetalleArticulo) => {
       this.articulo = data;
       if (this.articulo && this.articulo.variantes && this.articulo.variantes.length > 0) {
@@ -128,11 +124,10 @@ export class CreateOrderComponent implements OnInit {
       } else {
         this.hasVariantes = false;
       }
-      this.otherService.getPrecio(this.articulo.art_id, 1, this.selectedClient.id).subscribe((data: Precio) => {
-        this.price = data.precio;
+      this.orderService.getPrecio(this.articulo.art_id, 1, this.selectedClient.id).subscribe((price: Precio) => {
+        this.price = price.precio;
         console.log('Precio = ' + this.price);
       });
-      console.log('call getArticuloById works... ' + this.articulo.art_id + ' ' + this.variantes.length)
     });
   }
 
@@ -159,7 +154,7 @@ export class CreateOrderComponent implements OnInit {
             nom: variante.nom,
           }
         }
-      }
+      };
       this.selectedItems.push(peditem);
       console.log('selectedItems= ' + this.selectedItems.length + '   variante nombre=' + this.selectedItems[0].itemdatum.variante.nom);
     }
@@ -178,7 +173,7 @@ export class CreateOrderComponent implements OnInit {
   submitOrderDetail() {
     console.log('precio:' + this.price);
 
-    for (let item of this.selectedItems) {
+    for (const item of this.selectedItems) {
       item.pre_ped = this.price;
     }
 
