@@ -46,8 +46,8 @@ export class OrdersService {
         return this.httpClient.get<Art[]>(this.ROOT_URL + this.GET_ARTICULOS_URL);
     }
 
-    getArticuloById(id: number): Observable<DetalleArticulo> {
-        return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.GET_ART_URL + id);
+    getArticuloById(id: number, packing: number): Observable<DetalleArticulo> {
+        return this.httpClient.get<DetalleArticulo>(this.ROOT_URL + this.GET_ART_URL + id + '/' + packing);
     }
     getPrecio(id_articulo, id_conpag, id_cliente): Observable<Precio> {
         return this.httpClient.get<Precio>(this.ROOT_URL +
