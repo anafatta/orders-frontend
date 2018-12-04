@@ -1,0 +1,57 @@
+<mat-card>
+  <mat-card-title>Cuentas Corrientes</mat-card-title>
+  <mat-grid-list cols="2" rowHeight="80px">
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar resultados">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+      <td mat-cell *matCellDef="let accounts">
+        <div *ngIf="accounts.estado === '1 RED'"><button mat-mini-fab class="warn" matTooltip="Más de una semana vencido" matTooltipPosition="above"></button></div>
+        <div *ngIf="accounts.estado === '2 YELLOW'"><button mat-mini-fab class="alert" matTooltip="Menos de una semana vencido" matTooltipPosition="above"></button></div>
+        <div *ngIf="accounts.estado === '3 GREEN'"><button mat-mini-fab class="primary" matTooltip="Sin vencer" matTooltipPosition="above"></button></div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="codfac">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let accounts"> {{accounts.codfac}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+      <td mat-cell *matCellDef="let accounts"> {{ (accounts.nom)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="count">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad de comprobantes </th>
+      <td mat-cell *matCellDef="let accounts"> {{ (accounts.count)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="saldo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Saldo </th>
+      <td mat-cell *matCellDef="let accounts"> {{ (accounts.saldo | currency)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="button">
+      <th mat-header-cell *matHeaderCellDef> Ver </th>
+      <td mat-cell *matCellDef="let accounts">
+        <button mat-mini-fab color="accent" class="col-xs-1" [routerLink]="['/accountss/detail', accounts.id]"
+          matTooltip="Ver detalle" matTooltipPosition="above">
+          <mat-icon aria-label="Ver detalle">search</mat-icon>
+        </button> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <button mat-raised-button color="accent" [routerLink]="['/accountss/view']">
+    <mat-icon aria-label="Volver">arrow_back</mat-icon> Volver
+  </button>
+</mat-card>
