@@ -133,3 +133,9 @@ export interface CondicionPago {
   descuento: number;
   incremento: number;
 }
+// CTA. CLI
+export interface Det0 {
+  estado: string;
+  count: number;
+  saldo: number;
+}

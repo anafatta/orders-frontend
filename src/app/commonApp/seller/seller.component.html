@@ -41,13 +41,13 @@
     <mat-grid-tile>
       <mat-card>
         <mat-card-title>Clientes</mat-card-title>
-        <mat-card-subtitle>Estado de clientes</mat-card-subtitle>
+        <mat-card-subtitle>Estado de Ctas. Ctes.</mat-card-subtitle>
         <mat-divider></mat-divider>
         <mat-card-content>
           <p></p>
-          <p> <button mat-mini-fab color="primary">123</button> <strong>Aprobados</strong> </p>
-          <p><button mat-mini-fab class="alert">23</button> <strong>A confirmar</strong></p>
-          <p><button mat-mini-fab color="warn">12</button> <strong>Con revisiones</strong> </p>
+          <p> <button mat-mini-fab color="warn">{{ det0[0].count }}</button> <strong>  {{ det0[0].saldo }}</strong> </p>
+          <p><button mat-mini-fab class="alert">{{ det0[1].count }}</button> <strong>  {{ det0[1].saldo }}</strong></p>
+          <p><button mat-mini-fab color="primary">{{ det0[2].count }}</button> <strong> {{ det0[2].saldo }}</strong> </p>
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions align="right">
