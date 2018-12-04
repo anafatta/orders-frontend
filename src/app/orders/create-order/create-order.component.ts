@@ -90,23 +90,23 @@ export class CreateOrderComponent implements OnInit {
       this.conpag = data;
     });
   }
-  
+
   // Autocomplete filter
   displayFn(user?: Cliente): string | undefined {
-    return user ? user.codnom : undefined;
+    return user ? (user.nom) : undefined;
   }
   displayFnArt(art?: Art): string | undefined {
-    return art ? art.codnom : undefined;
+    return art ? (art.codfac + ' ' + art.nom) : undefined;
   }
 
   // Autocomplete filter
   private _filter(value: string): Cliente[] {
     const filterValue = value.toLowerCase();
-    return this.clients.filter(option => option.codnom.toLowerCase().includes(filterValue));
+    return this.clients.filter(option => (option.nom).toLowerCase().includes(filterValue));
   }
   private _filterArt(value: string): Art[] {
     const filterValueArt = value;
-    return this.articulos.filter(option => option.codnom.toLowerCase().includes(filterValueArt));
+    return this.articulos.filter(option => (option.codfac + ' ' + option.nom).toLowerCase().includes(filterValueArt));
   }
   // Autocomplete filter
   onClientSelected(event: any) {
