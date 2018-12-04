@@ -13,7 +13,8 @@
       <mat-grid-list cols="3" rowHeight="60px">
         <mat-grid-tile>
           <mat-form-field>
-            <input type="text" placeholder="Cliente" aria-label="Cliente" matInput [formControl]="myControl" [matAutocomplete]="auto" (ngModelChange)="onClientSelected($event)">
+            <input type="text" placeholder="Cliente" aria-label="Cliente" matInput [formControl]="myControl"
+              [matAutocomplete]="auto" (ngModelChange)="onClientSelected($event)">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{ option.nom }}
@@ -58,7 +59,8 @@
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-form-field>
-            <mat-select placeholder="Condición de Pago" [(ngModel)]="conven" (ngModelChange)="onCondVentSelected($event)" data-live-search="true" id="convenId">
+            <mat-select placeholder="Condición de Pago" [(ngModel)]="conven" (ngModelChange)="onCondVentSelected($event)"
+              data-live-search="true" id="convenId">
               <mat-option *ngFor="let cond of conpag" [value]="cond">
                 {{cond.nom}}
               </mat-option>
@@ -84,7 +86,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-grid-list cols="9" rowHeight="60px">
-        <mat-grid-tile [colspan]="7">
+        <mat-grid-tile [colspan]="6">
 
           <mat-form-field>
             <input type="text" placeholder="Artículo" aria-label="Artículo" matInput [formControl]="myControlArt"
@@ -97,16 +99,22 @@
           </mat-form-field>
 
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1">
-          <div class="static_field">
-            <span class="static_label">Precio Sugerido</span>
-            $ {{ sugPrice }}
-          </div>
+        <mat-grid-tile [colspan]="2">
+          <mat-form-field>
+            <mat-select class="custom-select" placeholder="Enviar desde" [(ngModel)]="selectedStock" data-live-search="true" (ngModelChange)="onStockSelected($event)">
+              <mat-option [value]="0">
+                Deposito
+              </mat-option>
+              <mat-option *ngFor="let pack of packing" [value]=pack>
+                {{pack.obs}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1">
           <mat-form-field>
             <input matInput placeholder="Precio" [(ngModel)]="price" type="number" min="0" step="0.01"
-              data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="price" />
+              data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="price" value="{{ sugPrice }}" />
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -122,7 +130,7 @@
           <mat-grid-tile [colspan]="1">{{item.itemdatum.variante.pza}}</mat-grid-tile>
           <mat-grid-tile [colspan]="1">
             <mat-form-field>
-            <input matInput required placeholder="Cantidad" #selectedCount (change)="addCount(i, selectedCount.value);">
+              <input matInput required placeholder="Cantidad" #selectedCount (change)="addCount(i, selectedCount.value);">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1">
