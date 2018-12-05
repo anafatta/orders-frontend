@@ -14,6 +14,7 @@ export class OtherdataService {
   Get_Provincia = '/provincia';
   Get_Provincia_Id = '/provincia/id/';
   Get_Ctacli_Det0 = '/ctacli/det0/ven/';
+  Get_Order_Status = '/pedcab/estado/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -26,6 +27,9 @@ export class OtherdataService {
 
   get_Ctacli_Det0(id: number): Observable<Det0[]> {
     return this.httpClient.get<Det0[]>(this.ROOT_URL + this.Get_Ctacli_Det0 + id);
+  }
+  get_OrdersStatus(id: number): Observable<Det0[]> {
+    return this.httpClient.get<Det0[]>(this.ROOT_URL + this.Get_Order_Status + id);
   }
 
   // Retrieve adittional orders and customers data

@@ -138,4 +138,17 @@ export interface Det0 {
   estado: string;
   count: number;
   saldo: number;
+  codfac: number;
+  nom: string;
+  nro: number;
+  fem: Date;
+  fev: Date;
+  tip: number;
+  obs: string;
+}
+// Orders
+export interface OrderStatus {
+  est: number;
+  nom: string;
+  count: number;
 }

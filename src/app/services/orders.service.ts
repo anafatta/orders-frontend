@@ -24,6 +24,7 @@ export class OrdersService {
     Get_Stock = '/articulos/id/';
     Get_CondVen = '/conpag/';
     Get_CondVen_Id = '/conpag/id/';
+    Get_Orders_Status = '/pedcab/estado/';
 
     constructor(private httpClient: HttpClient) { }
 
@@ -39,9 +40,11 @@ export class OrdersService {
     }
 
     getOrder(id: string): Observable<OrderDetail> {
-        return this.httpClient.get<OrderDetail>(this.ROOT_URL + this.GET_ORDER_URL + + id);
+        return this.httpClient.get<OrderDetail>(this.ROOT_URL + this.GET_ORDER_URL + id);
     }
-
+    getOrderStatus(sts: string, sellereId: string): Observable<OrderDetail> {
+        return this.httpClient.get<OrderDetail>(this.ROOT_URL + this.Get_Orders_Status + sts + '/vendedor/' + sellereId);
+    }
     getArticulos(): Observable<Art[]> {
         return this.httpClient.get<Art[]>(this.ROOT_URL + this.GET_ARTICULOS_URL);
     }
