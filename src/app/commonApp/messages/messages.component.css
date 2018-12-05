@@ -7,3 +7,14 @@ mat-card {
 .login .mat-form-field {
     min-width: 100% !important;
 }
+
+table {
+    width: 100%;
+}
+.mat-form-field {
+    width: 100%;
+}
+.mat-paginator {
+    display: block;
+    width: 100%;
+}

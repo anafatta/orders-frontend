@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Message } from '../models/models';
+import { Message , Doc } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class MessagesService {
   //ROOT_URL = 'http://lumasoft.dyndns.org:8000/api';
   
   SEND_MESSAGE_URL = '/message';
-  GET_MESSAGE_URL = '/api/messages/';
+  GET_MESSAGE_URL = '/messages/';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -22,20 +22,22 @@ export class MessagesService {
     })
 };
 
-  send(to: string, note: string){
+  send(to: string, toName : String, note: string){
     
     let user =  JSON.parse(localStorage.getItem('currentUser'));
     console.log("user: " +to + "     message:  " + note + "from user: " + user.userId)
     var message = {
       from :user.userId,
+      fromName : user.lastname,
       to: to,
+      toName : toName,
       message: note
     }
    return this.httpClient.post(this.ROOT_URL + this.SEND_MESSAGE_URL, message, this.httpOptions);
   }
   
-  get(): Observable<Message[]> {    
+  get(): Observable<Doc> {    
     let user =  JSON.parse(localStorage.getItem('currentUser'));
-    return this.httpClient.get<Message[]>(this.ROOT_URL + this.GET_MESSAGE_URL + user.userId , this.httpOptions);
+    return this.httpClient.get<Doc>(this.ROOT_URL + this.GET_MESSAGE_URL + user.userId , this.httpOptions);
   }
 }

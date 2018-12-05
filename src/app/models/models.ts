@@ -144,8 +144,14 @@ export interface User {
 export interface Message {
   _id: number;
   fromUser: string;
+  fromName: String;
   toUser: string;
+  toName: String;
   message: string;
   createdD: Date;
 
+}
+
+export interface Doc {
+  docs : Message[];
 }
