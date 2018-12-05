@@ -11,6 +11,8 @@ export class AuthenticationService {
     })
   };
   ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
+  // ROOT_URL = 'http://localhost.:8000/api';
+
   Auth = '/login';
   ChangePass = '/changepass';
 

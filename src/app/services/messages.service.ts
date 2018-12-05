@@ -8,8 +8,8 @@ import { Message , Doc } from '../models/models';
 })
 export class MessagesService {
   ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
-  //ROOT_URL = 'http://lumasoft.dyndns.org:8000/api';
-  
+  // ROOT_URL = 'http://localhost.:8000/api';
+
   SEND_MESSAGE_URL = '/message';
   GET_MESSAGE_URL = '/messages/';
 

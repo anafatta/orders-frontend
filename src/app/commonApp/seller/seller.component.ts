@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { DataService } from '../../services/data.service';
+import { OtherdataService } from '../../services/otherdata.service';
 import { Seller, Det0, OrderStatus } from '../../models/models';
 import { Router } from '@angular/router';
-import { OtherdataService } from '../../services/otherdata.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-seller',
   templateUrl: './seller.component.html',
   styleUrls: ['./seller.component.css']
 })
-export class SellerComponent implements OnInit {
+export class SellerComponent implements OnInit, OnDestroy {
   sellers: Seller[];
   isAdmin: boolean;
   selectedSeller: string;
   det0: Det0[];
   ordStatus: Det0[];
   semaforo: any;
+  userServiceSubscription: Subscription;
 
   constructor(private router: Router,
               private userService: UserService,
@@ -25,16 +27,17 @@ export class SellerComponent implements OnInit {
               private otherdataService: OtherdataService) { }
 
   ngOnInit() {
+    console.log('*****On init*****')
     // call service to retrieve client by seller
     const salesman = JSON.parse(localStorage.getItem('currentUser'));
-    console.log('El vendedor es: ' + salesman.lastname);
-    this.userService.getSeller(salesman.userId).subscribe((data: Seller[]) => {
+    console.log('El vendedor es salesman.lastname: ' + salesman.userId + ' ' +  salesman.lastname);
+    this.userServiceSubscription = this.userService.getSeller(salesman.userId).subscribe((data: Seller[]) => {
       console.log('data ' + JSON.stringify(data));
       if (data) {
         localStorage.setItem('sellerId', JSON.stringify(data));
       }
       const isSeller = JSON.parse(localStorage.getItem('sellerId'));
-      console.log('El vendedor es: ' + isSeller.id);
+      console.log('El vendedor es: isSeller.id' + isSeller.id);
       if (!isSeller) {
         this.isAdmin = true;
         console.log(this.isAdmin);
@@ -53,6 +56,11 @@ export class SellerComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    console.log('***** Estoy en on destroy *******');
+    this.userServiceSubscription.unsubscribe();
   }
 
   onClick(ven: any) {

@@ -9,6 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class OtherdataService {
   ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
+  // ROOT_URL = 'http://localhost.:8000/api';
+
   Get_Expresos = '/expresos';
   Get_Expreso_Id = '/expresos/id/';
   Get_Provincia = '/provincia';

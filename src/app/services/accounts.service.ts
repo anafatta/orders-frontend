@@ -8,6 +8,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AccountsService {
   ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
+  // ROOT_URL = 'http://localhost.:8000/api';
+
   Get_Ctacli_Det0 = '/ctacli/det0/ven/';
   Get_Ctacli_Det1 = '/ctacli/det1/ven/';
   Get_Ctacli_Det2 = '/ctacli/det2/ven/';

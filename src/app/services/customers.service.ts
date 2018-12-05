@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class CustomersService {
     ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
     // ROOT_URL = 'http://localhost.:8000/api';
-
+  
     GET_CUSTOMERS_URL = '/clientes/vendedor/';
     GET_CUSTOMER_URL = '/clientes/id/';
     GET_ARTICULOS_URL = '/articulos/';
