@@ -126,13 +126,36 @@ export interface Flete {
 export interface Precio {
   precio: number;
 }
+
 // Condición de pago
 export interface CondicionPago {
   id: number;
   nom: string;
   descuento: number;
   incremento: number;
+
 }
+export interface User {
+  nro: number;
+  firstname: string;
+  lastname: string;
+
+}
+export interface Message {
+  _id: number;
+  fromUser: string;
+  fromName: String;
+  toUser: string;
+  toName: String;
+  message: string;
+  createdD: Date;
+
+}
+
+export interface Doc {
+  docs : Message[];
+}
+
 // CTA. CLI
 export interface Det0 {
   estado: string;
@@ -152,3 +175,4 @@ export interface OrderStatus {
   nom: string;
   count: number;
 }
+

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cliente, Seller } from '../models/models';
+import { Cliente, Seller, User } from '../models/models';
 // import { Store } from '@ngrx/store';
 // import { AppState } from '../store/reducers';
 // import { appReducerState }  from '../store/reducers/appReducers';
@@ -32,4 +32,13 @@ export class UserService {
     return this.httpClient.get<Cliente>(this.ROOT_URL + '/clientes/id/' + id);
   }
 
+  getSelleById(userId : string) :Observable<Object>  {
+  console.log("user: " +userId)
+  return this.httpClient.get<Seller>(this.ROOT_URL + '/vend/'+ userId);
+  }
+
+  getUsers() : Observable<User[]> {
+   return this.httpClient.get<User[]>(this.ROOT_URL + '/users');
+  }
+ 
 }
