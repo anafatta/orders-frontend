@@ -5,7 +5,7 @@ import { AccountsService } from '../../services/accounts.service';
 import { OtherdataService } from '../../services/otherdata.service';
 import { Det0} from '../../models/models';
 
-export interface ViewAccountsDetails {
+export interface ViewAccountsDetailDocs {
   name: string;
   position: number;
   weight: number;
@@ -18,7 +18,7 @@ export interface ViewAccountsDetails {
   styleUrls: ['./view-accounts-detail.component.css'],
   providers: [AccountsService]
 })
-export class ViewAccountsDetailsComponent implements OnInit {
+export class ViewAccountsDetailComponent implements OnInit {
   accountsDetail: Det0;
   accountsId: string;
   address: number;
