@@ -92,6 +92,7 @@ export class CreateOrderComponent implements OnInit {
       this.conpag = data;
     });
   }
+  // Formulario de pedidos
 
   // Autocomplete filter
   displayFn(user?: Cliente): string | undefined {
@@ -99,7 +100,6 @@ export class CreateOrderComponent implements OnInit {
   }
   displayFnArt(art?: Art): string | undefined {
     return art ? (art.codfac + ' ' + art.nom) : undefined;
-
   }
 
   // Autocomplete filter
