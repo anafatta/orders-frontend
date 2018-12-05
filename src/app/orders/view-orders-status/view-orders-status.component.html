@@ -1,0 +1,61 @@
+<mat-card>
+  <mat-card-title>Estado de órdenes:
+    <span *ngIf="statusid === '0'">Pendiente de aprobación por ventas</span>
+    <span *ngIf="statusid === '1'">En espera</span>
+    <span *ngIf="statusid === '2'">Pendiente de aprobación por créditos y cobranzas</span>
+    <span *ngIf="statusid === '3'">Facturación</span>
+    <span *ngIf="statusid === '4'">Pendiente de Preparación</span>
+    <span *ngIf="statusid === '5'">En preparación en deposito</span>
+    <span *ngIf="statusid === '6'">Espera</span>
+    <span *ngIf="statusid === '7'">Espera</span>
+    <span *ngIf="statusid === '8'">Espera</span>
+    <span *ngIf="statusid === '9'">Espera</span>
+    <span *ngIf="statusid === '10'">Rechazado</span>
+  </mat-card-title>
+  <mat-grid-list cols="2" rowHeight="80px">
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar resultados">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+      <td mat-cell *matCellDef="let order"> {{order.nro}} </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+      <td mat-cell *matCellDef="let order"> {{order.fem| date:'dd-MM-yyyy'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+      <td mat-cell *matCellDef="let order"> {{order.cliente.nom}} </td>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </th>
+      <td mat-cell *matCellDef="let order"> {{(order.address && order.address.dir) ? order.address.dir : "-"}}</td>
+    </ng-container>
+    <ng-container matColumnDef="button">
+      <th mat-header-cell *matHeaderCellDef> Ver </th>
+      <td mat-cell *matCellDef="let order">
+        <button mat-mini-fab color="accent" class="col-xs-1" [routerLink]="['/orders/detail', order.id]" matTooltip="Ver orden completa"
+          matTooltipPosition="above">
+          <mat-icon aria-label="Ver detalle">search</mat-icon>
+        </button> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <button mat-raised-button color="accent" [routerLink]="['/orders/view']">
+    <mat-icon aria-label="Volver">arrow_back</mat-icon> Volver
+  </button>
+</mat-card>

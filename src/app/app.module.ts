@@ -22,10 +22,12 @@ import { SidenavService } from './services/sidenav.service';
 import { SpeedDialFabComponent } from './commonApp/speed-dial-fab/speed-dial-fab.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
+import { AccountsService } from './services/accounts.service';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { GlobalApp } from './_helpers/global';
 import { AlertsComponent } from './commonApp/alerts/alerts.component';
+import { AccountsModule } from './accounts/accounts.module';
 
 
 const appRoutes: Routes = [
@@ -52,6 +54,7 @@ const appRoutes: Routes = [
     CustomersModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    AccountsModule
   ],
   providers: [
     OrdersService,
@@ -60,6 +63,7 @@ const appRoutes: Routes = [
     SidenavService,
     OtherdataService,
     AuthenticationService,
+    AccountsService,
     AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

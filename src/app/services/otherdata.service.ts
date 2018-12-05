@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Expreso, Provincia } from '../models/models';
+import { Expreso, Provincia, Det0 } from '../models/models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class OtherdataService {
   ROOT_URL = 'https://enigmatic-cove-26128.herokuapp.com/api';
   Get_Expresos = '/expresos';
   Get_Expreso_Id = '/expresos/id/';
   Get_Provincia = '/provincia';
   Get_Provincia_Id = '/provincia/id/';
+  Get_Ctacli_Det0 = '/ctacli/det0/ven/';
+  Get_Order_Status = '/pedcab/estado/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -21,6 +24,13 @@ export class OtherdataService {
 
     })
   };
+
+  get_Ctacli_Det0(id: number): Observable<Det0[]> {
+    return this.httpClient.get<Det0[]>(this.ROOT_URL + this.Get_Ctacli_Det0 + id);
+  }
+  get_OrdersStatus(id: number): Observable<Det0[]> {
+    return this.httpClient.get<Det0[]>(this.ROOT_URL + this.Get_Order_Status + id);
+  }
 
   // Retrieve adittional orders and customers data
 

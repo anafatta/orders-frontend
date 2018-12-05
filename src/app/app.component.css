@@ -95,6 +95,9 @@ body {
   font-weight: 400;
   padding-right: 15px;
 }
+.mat-grid-tile .mat-figure {
+  align-items: end!important;
+}
 @media only screen and (max-width: 768px) {
   .header img {
     max-height: 20px;

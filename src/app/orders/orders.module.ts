@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { ViewOrdersStatusComponent } from './view-orders-status/view-orders-status.component';
 import { ViewOrderDetailsComponent, ViewOrderDetails } from './view-order-details/view-order-details.component';
 import { MaterialModule } from '../material.module';
 
@@ -11,7 +12,8 @@ import { MaterialModule } from '../material.module';
 const ordersRoutes: Routes = [
   { path: 'orders/create', component: CreateOrderComponent },
   { path: 'orders/view', component: ViewOrdersComponent },
-  { path: 'orders/detail/:id', component: ViewOrderDetailsComponent }
+  { path: 'orders/detail/:id', component: ViewOrderDetailsComponent },
+  { path: 'orders/status/:id', component: ViewOrdersStatusComponent }
 
 ];
 
@@ -26,13 +28,15 @@ const ordersRoutes: Routes = [
   declarations: [
     CreateOrderComponent,
     ViewOrdersComponent,
-    ViewOrderDetailsComponent
+    ViewOrderDetailsComponent,
+    ViewOrdersStatusComponent
 
   ],
   exports: [
     CreateOrderComponent,
     ViewOrdersComponent,
-    ViewOrderDetailsComponent
+    ViewOrderDetailsComponent,
+    ViewOrdersStatusComponent
   ]
 })
 export class OrdersModule { }

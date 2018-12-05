@@ -2,7 +2,7 @@
     max-width: 100%;
 }
 .mat-grid-tile .mat-figure {
-    align-items: flex-start!important;
+    align-items: end!important;
 }
 .mat-card {
     width: 85%;
@@ -18,4 +18,19 @@
     position: relative;
     text-align: left;
     width: 90%!important;
+}
+.count {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    line-height: 25px;
+    color: #333;
+    background: #eee;
+    display: inline-block;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.ordstatus button {
+    width: 100%;
 }

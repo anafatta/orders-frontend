@@ -25,8 +25,10 @@ export class CreateOrderComponent implements OnInit {
   articulos: Art[];
   artId: number;
   articulo: DetalleArticulo;
+  packing: DetalleArticulo;
   hasVariantes: boolean;
   variantes: Variante[];
+  stkId: number;
   // expreso : Expreso [];
   selectedItems: Peditem[];
   price: number;
@@ -90,23 +92,25 @@ export class CreateOrderComponent implements OnInit {
       this.conpag = data;
     });
   }
-  
+
   // Autocomplete filter
   displayFn(user?: Cliente): string | undefined {
-    return user ? user.codnom : undefined;
+    return user ? (user.nom) : undefined;
   }
   displayFnArt(art?: Art): string | undefined {
-    return art ? art.codfac : undefined;
+    return art ? (art.codfac + ' ' + art.nom) : undefined;
+
   }
 
   // Autocomplete filter
   private _filter(value: string): Cliente[] {
     const filterValue = value.toLowerCase();
-    return this.clients.filter(option => option.codnom.toLowerCase().includes(filterValue));
+    return this.clients.filter(option => (option.nom).toLowerCase().includes(filterValue));
   }
   private _filterArt(value: string): Art[] {
     const filterValueArt = value;
-    return this.articulos.filter(option => option.codfac.toLowerCase().includes(filterValueArt));
+    return this.articulos.filter(option => (option.codfac + ' ' + option.nom).toLowerCase().includes(filterValueArt));
+
   }
   // Autocomplete filter
   onClientSelected(event: any) {
@@ -122,17 +126,30 @@ export class CreateOrderComponent implements OnInit {
   }
 
   onCondVentSelected(event: any) {
-this.convenId = event.id;
+    this.convenId = event.id;
     console.log('Condición: ' + this.convenId);
-          this.orderService.getPrecio(this.articulo.art_id, this.convenId, this.selectedClient.id).subscribe((price: Precio) => {
-        console.log('El art es: ' + this.articulo.art_id + ' el conven es ' + this.convenId + ' el cliente es' + this.selectedClient.id);
-        this.sugPrice = price.precio;
-      });
+    this.orderService.getPrecio(this.articulo.art_id, this.convenId, this.selectedClient.id).subscribe((price: Precio) => {
+      console.log('El art es: ' + this.articulo.art_id + ' el conven es ' + this.convenId + ' el cliente es' + this.selectedClient.id);
+      this.sugPrice = price.precio;
+    });
   }
   onArtSelected(event: any) {
-    console.log('Art = ' + event);
+    console.log('Art = ' + event.id);
     this.artId = event.id;
-    this.orderService.getArticuloById(this.artId).subscribe((data: DetalleArticulo) => {
+    this.orderService.getPacking(this.artId).subscribe((data: DetalleArticulo) => {
+      this.packing = data;
+    });
+  }
+  onStockSelected(event: any) {
+
+    if (event.id !== undefined) {
+      this.stkId = event.id;
+      console.log('Prd: ' + this.artId + 'Stock = ' + this.stkId);
+    } else {
+      this.stkId = 0;
+      console.log('Prd: ' + this.artId + 'Stock = ' + this.stkId);
+    }
+    this.orderService.getArticuloById(this.artId, this.stkId).subscribe((data: DetalleArticulo) => {
       this.articulo = data;
       if (this.articulo && this.articulo.variantes && this.articulo.variantes.length > 0) {
         this.variantes = this.articulo.variantes;

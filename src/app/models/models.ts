@@ -37,7 +37,6 @@ export interface Order {
 
 export interface Cliente {
   id: number;
-  codnom: string;
   nombre: string;
   nom: string;
   cuit: string;
@@ -87,17 +86,18 @@ export interface Peditem {
   itemdatum: ItemDatum;
 }
 
+export interface Art {
+  id: number;
+  codfac: string;
+  nom: string;
+}
+
 export interface ItemDatum {
   id: number;
   art1: Art;
   variante: Variante;
 }
 
-export interface Art {
-  id: number;
-  codfac: string;
-  nom: string;
-}
 export interface Expreso {
   id: number;
   nom: string;
@@ -155,3 +155,24 @@ export interface Message {
 export interface Doc {
   docs : Message[];
 }
+
+// CTA. CLI
+export interface Det0 {
+  estado: string;
+  count: number;
+  saldo: number;
+  codfac: number;
+  nom: string;
+  nro: number;
+  fem: Date;
+  fev: Date;
+  tip: number;
+  obs: string;
+}
+// Orders
+export interface OrderStatus {
+  est: number;
+  nom: string;
+  count: number;
+}
+
